@@ -14,15 +14,14 @@
  *   An associative array containing:
  *   - islandora_object: An AbstractObject from Islandora.
  */
-function islandora_solution_pack_xml_preprocess_islandora_simple_xml(&$variables) {
+function islandora_solution_pack_xml_preprocess_islandora_simple_xml(array &$variables) {
   drupal_add_js('misc/form.js');
   drupal_add_js('misc/collapse.js');
-  $islandora_object = $variables['islandora_object'];
-  $repository = $islandora_object->repository;
   module_load_include('inc', 'islandora', 'includes/datastream');
   module_load_include('inc', 'islandora', 'includes/utilities');
   module_load_include('inc', 'islandora', 'includes/metadata');
 
+  $islandora_object = $variables['islandora_object'];
 
   // We should eventually remove the DC object and dc_array code as it only
   // exists to not break legacy implementations.
@@ -43,12 +42,19 @@ function islandora_solution_pack_xml_preprocess_islandora_simple_xml(&$variables
   $variables['metadata'] = islandora_retrieve_metadata_markup($islandora_object);
   $variables['description'] = islandora_retrieve_description_markup($islandora_object);
 
-  $islandora_object = $variables['islandora_object'];
   $obj_xml_content = $islandora_object['OBJ']->content;
 
   if ($islandora_object['RENDER_STYLESHEET']) {
     module_load_include('inc', 'islandora_solution_pack_xml', 'includes/utilities');
     $object_render_stylesheet = $islandora_object['RENDER_STYLESHEET']->content;
+    $variables['islandora_content'] = islandora_solution_pack_xml_apply_xslt($object_render_stylesheet, $obj_xml_content);
+  }
+  // If the object is a member of a collection that has a RENDER_STYLESHEET ds, use that
+  // stylesheet. But only do that if the object is a member of one collection.
+  elseif (count($variables['parent_collections']) == 1 &&
+    $variables['parent_collections'][0]['RENDER_STYLESHEET']) {
+    module_load_include('inc', 'islandora_solution_pack_xml', 'includes/utilities');
+    $object_render_stylesheet = $variables['parent_collections'][0]['RENDER_STYLESHEET']->content;
     $variables['islandora_content'] = islandora_solution_pack_xml_apply_xslt($object_render_stylesheet, $obj_xml_content);
   }
   else {

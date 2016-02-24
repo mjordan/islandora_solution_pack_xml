@@ -1,12 +1,12 @@
 <?php
 
 /**
- * @file
+* @file
  *
  * Theme template file for the Islandora Simple XML Viewer.
  */
 
 ?>
 <div id="islandora-simple-xml">
-  <?php print $content; ?>
+  <?php print $islandora_content; ?>
 </div>

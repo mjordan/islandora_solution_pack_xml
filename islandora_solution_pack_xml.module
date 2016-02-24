@@ -27,7 +27,9 @@ function islandora_solution_pack_xml_menu() {
  *
  * We supply a pattern so we can overide templates at the theme level if needed.
  * We can append a pid to a template and the new template file will be called
- * (the pid's colon should be replaced with a dash)
+ * (the pid's colon should be replaced with a dash).
+ * An example template might be named:
+ *   "islandora-simple-xml--islandora-100.tpl.php".
  */
 function islandora_solution_pack_xml_theme($existing, $type, $theme, $path) {
   return array(
@@ -35,7 +37,7 @@ function islandora_solution_pack_xml_theme($existing, $type, $theme, $path) {
       'template' => 'theme/islandora-simple-xml',
       'file' => 'theme/theme.inc',
       'pattern' => 'islandora_simple_xml__',
-      'variable' => array('islandora_object' => NULL),
+      'variables' => array('islandora_object' => NULL),
     ),
   );
 }

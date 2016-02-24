@@ -6,23 +6,32 @@
  */
 
 /**
+ * Implements hook_menu().
+ */
+function islandora_simple_xml_viewer_menu() {
+  return array(
+    'admin/islandora/islandora_viewers/simple_xml' => array(
+      'title' => 'Simple XML Viewer',
+      'description' => 'Configure the Simple XML viewer.',
+      'page callback' => 'drupal_get_form',
+      'access arguments' => array('administer site configuration'),
+      'page arguments' => array('islandora_simple_xml_viewer_admin'),
+      'file' => 'includes/admin.form.inc',
+      'type' => MENU_NORMAL_ITEM,
+    ),
+  );
+}
+
+/**
  * Implements hook_theme().
  */
 function islandora_simple_xml_viewer_theme() {
   return array(
     'islandora_simple_xml' => array(
       'file' => 'theme/theme.inc',
-      'template' => 'theme/islandora-simple-xml',
+      'template' => 'theme/islandora-simple-xml-viewer',
       'variables' => array(
-        'fedora_object' => NULL,
-        'dsid' => NULL,
-      ),
-    ),
-    'viewer' => array(
-      'file' => 'theme/theme.inc',
-      'template' => 'theme/viewer',
-      'variables' => array(
-        'fedora_object' => NULL,
+        'islandora_object' => NULL,
       ),
     ),
   );
@@ -36,7 +45,7 @@ function islandora_simple_xml_viewer_islandora_viewer_info() {
     'islandora_simple_xml' => array(
       'label' => t('Islandora Simple XML Viewer'),
       'description' => t('A simple XML viewer for Islandora.'),
-      'configuration' => '',
+      'configuration' => 'admin/islandora/islandora_viewers/simple_xml',
       'callback' => 'islandora_simple_xml_viewer_callback',
       'model' => array(
         'islandora:sp_simple_xml'),
