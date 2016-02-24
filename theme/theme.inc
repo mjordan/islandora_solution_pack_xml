@@ -23,7 +23,6 @@ function islandora_solution_pack_xml_preprocess_islandora_simple_xml(&$variables
   module_load_include('inc', 'islandora', 'includes/utilities');
   module_load_include('inc', 'islandora', 'includes/metadata');
 
-/*
 
   // We should eventually remove the DC object and dc_array code as it only
   // exists to not break legacy implementations.
@@ -43,51 +42,22 @@ function islandora_solution_pack_xml_preprocess_islandora_simple_xml(&$variables
   $variables['parent_collections'] = islandora_get_parents_from_rels_ext($islandora_object);
   $variables['metadata'] = islandora_retrieve_metadata_markup($islandora_object);
   $variables['description'] = islandora_retrieve_description_markup($islandora_object);
-*/
+
   $islandora_object = $variables['islandora_object'];
-  $variables['islandora_content'] = htmlspecialchars($islandora_object['OBJ']->content);
+  $obj_xml_content = $islandora_object['OBJ']->content;
+
+  if ($islandora_object['RENDER_STYLESHEET']) {
+    module_load_include('inc', 'islandora_solution_pack_xml', 'includes/utilities');
+    $object_render_stylesheet = $islandora_object['RENDER_STYLESHEET']->content;
+    $variables['islandora_content'] = islandora_solution_pack_xml_apply_xslt($object_render_stylesheet, $obj_xml_content);
+  }
+  else {
+    $variables['islandora_content'] = '<pre>' . htmlspecialchars($obj_xml_content) . '</pre>';
+  }
 
   module_load_include('inc', 'islandora', 'includes/solution_packs');
-  // $viewer = islandora_get_viewer(array(), 'islandora_xml_viewers', $islandora_object);
-  // dd($viewer, 'Viewer');
-  // $variables['islandora_content'] = $viewer;
-
-/*
-  global $base_url;
+  $viewer = islandora_get_viewer(array(), 'islandora_xml_viewers', $islandora_object);
   if ($viewer) {
     $variables['islandora_content'] = $viewer;
   }
-  else {
-    // Full size url.
-    if (isset($islandora_object['OBJ'])) {
-      $full_size_url = url("islandora/object/{$islandora_object->id}/datastream/OBJ/view", array('absolute' => TRUE));
-      $variables['islandora_full_url'] = $full_size_url;
-    }
-    // Thumbnail.
-    if (isset($islandora_object['TN'])) {
-      $thumbnail_size_url = url("islandora/object/{$islandora_object->id}/datastream/TN/view");
-      $params = array(
-        'title' => $islandora_object->label,
-        'path' => $thumbnail_size_url,
-      );
-      $variables['islandora_thumbnail_img'] = theme('image', $params);
-    }
-    // Preview image + link.
-    if (isset($islandora_object['PREVIEW'])) {
-      $preview_url = url("islandora/object/{$islandora_object->id}/datastream/PREVIEW/view");
-      $params = array(
-        'title' => $islandora_object->label,
-        'path' => $preview_url,
-      );
-      $variables['islandora_preview_img'] = theme('image', $params);
-      $variables['islandora_content'] = l($variables['islandora_preview_img'], $variables['islandora_full_url'], array('html' => TRUE));
-      // Sanitize this object name a bit.
-      $sanitized_label = preg_replace('/[^A-Za-z0-9_\-]|\.pdf$/', '_', $islandora_object->label);
-      $download_url = 'islandora/object/' . $islandora_object->id . '/datastream/OBJ/download/' . $sanitized_label . '.pdf';
-      $download_text = t("Download pdf");
-      $variables['islandora_download_link'] = l($download_text, $download_url, array('attributes' => array('class' => array('islandora-pdf-link'))));
-    }
-
-  }
-*/
 }

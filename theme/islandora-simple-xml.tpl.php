@@ -10,7 +10,7 @@
   <div class="islandora-simple-xml-content-wrapper clearfix">
     <?php if (isset($islandora_content)): ?>
       <div class="islandora-simple-xml-content">
-        <?php print '<pre>' . $islandora_content . '</pre>'; ?>
+        <?php print $islandora_content; ?>
       </div>
       <?php if (isset($islandora_download_link)): ?>
         <?php print $islandora_download_link; ?>
