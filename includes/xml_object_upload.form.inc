@@ -34,6 +34,30 @@ function islandora_solution_pack_xml_xml_upload_form(array $form, array &$form_s
     ),
   );
 
+  $form['islandora_solution_pack_xml_thumbnail_upload'] = array(
+    '#type' => 'checkbox',
+    '#title' => t("Add a thumbnail to this upload?"),
+    '#default_value' => FALSE,
+  );
+  $form['thumbnail'] = array(
+    '#title' => t('Thumbnail image for this XML file'),
+    '#type' => 'managed_file',
+    '#required' => FALSE,
+    '#description' => t('Select thumbnail file to upload.<br/>Files must be less than <strong>@size MB.</strong><br/>Allowed file types: <strong>@ext.</strong><br />This file is optional.', array('@size' => $upload_size, '@ext' => 'jpg, png, gif')),
+    '#default_value' => isset($form_state['values']['files']) ? $form_state['values']['files'] : NULL,
+    '#upload_location' => 'temporary://',
+    '#upload_validators' => array(
+      'file_validate_extensions' => array('jpg', 'png', 'gif'),
+      // Assume it's specified in MB.
+      'file_validate_size' => array($upload_size * 1024 * 1024),
+    ),
+    '#states' => array(
+      'visible' => array(
+        ':input[name="islandora_solution_pack_xml_thumbnail_upload"]' => array('checked' => TRUE),
+      ),
+    ),
+  );
+
   if (variable_get('islandora_solution_pack_xml_allow_render_stylesheet_upload', FALSE)) {
     $form['islandora_solution_pack_xml_render_stylesheet_upload'] = array(
       '#type' => 'checkbox',
@@ -84,6 +108,21 @@ function islandora_solution_pack_xml_xml_upload_form_submit(array $form, array &
   $ds->setContentFromFile($xml_path, FALSE);
   $ds->label = $xml_file->filename;
   $ds->mimetype = $xml_file->filemime;
+
+  if (isset($form_state['values']['thumbnail']) && ($form_state['values']['thumbnail'] > 0)) {
+    if (empty($object['TN'])) {
+      $ds = $object->constructDatastream('TN', 'M');
+      $object->ingestDatastream($ds);
+    }
+    else {
+      $ds = $object['TN'];
+    }
+    $thumbnail_file = file_load($form_state['values']['thumbnail']);
+    $thumbnail_path = drupal_realpath($thumbnail_file->uri);
+    $ds->setContentFromFile($thumbnail_path, FALSE);
+    $ds->label = $thumbnail_file->filename;
+    $ds->mimetype = $thumbnail_file->filemime;
+  }
 
   if (isset($form_state['values']['render_stylesheet']) && ($form_state['values']['render_stylesheet'] > 0)) {
     if (empty($object['RENDER_STYLESHEET'])) {
