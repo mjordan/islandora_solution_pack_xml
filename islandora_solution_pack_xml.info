@@ -1,0 +1,10 @@
+name = "Islandora XML Solution Pack"
+description = "A simple Islandora Repository module to handle XML datastreams"
+dependencies[] = islandora
+package = Islandora Solution Packs
+core = 7.x
+version = 7.x-dev
+configure = admin/islandora/solution_pack_config/xml
+; stylesheets[all][] = css/islandora_basic_image.theme.css
+; files[] = tests/islandora_basic_image_ingest_purge.test
+

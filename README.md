@@ -4,7 +4,7 @@ Islandora Solution Pack that allows for ingesting and viewing XML files.
 
 ## Introduction
 
-This module provides basic support for ingesting and viewing XML files in Islandora.
+This module provides basic support for ingesting and viewing XML OBJ files in Islandora.
 
 ## Requirements
 

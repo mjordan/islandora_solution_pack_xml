@@ -1,0 +1,5 @@
+name = "Islandora Simple XML Viewer"
+description = "Implements a very simple XML viewer for Islandora."
+package = Islandora Viewers
+version = 7.x-dev
+core = 7.x
