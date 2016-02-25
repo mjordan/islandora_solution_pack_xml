@@ -1,10 +1,11 @@
 # Islandora Simple XML Batch
 
-Islandora batch module for loading XML files managed by the Islandora XML Solution Pack. We can't use Islandora Batch for this because it treats .xml files as MODS or DC datastreams.
+Islandora batch module for loading XML files managed by the Islandora XML Solution Pack. We can't use Islandora Batch because it treats .xml files as MODS or DC datastreams.
 
 ## Requirements
 
 * [Islandora](https://github.com/Islandora/islandora)
+* [Islandora Batch](https://github.com/Islandora/islandora_batch)
 
 ## Usage
 
