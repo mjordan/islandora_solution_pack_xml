@@ -23,6 +23,10 @@ Users may also upload a thumbnail image for their XML object.
 
 This module comes with an Islandora viewer that if enabled and configured as the default viewer for XML objects allows easy styling of XML files using the [Google Javascript Prettifier](https://github.com/google/code-prettify). Note that if this viewer is enabled, the XML content is not styled with the RENDER_STYLESHEET XSLTs as described above.
 
+## Batch loading
+
+Objects managed by this module can't be loaded using Islandora Batch, but a simple custom loader is available in the `modules` subdirectory, along with the viewer.
+
 ## Requirements
 
 * [Islandora](https://github.com/Islandora/islandora)
@@ -35,7 +39,6 @@ This module comes with an Islandora viewer that if enabled and configured as the
 
 * Add checks for well formedness on XML and XSLT files as they are uploaded.
 * Add checks for validity against a specific schema or DTD.
-* Figure out strategies for batch loading objects managed by this solution pack (maybe create a [custom batch module](https://github.com/Islandora/islandora_batch/wiki/Example-Implementation-Tutorial)).
 * Write some additional viewers that present the XML content in interesting ways like [this](https://www.sencha.com/forum/showthread.php?163680-Implementing-treeview-using-xml-data) or [this](http://blog.ashwani.co.in/blog/2013-07-18/stylize-your-xml-with-jquery-xml-tree-plugin/).
 * Provide Solr configs for allowing the indexing of XML element content for advanced searches.
 
