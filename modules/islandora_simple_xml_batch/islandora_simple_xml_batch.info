@@ -1,0 +1,9 @@
+name = Islandora Simple XML Batch
+description = "A batch importer module for objects of content type Islandora Simple XML."
+package = Islandora
+dependencies[] = islandora
+dependencies[] = islandora_batch
+version = 7.x-dev
+core = 7.x
+files[] = includes/preprocessor.inc
+files[] = includes/object.inc
