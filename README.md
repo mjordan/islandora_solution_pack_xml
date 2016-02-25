@@ -25,7 +25,7 @@ This module comes with an Islandora viewer that if enabled and configured as the
 
 ## Batch loading
 
-Objects managed by this module can't be loaded using Islandora Batch, but a simple custom loader is available in the `modules` subdirectory, along with the viewer.
+Objects managed by this module can't be loaded using Islandora Batch, but a simple custom loader is available in the `modules` subdirectory.
 
 ## Requirements
 
@@ -38,9 +38,10 @@ Objects managed by this module can't be loaded using Islandora Batch, but a simp
 ## To do
 
 * Add checks for well formedness on XML and XSLT files as they are uploaded.
-* Add checks for validity against a specific schema or DTD.
+* Add checks for validity against a specific schema or DTD (maybe one that is attached to the collection object as a datastream?).
 * Write some additional viewers that present the XML content in interesting ways like [this](https://www.sencha.com/forum/showthread.php?163680-Implementing-treeview-using-xml-data) or [this](http://blog.ashwani.co.in/blog/2013-07-18/stylize-your-xml-with-jquery-xml-tree-plugin/).
 * Provide Solr configs for allowing the indexing of XML element content for advanced searches.
+* Provide sample XSLT stylesheets for common types of XML objects, like "flat" XML, TEI, EAD, etc.
 
 ## Development and feedback
 
