@@ -27,7 +27,7 @@ function islandora_simple_xml_viewer_menu() {
  */
 function islandora_simple_xml_viewer_theme() {
   return array(
-    'islandora_simple_xml' => array(
+    'islandora_simple_xml_viewer' => array(
       'file' => 'theme/theme.inc',
       'template' => 'theme/islandora-simple-xml-viewer',
       'variables' => array(
@@ -58,28 +58,18 @@ function islandora_simple_xml_viewer_islandora_viewer_info() {
  * Callback function for the viewer.
  *
  * @param array $params
- *   The params for the theme function 'islandora_pdfjs'.
+ *   The params for the theme function 'islandora_simple_xml_viewer'.
  *
  * @param IslandoraAbstractObject $fedora_object
  *   The object that we are viewing.
  *
  * @return string
- *   HTML repersentation of the pdf.js Reader.
+ *   HTML repersentation of the Simple XML Viewer.
  */
-function islandora_simple_xml_viewer_callback(array $params, $fedora_object = NULL) {
-  $dsid = NULL;
-  if (isset($params['dsid']) && !empty($params['dsid']) && isset($fedora_object[$dsid])) {
-    $dsid = $params['dsid'];
-  }
-  else {
-    if (isset($fedora_object['OBJ'])) {
-      $dsid = 'OBJ';
+function islandora_simple_xml_viewer_callback(array $params, $islandora_object = NULL) {
+  if (isset($islandora_object['OBJ']) && $islandora_object['OBJ']->mimetype == 'application/xml') {
+    if (islandora_datastream_access(ISLANDORA_VIEW_OBJECTS, $islandora_object['OBJ'])) {
+      return theme('islandora_simple_xml_viewer', array('islandora_object' => $islandora_object));
     }
-    elseif (isset($fedora_object['OBJ']) && $fedora_object['OBJ']->mimetype == 'application/xml') {
-      $dsid = 'OBJ';
-    }
-  }
-  if ($dsid && islandora_datastream_access(ISLANDORA_VIEW_OBJECTS, $fedora_object[$dsid])) {
-    return theme('islandora_simple_xml', array('fedora_object' => $fedora_object, 'dsid' => $dsid));
   }
 }

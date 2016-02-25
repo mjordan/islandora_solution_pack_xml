@@ -33,10 +33,10 @@ function islandora_solution_pack_xml_menu() {
  */
 function islandora_solution_pack_xml_theme($existing, $type, $theme, $path) {
   return array(
-    'islandora_simple_xml' => array(
-      'template' => 'theme/islandora-simple-xml',
+    'islandora_solution_pack_xml_default' => array(
+      'template' => 'theme/islandora-solution-pack-xml-default',
       'file' => 'theme/theme.inc',
-      'pattern' => 'islandora_simple_xml__',
+      'pattern' => 'islandora_solution_pack_xml__',
       'variables' => array('islandora_object' => NULL),
     ),
   );
@@ -137,7 +137,7 @@ function islandora_solution_pack_xml_islandora_sp_simple_xml_islandora_ingest_st
  * Implements hook_CMODEL_PID_islandora_view_object().
  */
 function islandora_solution_pack_xml_islandora_sp_simple_xml_islandora_view_object($object, $page_number, $page_size) {
-  $output = theme('islandora_simple_xml', array('islandora_object' => $object));
+  $output = theme('islandora_solution_pack_xml_default', array('islandora_object' => $object));
   return array('' => $output);
 }
 

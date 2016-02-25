@@ -14,7 +14,7 @@
  *   An associative array containing:
  *   - islandora_object: An AbstractObject from Islandora.
  */
-function islandora_solution_pack_xml_preprocess_islandora_simple_xml(array &$variables) {
+function islandora_solution_pack_xml_preprocess_islandora_solution_pack_xml_default(array &$variables) {
   drupal_add_js('misc/form.js');
   drupal_add_js('misc/collapse.js');
   module_load_include('inc', 'islandora', 'includes/datastream');
