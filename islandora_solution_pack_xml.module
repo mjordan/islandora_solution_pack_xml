@@ -74,7 +74,7 @@ function islandora_solution_pack_xml_islandora_required_objects(IslandoraTuque $
   $datastream = $simple_xml_collection->constructDatastream('TN', 'M');
   $datastream->label = 'Thumbnail';
   $datastream->mimetype = 'image/png';
-  $datastream->setContentFromFile("$module_path/images/folder.png", FALSE);
+  $datastream->setContentFromFile("$module_path/images/xml.png", FALSE);
   $simple_xml_collection->ingestDatastream($datastream);
   return array(
     'islandora_solution_pack_xml' => array(
