@@ -49,8 +49,9 @@ function islandora_solution_pack_xml_preprocess_islandora_solution_pack_xml_defa
     $object_render_stylesheet = $islandora_object['RENDER_STYLESHEET']->content;
     $variables['islandora_content'] = islandora_solution_pack_xml_apply_xslt($object_render_stylesheet, $obj_xml_content);
   }
-  // If the object is a member of a collection that has a RENDER_STYLESHEET ds, use that
-  // stylesheet. But only do that if the object is a member of one collection.
+  // If the object is a member of a collection that has a RENDER_STYLESHEET ds,
+  // use that stylesheet. But only do that if the object is a member of one
+  // collection.
   elseif (count($variables['parent_collections']) == 1 &&
     $variables['parent_collections'][0]['RENDER_STYLESHEET']) {
     module_load_include('inc', 'islandora_solution_pack_xml', 'includes/utilities');

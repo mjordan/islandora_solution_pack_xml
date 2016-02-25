@@ -19,7 +19,7 @@
 function islandora_simple_xml_viewer_admin(array $form, array &$form_state) {
   $form['islandora_simple_xml_viewer_prettify'] = array(
     '#type' => 'checkbox',
-    '#title' => t('Prettify '),
+    '#title' => t('Prettify'),
     '#description' => t('Prettify the XML markup with <a href="https://github.com/google/code-prettify">' .
       'Google Javascript code prettifier</a>.'),
     '#default_value' => variable_get('islandora_simple_xml_viewer_prettify', TRUE),

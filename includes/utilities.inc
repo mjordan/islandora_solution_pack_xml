@@ -17,7 +17,7 @@
  *   The transformed XML.
  */
 function islandora_solution_pack_xml_apply_xslt($xslt, $input_xml) {
- try {
+  try {
     $xsl_doc = new DOMDocument();
     $xsl_doc->loadXML($xslt);
     $xml_doc = new DOMDocument();
@@ -40,4 +40,3 @@ function islandora_solution_pack_xml_apply_xslt($xslt, $input_xml) {
     );
   }
 }
-

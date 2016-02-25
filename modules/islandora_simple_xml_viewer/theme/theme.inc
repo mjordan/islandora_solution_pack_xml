@@ -30,5 +30,4 @@ function islandora_simple_xml_viewer_preprocess_islandora_simple_xml_viewer(arra
     $islandora_object = $variables['islandora_object'];
     $variables['islandora_content'] = '<pre>' . htmlspecialchars($islandora_object['OBJ']->content) . '</pre>';
   }
-
 }

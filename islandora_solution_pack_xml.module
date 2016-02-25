@@ -140,4 +140,3 @@ function islandora_solution_pack_xml_islandora_sp_simple_xml_islandora_view_obje
   $output = theme('islandora_solution_pack_xml_default', array('islandora_object' => $object));
   return array('' => $output);
 }
-
