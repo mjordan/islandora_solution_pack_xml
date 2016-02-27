@@ -24,13 +24,11 @@ Then, to perform the ingest:
 
 XML files with the extension `.xml`.
 
-It's a great idea to check the XML files for well formedness and if applicable, validity before ingesting them.
+It's a very good idea to check the XML files for well formedness and if applicable, validity before ingesting them.
 
 ### TN datastreams
 
-OBJ file base name with the double extension `.TN.ext`
-
-where `.ext` is one of 'jpg', 'png', 'gif', or 'jpeg'.
+OBJ file base name with the double extension `.TN.ext` where `.ext` is one of '.jpg', '.jpeg', '.png', or '.gif'.
 
 ### MODS datastreams
 
@@ -62,16 +60,16 @@ Two XML files, which will create two objects. The thumbnail and MODS datastreams
 └── bar.TN.png
 ```
 
-Two XML files, which will create two objects. The object created from `foo.xml` will have its MODS datastream created from the `foo.MODS.xml` and its thumbnail created from defaults; the object created from `bar.xml` will have its TN datastream created from `bar.TN.jpg` and its MODS datastream created from defaults; the object created from `baz.xml` will have its TN and MODS datastreams created from defaults and will have its RENDER_STYLESHEET created from `baz.xsl`:
+Two XML files, which will create two objects. The object created from `foo.xml` will have its MODS datastream created from the `foo.MODS.xml` and its thumbnail created from defaults; the object created from `bar.xml` will have its TN datastream created from `bar.TN.jpg` and its MODS datastream created from defaults; the object created from `baz.xml` will have its TN and MODS datastreams created from defaults and will have its RENDER_STYLESHEET datastream created from `baz.xsl`:
 
 ```
 .
 ├── foo.xml
 ├── foo.MODS.xml
-├── baz.xml
-├── baz.xsl
 ├── bar.xml
-└── bar.TN.png
+├── bar.TN.png
+├── baz.xml
+└── baz.xsl
 ```
 
 ## Maintainer
