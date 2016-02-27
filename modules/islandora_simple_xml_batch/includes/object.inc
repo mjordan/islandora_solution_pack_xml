@@ -38,6 +38,19 @@ class IslandoraSimpleXmlBatchObject extends IslandoraBatchObject {
       $dc->label = 'DC Record';
       $dc->setContentFromString($dc_content);
       $this->ingestDatastream($dc);
+
+      // Get object label from dc:title.
+      $dom = new DOMDocument();
+      $dom->loadXML($dc_content);
+      $xpath = new DOMXPath($dom);
+      $xpath->registerNamespace('dc', 'http://purl.org/dc/elements/1.1/');
+      $titles = $xpath->query("//dc:title");
+      if ($titles->length > 0) {
+        $this->label = $titles->item(0)->nodeValue;
+      }
+      else {
+        $this->label = '[No object label available]';
+      }
     }
 
     // TN datastream.
