@@ -155,7 +155,7 @@ function islandora_solution_pack_xml_xml_upload_form_submit(array $form, array &
     $render_stylesheet_file = file_load($form_state['values']['render_stylesheet']);
     $render_stylesheet_path = drupal_realpath($render_stylesheet_file->uri);
     $ds->setContentFromFile($render_stylesheet_path, FALSE);
-    $ds->label = $render_stylesheet_file->filename;
+    $ds->label = 'Render stylesheet';
     $ds->mimetype = $render_stylesheet_file->filemime;
   }
 }

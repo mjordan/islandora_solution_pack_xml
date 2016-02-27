@@ -18,31 +18,29 @@ class IslandoraSimpleXmlBatchObject extends IslandoraBatchObject {
 
   // Generate datastreams.
   public function batchProcess() {
+    // OBJ datastream.
     $obj = $this->constructDatastream('OBJ', 'M');
     $obj->label = 'OBJ Datastream';
     $obj->mimetype = 'text/xml';
     $obj->setContentFromFile($this->xml_obj_file_path, FALSE);
     $this->ingestDatastream($obj);
 
+    // MODS, then DC datastreams.
     if ($mods = $this->getMods()) {
       $this->ingestDatastream($mods);
 
-/*
-      $dom = new DOMDocument();
-      $dom->loadXML($mods->content);
-      $xpath = new DOMXPath($dom);
-      $titles = $xpath->query("//titleInfo/title");
-      if ($title->length > 0) {
-        $object_label = $titles->item(0)->nodeValue;
-      }
-      else {
-        $object_label = '[No object label available]';
-      }
-*/
-
-      // @todo: add DC.
+      module_load_include('inc', 'islandora_solution_pack_xml', 'includes/utilities');
+      $path_to_mods_to_dc_xsl = drupal_get_path('module', 'islandora_batch') . '/transforms/mods_to_dc.xsl';
+      $mods_to_dc_xsl = file_get_contents($path_to_mods_to_dc_xsl);
+      $dc_content = islandora_solution_pack_xml_apply_xslt($mods_to_dc_xsl, $mods->content); 
+      $dc = $this->constructDatastream('DC', 'M');
+      $dc->mimetype = 'text/xml';
+      $dc->label = 'DC Record';
+      $dc->setContentFromString($dc_content);
+      $this->ingestDatastream($dc);
     }
 
+    // TN datastream.
     if ($tn = $this->getTn()) {
       $this->ingestDatastream($tn);
     }
@@ -125,6 +123,28 @@ EOQ;
       $mods->mimetype = 'text/xml';
       $mods->label = 'MODS metadata';
       return $mods;
+    }
+  } 
+
+  /**
+   * Creates a RENDER_STYLESHEET datastream from a file matching the base object.
+   *
+   * @return object|FALSE
+   */
+  private function getRenderStylesheet() {
+    $pathinfo = pathinfo($this->xml_obj_file_path);
+    $dir_name = $pathinfo['dirname'];
+    $file_name = $pathinfo['filename'];
+    $rs_file_path = $dir_name . DIRECTORY_SEPARATOR . $file_name . '.xsl';
+    if (file_exists($mods_file_path)) {
+      $rs = $this->constructDatastream('RENDER_STYLESHEET', 'M');
+      $rs->mimetype = 'text/xml';
+      $rs->label = 'Render stylesheet';
+      $rs->setContentFromFile($rs_file_path, FALSE);
+      return $rs;
+    }
+    else {
+      return FALSE;
     }
   } 
 

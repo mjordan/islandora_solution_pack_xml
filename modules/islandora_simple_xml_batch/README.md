@@ -36,6 +36,10 @@ where '.ext' is one of 'jpg', 'png', 'gif', or 'jpeg'.
 
 OBJ file base name plus '.MODS.xml'.
 
+### RENDER_STYLESHEET datastreams
+
+OBJ file base name plus '.xsl'.
+
 ### Example input directories
 
 Two XML files, which will create two objects. The thumbnail and MODS datastreams for the objects will be set to defaults:
@@ -58,12 +62,14 @@ Two XML files, which will create two objects. The thumbnail and MODS datastreams
 └── bar.TN.png
 ```
 
-Two XML files, which will create two objects. The object created from `foo.xml` will have its MODS datastream created from the `foo.MODS.xml` and its thumbnail created from defaults; the object created from `bar.xml` will have its TN datastream created from `bar.TN.jpg` and its MODS datastream created from defaults:
+Two XML files, which will create two objects. The object created from `foo.xml` will have its MODS datastream created from the `foo.MODS.xml` and its thumbnail created from defaults; the object created from `bar.xml` will have its TN datastream created from `bar.TN.jpg` and its MODS datastream created from defaults; the object created from `baz.xml` will have its TN and MODS datastreams created from defaults and will have its RENDER_STYLESHEET created from `baz.xsl`:
 
 ```
 .
 ├── foo.xml
 ├── foo.MODS.xml
+├── baz.xml
+├── baz.xsl
 ├── bar.xml
 └── bar.TN.png
 ```
