@@ -22,23 +22,23 @@ Then, to perform the ingest:
 
 ### OBJ datastreams
 
-XML files with the extension '.xml'.
+XML files with the extension `.xml`.
 
 It's a great idea to check the XML files for well formedness and if applicable, validity before ingesting them.
 
 ### TN datastreams
 
-OBJ file base name plus .TN.ext
+OBJ file base name with the double extension `.TN.ext`
 
-where '.ext' is one of 'jpg', 'png', 'gif', or 'jpeg'.
+where `.ext` is one of 'jpg', 'png', 'gif', or 'jpeg'.
 
 ### MODS datastreams
 
-OBJ file base name plus '.MODS.xml'.
+OBJ file base name with the double extension `.MODS.xml`.
 
 ### RENDER_STYLESHEET datastreams
 
-OBJ file base name plus '.xsl'.
+OBJ file base name plus the extension `.xsl`.
 
 ### Example input directories
 
