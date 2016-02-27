@@ -122,7 +122,7 @@ function islandora_solution_pack_xml_xml_upload_form_submit(array $form, array &
     $thumbnail_file = file_load($form_state['values']['thumbnail']);
     $thumbnail_path = drupal_realpath($thumbnail_file->uri);
     $ds->setContentFromFile($thumbnail_path, FALSE);
-    $ds->label = $thumbnail_file->filename;
+    $ds->label = 'Thumbnail';
     $ds->mimetype = $thumbnail_file->filemime;
   }
   else {

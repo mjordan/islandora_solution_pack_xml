@@ -16,46 +16,36 @@ class IslandoraSimpleXmlBatchObject extends IslandoraBatchObject {
     $this->preprocessorParameters = $batch_parameters;
   }
 
-  // Responsible for pre-ingest transformations into base datastreams.
+  // Generate datastreams.
   public function batchProcess() {
-
-/*
-    // Grab things from the XML into variables, as strings.
-    $this->label = $title = (string) $simple_xml->title;
-    $description = (string) $simple_xml->description;
-    $url = (string) $simple_xml->link;
-*/
-
     $obj = $this->constructDatastream('OBJ', 'M');
-    $obj->label = "Hi";
+    $obj->label = 'OBJ Datastream';
     $obj->mimetype = 'text/xml';
     $obj->setContentFromFile($this->xml_obj_file_path, FALSE);
     $this->ingestDatastream($obj);
 
-    // Generate a simple MODS datastream, and add it to the current object.
-    // Typically, the MODS would also be transformed to DC and added, but
-    // we're skipping this, due to the simple data.
+    if ($mods = $this->getMods()) {
+      $this->ingestDatastream($mods);
 
-    // @todo: Add a 'label' parameter to batch which identifies the element that is to be
-    // used as the object label. If absent, assign a default label or get one from the MODS
-    // file if it is present. Maybe also add a parameter for description?
+/*
+      $dom = new DOMDocument();
+      $dom->loadXML($mods->content);
+      $xpath = new DOMXPath($dom);
+      $titles = $xpath->query("//titleInfo/title");
+      if ($title->length > 0) {
+        $object_label = $titles->item(0)->nodeValue;
+      }
+      else {
+        $object_label = '[No object label available]';
+      }
+*/
 
-    // @todo: If a file named xxx.mods is present, use it instead of generating one.
-    $mods = $this->constructDatastream('MODS', 'M');
-    // $mods->label = $title;
-    $mods->label = 'New XML object MODS';
-    $mods->mimetype = 'text/xml';
-    $mods->content = <<<EOQ
-<mods xmlns='http://www.loc.gov/mods/v3'>
-  <titleInfo>
-    <title>Hi there</title>
-  </titleInfo>
-  <abstract>Duh, I am an abstract</abstract>
-</mods>
-EOQ;
-    $this->ingestDatastream($mods);
+      // @todo: add DC.
+    }
 
-    //@todo: Create TN datastream from a file matching the base object.
+    if ($tn = $this->getTn()) {
+      $this->ingestDatastream($tn);
+    }
 
     // Add relationships.
     $this->addRelationships();
@@ -76,4 +66,66 @@ EOQ;
   public function getResources() {
     return array();
   }
+
+  /**
+   * Creates a TN datastream from a file matching the base object.
+   *
+   * @return object|FALSE
+   */
+  private function getTn() {
+    $tn_extensions = array('png', 'jpg', 'jpeg', 'gif');
+    $pathinfo = pathinfo($this->xml_obj_file_path);
+    $dir_name = $pathinfo['dirname'];
+    $file_name = $pathinfo['filename'];
+    foreach ($tn_extensions as $ext) {
+      $tn_file_path = $dir_name . DIRECTORY_SEPARATOR . $file_name . '.TN.' . $ext;
+      if (file_exists($tn_file_path)) {
+        $tn_mime_detector = new MimeDetect();
+        $tn = $this->constructDatastream('TN', 'M');
+        $tn->mimetype = $tn_mime_detector->getMimetype($tn_file_path);
+        $tn->label = 'Thumbnail';
+        $tn->setContentFromFile($tn_file_path, FALSE);
+        return $tn;
+      }
+    }
+    return FALSE;
+  } 
+
+  /**
+   * Creates a MODS datastream.
+   *
+   * If a file in the same directory as the OBJ file and matching its basename
+   * plus '.MODS.xml' exists, populates the MODS datastream with that file;
+   * if no such file exists, generates a minimal, templated MODS datastream.
+   *
+   * @return obj
+   */
+  private function getMods() {
+    $pathinfo = pathinfo($this->xml_obj_file_path);
+    $dir_name = $pathinfo['dirname'];
+    $file_name = $pathinfo['filename'];
+    $mods_file_path = $dir_name . DIRECTORY_SEPARATOR . $file_name . '.MODS.xml';
+    if (file_exists($mods_file_path)) {
+      $mods = $this->constructDatastream('MODS', 'M');
+      $mods->mimetype = 'text/xml';
+      $mods->label = 'MODS metadata';
+      $mods->setContentFromFile($mods_file_path, FALSE);
+      return $mods;
+    }
+    else {
+      // @todo: Generate a minimal MODS file.
+      $mods = $this->constructDatastream('MODS', 'M');
+      $mods->content = <<<EOQ
+<mods xmlns='http://www.loc.gov/mods/v3'>
+  <titleInfo>
+    <title>{$file_name}</title>
+  </titleInfo>
+</mods>
+EOQ;
+      $mods->mimetype = 'text/xml';
+      $mods->label = 'MODS metadata';
+      return $mods;
+    }
+  } 
+
 }

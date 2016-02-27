@@ -18,6 +18,56 @@ Then, to perform the ingest:
 
 `drush --user=admin islandora_batch_ingest`
 
+## Preparing your content files for ingesting
+
+### OBJ datastreams
+
+XML files with the extension '.xml'.
+
+It's a great idea to check the XML files for well formedness and if applicable, validity before ingesting them.
+
+### TN datastreams
+
+OBJ file base name plus .TN.ext
+
+where '.ext' is one of 'jpg', 'png', 'gif', or 'jpeg'.
+
+### MODS datastreams
+
+OBJ file base name plus '.MODS.xml'.
+
+### Example input directories
+
+Two XML files, which will create two objects. The thumbnail and MODS datastreams for the objects will be set to defaults:
+
+```
+.
+├── foo.xml
+└── bar.xml
+```
+
+Two XML files, which will create two objects. The thumbnail and MODS datastreams for the objects will be created from the file with TN and MODS in their filenames:
+
+```
+.
+├── foo.xml
+├── foo.MODS.xml
+├── foo.TN.jpg
+├── bar.xml
+├── bar.MODS.xml
+└── bar.TN.png
+```
+
+Two XML files, which will create two objects. The object created from `foo.xml` will have its MODS datastream created from the `foo.MODS.xml` and its thumbnail created from defaults; the object created from `bar.xml` will have its TN datastream created from `bar.TN.jpg` and its MODS datastream created from defaults:
+
+```
+.
+├── foo.xml
+├── foo.MODS.xml
+├── bar.xml
+└── bar.TN.png
+```
+
 ## Maintainer
 
 * [Mark Jordan](https://github.com/mjordan)
