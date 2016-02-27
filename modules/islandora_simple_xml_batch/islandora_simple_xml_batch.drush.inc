@@ -13,7 +13,7 @@ function islandora_simple_xml_batch_drush_command() {
 
   $items['islandora_simple_xml_batch_preprocess'] = array(
     'aliases' => array('isxbp'),
-    'description' => 'Preprocess Islandora Simple XML objects into bath queue entries.',
+    'description' => 'Preprocess Islandora Simple XML objects into batch queue entries.',
     'drupal dependencies' => array('islandora_batch', 'islandora_solution_pack_xml'),
     'options' => array(
       'target' => array(
@@ -47,10 +47,6 @@ function islandora_simple_xml_batch_drush_command() {
  * Implements hook_drush_command().
  */
 function drush_islandora_simple_xml_batch_preprocess() {
-  // Due to how Drush bootstrapping works, the connection may be created
-  // without credentials (when your site's front page is
-  // 'islandora/object/some:object', for example). Resetting to ensure a new
-  // connection gets created should fix it.
   drupal_static_reset('islandora_get_tuque_connection');
   $connection = islandora_get_tuque_connection();
   $parameters = array(
@@ -61,14 +57,13 @@ function drush_islandora_simple_xml_batch_preprocess() {
     'parent_relationship_pred' => drush_get_option('parent_relationship_pred', 'isMemberOf'),
   );
 
+  // Run the preprocessor.
   $preprocessor = new IslandoraSimpleXmlBatchPreprocessor($connection, $parameters);
-
-  // Pass the preprocessor off to run.
   $preprocessed = islandora_batch_handle_preprocessor($preprocessor);
 }
 
 /**
- * Parent validation.
+ * Parent collection validation.
  */
 function drush_islandora_simple_xml_batch_preprocess_validate() {
   $parent = drush_get_option('parent');

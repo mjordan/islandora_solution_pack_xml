@@ -1,5 +1,5 @@
-name = "Islandora XML Solution Pack"
-description = "A simple Islandora Repository module to handle XML datastreams"
+name = "Islandora Simple XML Solution Pack"
+description = "A Islandora Repository module to handle XML datastreams"
 dependencies[] = islandora
 package = Islandora Solution Packs
 core = 7.x

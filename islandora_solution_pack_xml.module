@@ -47,7 +47,7 @@ function islandora_solution_pack_xml_theme($existing, $type, $theme, $path) {
  */
 function islandora_solution_pack_xml_islandora_required_objects(IslandoraTuque $connection) {
   $module_path = drupal_get_path('module', 'islandora_solution_pack_xml');
-  // Web ARChive Content Model.
+  // Islandora Simple XML Content Model.
   $simple_xml_content_model = $connection->repository->constructObject('islandora:sp_simple_xml');
   $simple_xml_content_model->owner = 'fedoraAdmin';
   $simple_xml_content_model->label = 'Islandora Simple XML Content Model';

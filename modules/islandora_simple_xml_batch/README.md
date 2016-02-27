@@ -6,6 +6,7 @@ Islandora batch module for loading XML files managed by the Islandora XML Soluti
 
 * [Islandora](https://github.com/Islandora/islandora)
 * [Islandora Batch](https://github.com/Islandora/islandora_batch)
+* Islandora Simple XML Solution Pack
 
 ## Usage
 

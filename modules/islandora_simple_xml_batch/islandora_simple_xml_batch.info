@@ -3,6 +3,7 @@ description = "A batch importer module for objects of content type Islandora Sim
 package = Islandora
 dependencies[] = islandora
 dependencies[] = islandora_batch
+dependencies[] = islandora_solution_pack_xml
 version = 7.x-dev
 core = 7.x
 files[] = includes/preprocessor.inc

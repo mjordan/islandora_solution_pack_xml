@@ -1,15 +1,19 @@
 <?php
 
+/**
+ * @file
+ * Implementation of classes from the batch ingest framework.
+ */
+
 class IslandoraSimpleXmlBatchObject extends IslandoraBatchObject {
   protected $xml_obj_file_path;
+  protected $preprocessorParameters;
 
-  public function __construct(IslandoraTuque $connection, string $xml_file_path) {
-    // Need the connection to perform the other setup for the Tuque object.
+  public function __construct(IslandoraTuque $connection, string $xml_file_path, $batch_parameters) {
     parent::__construct(NULL, $connection->repository);
 
-    // var_dump($this->parameters);
-
     $this->xml_obj_file_path = $xml_file_path;
+    $this->preprocessorParameters = $batch_parameters;
   }
 
   // Responsible for pre-ingest transformations into base datastreams.
@@ -22,9 +26,21 @@ class IslandoraSimpleXmlBatchObject extends IslandoraBatchObject {
     $url = (string) $simple_xml->link;
 */
 
+    $obj = $this->constructDatastream('OBJ', 'M');
+    $obj->label = "Hi";
+    $obj->mimetype = 'text/xml';
+    $obj->setContentFromFile($this->xml_obj_file_path, FALSE);
+    $this->ingestDatastream($obj);
+
     // Generate a simple MODS datastream, and add it to the current object.
     // Typically, the MODS would also be transformed to DC and added, but
     // we're skipping this, due to the simple data.
+
+    // @todo: Add a 'label' parameter to batch which identifies the element that is to be
+    // used as the object label. If absent, assign a default label or get one from the MODS
+    // file if it is present. Maybe also add a parameter for description?
+
+    // @todo: If a file named xxx.mods is present, use it instead of generating one.
     $mods = $this->constructDatastream('MODS', 'M');
     // $mods->label = $title;
     $mods->label = 'New XML object MODS';
@@ -39,11 +55,7 @@ class IslandoraSimpleXmlBatchObject extends IslandoraBatchObject {
 EOQ;
     $this->ingestDatastream($mods);
 
-    $obj = $this->constructDatastream('OBJ', 'M');
-    $obj->label = "Hi";
-    $obj->mimetype = 'text/xml';
-    $obj->setContentFromFile($this->xml_obj_file_path, FALSE);
-    $this->ingestDatastream($obj);
+    //@todo: Create TN datastream from a file matching the base object.
 
     // Add relationships.
     $this->addRelationships();
@@ -56,8 +68,8 @@ EOQ;
   public function addRelationships() {
     // Let's make this object a citation in the default citation collection, as
     // MODS is all that is really required to make a citation...
-    $this->relationships->add(FEDORA_RELS_EXT_URI, 'isMemberOfCollection', 'ir:citationCollection');
-    $this->models = 'ir:citationCModel';
+    $this->relationships->add(FEDORA_RELS_EXT_URI, 'isMemberOfCollection', $this->preprocessorParameters['parent']);
+    $this->models = 'islandora:sp_simple_xml';
   }
 
   // Get a list of resources.
