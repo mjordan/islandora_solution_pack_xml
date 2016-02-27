@@ -20,6 +20,8 @@ Then, to perform the ingest:
 
 ## Preparing your content files for ingesting
 
+This batch module uses filename patterns to identify the files that are intended for specific datastreams. All of the files you are ingesting should go in the same directory (the one you identify in the drush command with the `--target` option), and you must have at least a file for the OJB datastream. All other files are optional. Using this module, you can batch ingest objects of content model 'islandora:sp_simple_xml' having the following datastreams.
+
 ### OBJ datastreams
 
 XML files with the extension `.xml`.
