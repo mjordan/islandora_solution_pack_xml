@@ -34,34 +34,36 @@ function islandora_solution_pack_xml_xml_upload_form(array $form, array &$form_s
     ),
   );
 
-  $form['islandora_solution_pack_xml_thumbnail_upload'] = array(
-    '#type' => 'checkbox',
-    '#title' => t("Add a thumbnail to this upload?"),
-    '#default_value' => FALSE,
-  );
-  $form['thumbnail'] = array(
-    '#title' => t('Thumbnail image for this XML file'),
-    '#type' => 'managed_file',
-    '#required' => FALSE,
-    '#description' => t('Select thumbnail file to upload.<br/>Files must be less than <strong>@size MB.</strong><br/>Allowed file types: <strong>@ext.</strong><br />This file is optional.', array('@size' => $upload_size, '@ext' => 'jpg, png, gif')),
-    '#default_value' => isset($form_state['values']['files']) ? $form_state['values']['files'] : NULL,
-    '#upload_location' => 'temporary://',
-    '#upload_validators' => array(
-      'file_validate_extensions' => array('jpg', 'png', 'gif'),
-      // Assume it's specified in MB.
-      'file_validate_size' => array($upload_size * 1024 * 1024),
-    ),
-    '#states' => array(
-      'visible' => array(
-        ':input[name="islandora_solution_pack_xml_thumbnail_upload"]' => array('checked' => TRUE),
+  if (variable_get('islandora_solution_pack_xml_allow_thumbnail_upload', TRUE)) {
+    $form['islandora_solution_pack_xml_thumbnail_upload'] = array(
+      '#type' => 'checkbox',
+      '#title' => t("Add a custom thumbnail to this object?"),
+      '#default_value' => FALSE,
+    );
+    $form['thumbnail'] = array(
+      '#title' => t('Thumbnail image'),
+      '#type' => 'managed_file',
+      '#required' => FALSE,
+      '#description' => t('Select thumbnail file to upload.<br/>Files must be less than <strong>@size MB.</strong><br/>Allowed file types: <strong>@ext.</strong><br />This file is optional.', array('@size' => $upload_size, '@ext' => 'jpg, png, gif')),
+      '#default_value' => isset($form_state['values']['files']) ? $form_state['values']['files'] : NULL,
+      '#upload_location' => 'temporary://',
+      '#upload_validators' => array(
+        'file_validate_extensions' => array('jpg', 'png', 'gif'),
+        // Assume it's specified in MB.
+        'file_validate_size' => array($upload_size * 1024 * 1024),
       ),
-    ),
-  );
+      '#states' => array(
+        'visible' => array(
+          ':input[name="islandora_solution_pack_xml_thumbnail_upload"]' => array('checked' => TRUE),
+        ),
+      ),
+    );
+  }
 
-  if (variable_get('islandora_solution_pack_xml_allow_render_stylesheet_upload', FALSE)) {
+  if (variable_get('islandora_solution_pack_xml_allow_render_stylesheet_upload', TRUE)) {
     $form['islandora_solution_pack_xml_render_stylesheet_upload'] = array(
       '#type' => 'checkbox',
-      '#title' => t("Add a render stylesheet file to this upload?"),
+      '#title' => t("Add a render stylesheet file to this object?"),
       '#default_value' => FALSE,
     );
     $form['render_stylesheet'] = array(
@@ -122,6 +124,24 @@ function islandora_solution_pack_xml_xml_upload_form_submit(array $form, array &
     $ds->setContentFromFile($thumbnail_path, FALSE);
     $ds->label = $thumbnail_file->filename;
     $ds->mimetype = $thumbnail_file->filemime;
+  }
+  else {
+    // Use default thumbnail.
+    $default_thumbnail_path = variable_get('islandora_solution_pack_xml_default_thumbnail_path', '');
+    if (strlen($default_thumbnail_path)) {
+      if (empty($object['TN'])) {
+        $ds = $object->constructDatastream('TN', 'M');
+        $object->ingestDatastream($ds);
+      }
+      else {
+        $ds = $object['TN'];
+      }
+      $thumbnail_path = DRUPAL_ROOT . DIRECTORY_SEPARATOR . $default_thumbnail_path;
+      $thumbnail_mime_detector = new MimeDetect();
+      $ds->mimetype = $thumbnail_mime_detector->getMimetype($thumbnail_path);
+      $ds->label = 'Thumbnail';
+      $ds->setContentFromFile($thumbnail_path, FALSE);
+    }
   }
 
   if (isset($form_state['values']['render_stylesheet']) && ($form_state['values']['render_stylesheet'] > 0)) {

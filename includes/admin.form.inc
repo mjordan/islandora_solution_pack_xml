@@ -23,6 +23,22 @@ function islandora_solution_pack_xml_admin(array $form, array &$form_state) {
     '#description' => t('If present, this stylesheet will override collection-level stylesheets'),
     '#default_value' => variable_get('islandora_solution_pack_xml_allow_render_stylesheet_upload', TRUE),
   );
+  $form['islandora_solution_pack_xml_allow_thumbnail_upload'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Allow users to upload object-specific thumbnails?'),
+    '#default_value' => variable_get('islandora_solution_pack_xml_allow_thumbnail_upload', TRUE),
+  );
+  $module_path = drupal_get_path('module', 'islandora_solution_pack_xml');
+  $default_tn_path = $module_path . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'xml.png';
+  $form['islandora_solution_pack_xml_default_thumbnail_path'] = array(
+    '#title' => t('Path to default thumbnail image'),
+    '#type' => 'textfield',
+    '#size' => 60,
+    '#default_value' => variable_get('islandora_solution_pack_xml_default_thumbnail_path', $default_tn_path),
+    '#description' => t('Filesystem path (relative to your Drupal installation) to the default thumbnail ' .
+      'image for XML objects. Leave empty to not attach a thumbnail.'),
+    '#maxlength' => 255,
+  );
 
   module_load_include('inc', 'islandora', 'includes/solution_packs');
   $form += islandora_viewers_form('islandora_xml_viewers', 'application/xml');
