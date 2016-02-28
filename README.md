@@ -49,9 +49,11 @@ Objects managed by this module cannot be loaded using Islandora Batch, but a cus
 ## To do
 
 * Add checks for well formedness on XML and XSLT files as they are uploaded.
-* Add checks for validity against a specific schema or DTD (maybe one that is attached to the collection object as a datastream?).
-* Write some additional viewers that present the XML content in interesting ways like [this](https://www.sencha.com/forum/showthread.php?163680-Implementing-treeview-using-xml-data) or [this](http://blog.ashwani.co.in/blog/2013-07-18/stylize-your-xml-with-jquery-xml-tree-plugin/).
 * Provide Solr configs for allowing the indexing of XML element content for advanced searches within using elements in XML OBJ datasteams.
+* Add checks for validity against a specific schema or DTD
+  * Possible solution is to attach a schema file to the collection object as a datastream.
+* Write some additional viewers that present the XML content in interesting ways
+  * Like [this](https://www.sencha.com/forum/showthread.php?163680-Implementing-treeview-using-xml-data) or [this](http://blog.ashwani.co.in/blog/2013-07-18/stylize-your-xml-with-jquery-xml-tree-plugin/).
 * Provide sample XSLT stylesheets for common types of XML objects, like "flat" XML, TEI, EAD, etc.
 * Define use cases for more granular permissions controlling upload of thumbnail images and XSLT stylesheets.
 
