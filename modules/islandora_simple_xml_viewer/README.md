@@ -5,6 +5,7 @@ Islandora viewer that allows easy styling of XML files managed by the Islandora 
 ## Requirements
 
 * [Islandora](https://github.com/Islandora/islandora)
+* Islandora Simple XML Solution Pack
 
 ## Usage
 
