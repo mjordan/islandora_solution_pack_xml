@@ -1,6 +1,6 @@
 # Islandora XML Solution Pack
 
-Simple Islandora Solution Pack that allows for ingesting and viewing XML files. This solution pack is a successor to the overly complex [Islandora Feeds](https://github.com/mjordan/islandora_feeds) module.
+Simple Islandora Solution Pack that allows for ingesting and viewing content structured within XML files. This solution pack is a successor to the overly complex [Islandora Feeds](https://github.com/mjordan/islandora_feeds) module. The origins of that module, and therefore of the one described in this README, can be found in this [Islandora Google group thread](https://groups.google.com/forum/#!searchin/islandora/jordan$20database/islandora/vqJZH7bxBDc/SzSygjj1RQsJ).
 
 ## Introduction
 
