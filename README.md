@@ -27,7 +27,7 @@ Note that if this viewer is enabled, the XML OBJ datastream content is not style
 
 ## Batch loading
 
-Objects managed by this module cannot be loaded using Islandora Batch, but a simple custom Drush-based loader is available in the `modules` subdirectory.
+Objects managed by this module cannot be loaded using Islandora Batch, but a custom Drush-based loader is available in the `modules` subdirectory.
 
 ## Requirements
 
