@@ -62,7 +62,7 @@ Two XML files, which will create two objects. The thumbnail and MODS datastreams
 └── bar.TN.png
 ```
 
-Two XML files, which will create two objects. The object created from `foo.xml` will have its MODS datastream created from the `foo.MODS.xml` and its thumbnail created from defaults; the object created from `bar.xml` will have its TN datastream created from `bar.TN.jpg` and its MODS datastream created from defaults; the object created from `baz.xml` will have its TN and MODS datastreams created from defaults and will have its RENDER_STYLESHEET datastream created from `baz.xsl`:
+Three XML files, which will create three objects. The object created from `foo.xml` will have its MODS datastream created from the `foo.MODS.xml` and its thumbnail created from defaults; the object created from `bar.xml` will have its TN datastream created from `bar.TN.png` and its MODS datastream created from defaults; the object created from `baz.xml` will have its TN and MODS datastreams created from defaults and will have its RENDER_STYLESHEET datastream created from `baz.xsl`:
 
 ```
 .
