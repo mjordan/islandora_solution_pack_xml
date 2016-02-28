@@ -1,12 +1,12 @@
 # Islandora XML Solution Pack
 
-An Islandora Solution Pack that allows for ingesting and viewing content structured within XML files. This solution pack offers a simpler solution to the goals of the overly complex [Islandora Feeds](https://github.com/mjordan/islandora_feeds) module, the original motivation of which can be found in [this Islandora Google group thread](https://groups.google.com/forum/#!searchin/islandora/jordan$20database/islandora/vqJZH7bxBDc/SzSygjj1RQsJ).
+An Islandora Solution Pack that allows for ingesting and viewing content within arbitrarily structured XML files. This solution pack offers a simpler solution to the goals of the overly complex [Islandora Feeds](https://github.com/mjordan/islandora_feeds) module, the original motivation of which can be found in [this Islandora Google group discussion](https://groups.google.com/forum/#!searchin/islandora/jordan$20database/islandora/vqJZH7bxBDc/SzSygjj1RQsJ).
 
 ## Introduction
 
 This solution pack provides well-understood tools for ingesting and viewing XML OBJ files in Islandora. It is simpler than Islandora Feeds because:
 
-* It does not offer any way of editing the XML files. If users need to modify an XML file, they must replace the object's OBJ datastream using the standard tools provided within an object's Datastreams tab.
+* It does not offer any way of editing the XML files. If users need to modify an XML file, they must replace the object's OBJ datastream using the standard tools provided within an object's Datastreams tab, just like with any other solution pack's OBJ datastream.
 * It does not generate any derivatives.
 
 Users may upload a thumbnail image and default XSLT stylesheet for each XML object. Objects managed by this solution pack also have a MODS datastream just like other Islandora objects do.
