@@ -13,7 +13,7 @@ Users may upload a thumbnail image for their XML object. Objects managed by this
 
 ## Configuration
 
-This solution pack lets site administrators determine:
+The admin settings for this solution pack lets site administrators determine:
 
 1. whether users can upload object-specific thumbnails for objects
 2. the location of a default thumbnail image for use if no object-specific thumbnail exists)
