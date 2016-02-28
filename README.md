@@ -18,6 +18,7 @@ This solution pack lets site administrators determine:
 1. whether users can upload object-specific thumbnails for objects
 2. the location of a default thumbnail image for use if no object-specific thumbnail exists)
 3. whether users can upload object-specific XSLT sytlesheets for objects
+4. what the default Islandora viewer for objects managed by this solution pack are.
 
 ## Rendering the OBJ datastream using XSL Transformations
 
