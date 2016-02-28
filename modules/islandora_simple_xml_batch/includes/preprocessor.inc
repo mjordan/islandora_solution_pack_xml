@@ -9,6 +9,7 @@
  * Batch preprocessor class.
  */
 class IslandoraSimpleXmlBatchPreprocessor extends IslandoraBatchPreprocessor {
+
   /**
    * Function to get the OBJ XML files from the input directory.
    */
@@ -22,10 +23,9 @@ class IslandoraSimpleXmlBatchPreprocessor extends IslandoraBatchPreprocessor {
     // Get input files and process each one.
     foreach (glob($input_path) as $filepath) {
       // File ending in .MODS.xml are reserved for the content of
-      // the MODS datastream.
+      // the MODS datastream, so we exclude them here.
       if (!preg_match('/MODS\.xml$/', $filepath)) {
         $batch_object = new IslandoraSimpleXmlBatchObject($this->connection, $filepath, $this->parameters);
-
         // Add the instances to the Islandora batch queue.
         $this->addToDatabase($batch_object);
         $added[] = $batch_object;

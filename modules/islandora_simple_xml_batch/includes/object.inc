@@ -23,7 +23,7 @@ class IslandoraSimpleXmlBatchObject extends IslandoraBatchObject {
   }
 
   /**
-   * Assemble primary datastreams.
+   * Assemble the base datastreams.
    */
   public function batchProcess() {
     // OBJ datastream.
@@ -33,7 +33,7 @@ class IslandoraSimpleXmlBatchObject extends IslandoraBatchObject {
     $obj->setContentFromFile($this->xmlObjFilePath, FALSE);
     $this->ingestDatastream($obj);
 
-    // MODS, then DC datastreams.
+    // MODS, then from it DC, datastreams.
     if ($mods = $this->getMods()) {
       $this->ingestDatastream($mods);
 
@@ -66,7 +66,11 @@ class IslandoraSimpleXmlBatchObject extends IslandoraBatchObject {
       $this->ingestDatastream($tn);
     }
 
-    // Add relationships.
+    // RENDER_STYLESHEET datastream.
+    if ($rs = $this->getRenderStylesheet()) {
+      $this->ingestDatastream($rs);
+    }
+
     $this->addRelationships();
 
     // Indicate that this object is ready to actually go into Fedora.
@@ -77,8 +81,6 @@ class IslandoraSimpleXmlBatchObject extends IslandoraBatchObject {
    * Add relationships.
    */
   public function addRelationships() {
-    // Let's make this object a citation in the default citation collection, as
-    // MODS is all that is really required to make a citation...
     $this->relationships->add(FEDORA_RELS_EXT_URI, 'isMemberOfCollection', $this->preprocessorParameters['parent']);
     $this->models = 'islandora:sp_simple_xml';
   }
@@ -136,7 +138,7 @@ class IslandoraSimpleXmlBatchObject extends IslandoraBatchObject {
       return $mods;
     }
     else {
-      // @todo: Generate a minimal MODS file.
+      // In the absence of a poper MODS file, generate a minimal one.
       $mods = $this->constructDatastream('MODS', 'M');
       $mods->content = <<<EOQ
 <mods xmlns='http://www.loc.gov/mods/v3'>
@@ -161,7 +163,7 @@ EOQ;
     $dir_name = $pathinfo['dirname'];
     $file_name = $pathinfo['filename'];
     $rs_file_path = $dir_name . DIRECTORY_SEPARATOR . $file_name . '.xsl';
-    if (file_exists($mods_file_path)) {
+    if (file_exists($rs_file_path)) {
       $rs = $this->constructDatastream('RENDER_STYLESHEET', 'M');
       $rs->mimetype = 'text/xml';
       $rs->label = 'Render stylesheet';

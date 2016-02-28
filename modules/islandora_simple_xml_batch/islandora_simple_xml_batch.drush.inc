@@ -21,8 +21,8 @@ function islandora_simple_xml_batch_drush_command() {
         'required' => TRUE,
       ),
       'namespace' => array(
-        'description' => 'The namespace for objects created by this command. Defaults to namespace set in Islandora config.',
-        'required' => FALSE,
+        'description' => 'The namespace for objects created by this command.',
+        'required' => TRUE,
       ),
       'parent' => array(
         'description' => 'The collection to which the generated items should be added.',
@@ -52,7 +52,7 @@ function drush_islandora_simple_xml_batch_preprocess() {
   $parameters = array(
     'namespace' => drush_get_option('namespace'),
     'target' => drush_get_option('target'),
-    'parent' => drush_get_option('parent', 'ir:citationCollection'),
+    'parent' => drush_get_option('parent'),
     'parent_relationship_uri' => drush_get_option('parent_relationship_uri', 'info:fedora/fedora-system:def/relations-external#'),
     'parent_relationship_pred' => drush_get_option('parent_relationship_pred', 'isMemberOf'),
   );
