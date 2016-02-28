@@ -1,10 +1,10 @@
 # Islandora XML Solution Pack
 
-Simple Islandora Solution Pack that allows for ingesting and viewing content structured within XML files. This solution pack is a successor to the overly complex [Islandora Feeds](https://github.com/mjordan/islandora_feeds) module. The origins of that module, and therefore of the one described in this README, can be found in this [Islandora Google group thread](https://groups.google.com/forum/#!searchin/islandora/jordan$20database/islandora/vqJZH7bxBDc/SzSygjj1RQsJ).
+Simple Islandora Solution Pack that allows for ingesting and viewing content structured within XML files. This solution pack is a successor to the overly complex [Islandora Feeds](https://github.com/mjordan/islandora_feeds) module. The original motivation for that module, and therefore of the one described in this README, can be found in this [Islandora Google group thread](https://groups.google.com/forum/#!searchin/islandora/jordan$20database/islandora/vqJZH7bxBDc/SzSygjj1RQsJ).
 
 ## Introduction
 
-This module provides basic support for ingesting and viewing XML OBJ files in Islandora. The solution pack is "simple" because:
+This module provides mechanisms for ingesting and viewing XML OBJ files in Islandora. The solution pack is "simple" because:
 
 * It does not offer any way of editing the XML files. If users need to modify an XML file, they must replace the object's OBJ datastream using the standard tools provided within an object's Datastreams tab.
 * It does not generate any derivatives.
@@ -13,7 +13,7 @@ Users may upload a thumbnail image for their XML object. Objects managed by this
 
 ## Configuration
 
-The admin settings for this solution pack lets site administrators determine:
+The admin settings for this solution pack, available at `admin/islandora/solution_pack_config/xml`, let site administrators determine:
 
 1. whether users can upload object-specific thumbnails for objects
 2. the location of a default thumbnail image for use if no object-specific thumbnail exists (this default thumbnail can also be applied in batch ingests)
@@ -24,7 +24,7 @@ The admin settings for this solution pack lets site administrators determine:
 
 The module allows the use of XSLT stylesheets to render the XML to users in the following ways:
 
-1. Users may upload a stylesheet when they create an object managed by this solution pack. The stylesheet becomes a datastream on the object with the datastream ID 'RENDER_STYLESHEET' and is applied to the XML OBJ file when users view the object. So in a sense this module creates its derivatives on demand, not on ingest.
+1. Users may upload a stylesheet when they create an object managed by this solution pack. The stylesheet becomes a datastream on the object with the datastream ID 'RENDER_STYLESHEET' and is applied to the XML OBJ file when users view the object.
 2. Owners of collections may upload an XSL stylesheet as a datastream on a collection object. If this datastream has an ID of 'RENDER_STYLESHEET', it is used for all XML objects that are members of the collection (unless a member object has its own RENDER_STYLESHEET datastream).
 3. If neither of the above is true, the XML file is simply escaped and rendered betweem HTML &lt;pre&gt; tags, or, if a viewer module (like the one included with this solution pack) is enabled and configured, it renders the XML output.
 
@@ -51,8 +51,9 @@ Objects managed by this module cannot be loaded using Islandora Batch, but a cus
 * Add checks for well formedness on XML and XSLT files as they are uploaded.
 * Add checks for validity against a specific schema or DTD (maybe one that is attached to the collection object as a datastream?).
 * Write some additional viewers that present the XML content in interesting ways like [this](https://www.sencha.com/forum/showthread.php?163680-Implementing-treeview-using-xml-data) or [this](http://blog.ashwani.co.in/blog/2013-07-18/stylize-your-xml-with-jquery-xml-tree-plugin/).
-* Provide Solr configs for allowing the indexing of XML element content for advanced searches.
+* Provide Solr configs for allowing the indexing of XML element content for advanced searches within using elements in XML OBJ datasteams.
 * Provide sample XSLT stylesheets for common types of XML objects, like "flat" XML, TEI, EAD, etc.
+* Define use cases for more granular permissions controlling upload of thumbnail images and XSLT stylesheets.
 
 ## Development and feedback
 
