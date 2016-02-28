@@ -11,6 +11,14 @@ This module provides basic support for ingesting and viewing XML OBJ files in Is
 
 Users may upload a thumbnail image for their XML object. Objects managed by this solution pack also have a MODS datastream just like other Islandora objects do.
 
+## Configuration
+
+This solution pack lets site administrators determine:
+
+1. whether users can upload object-specific thumbnails for objects
+2. the location of a default thumbnail image for use if no object-specific thumbnail exists)
+3. whether users can upload object-specific XSLT sytlesheets for objects
+
 ## Rendering the OBJ datastream using XSL Transformations
 
 The module allows the use of XSLT stylesheets in the following ways:
