@@ -5,24 +5,32 @@
  * Implementation of classes from the batch ingest framework.
  */
 
+/**
+ * Batch object class.
+ */
 class IslandoraSimpleXmlBatchObject extends IslandoraBatchObject {
-  protected $xml_obj_file_path;
+  protected $xmlObjFilePath;
   protected $preprocessorParameters;
 
+  /**
+   * Constructor.
+   */
   public function __construct(IslandoraTuque $connection, string $xml_file_path, $batch_parameters) {
     parent::__construct(NULL, $connection->repository);
 
-    $this->xml_obj_file_path = $xml_file_path;
+    $this->xmlObjFilePath = $xml_file_path;
     $this->preprocessorParameters = $batch_parameters;
   }
 
-  // Generate datastreams.
+  /**
+   * Assemble primary datastreams.
+   */
   public function batchProcess() {
     // OBJ datastream.
     $obj = $this->constructDatastream('OBJ', 'M');
     $obj->label = 'OBJ Datastream';
     $obj->mimetype = 'text/xml';
-    $obj->setContentFromFile($this->xml_obj_file_path, FALSE);
+    $obj->setContentFromFile($this->xmlObjFilePath, FALSE);
     $this->ingestDatastream($obj);
 
     // MODS, then DC datastreams.
@@ -32,7 +40,7 @@ class IslandoraSimpleXmlBatchObject extends IslandoraBatchObject {
       module_load_include('inc', 'islandora_solution_pack_xml', 'includes/utilities');
       $path_to_mods_to_dc_xsl = drupal_get_path('module', 'islandora_batch') . '/transforms/mods_to_dc.xsl';
       $mods_to_dc_xsl = file_get_contents($path_to_mods_to_dc_xsl);
-      $dc_content = islandora_solution_pack_xml_apply_xslt($mods_to_dc_xsl, $mods->content); 
+      $dc_content = islandora_solution_pack_xml_apply_xslt($mods_to_dc_xsl, $mods->content);
       $dc = $this->constructDatastream('DC', 'M');
       $dc->mimetype = 'text/xml';
       $dc->label = 'DC Record';
@@ -65,7 +73,9 @@ class IslandoraSimpleXmlBatchObject extends IslandoraBatchObject {
     return ISLANDORA_BATCH_STATE__DONE;
   }
 
-  // Add relationships.
+  /**
+   * Add relationships.
+   */
   public function addRelationships() {
     // Let's make this object a citation in the default citation collection, as
     // MODS is all that is really required to make a citation...
@@ -73,7 +83,9 @@ class IslandoraSimpleXmlBatchObject extends IslandoraBatchObject {
     $this->models = 'islandora:sp_simple_xml';
   }
 
-  // Get a list of resources.
+  /**
+   * Get a list of resources.
+   */
   public function getResources() {
     return array();
   }
@@ -85,7 +97,7 @@ class IslandoraSimpleXmlBatchObject extends IslandoraBatchObject {
    */
   private function getTn() {
     $tn_extensions = array('png', 'jpg', 'jpeg', 'gif');
-    $pathinfo = pathinfo($this->xml_obj_file_path);
+    $pathinfo = pathinfo($this->xmlObjFilePath);
     $dir_name = $pathinfo['dirname'];
     $file_name = $pathinfo['filename'];
     foreach ($tn_extensions as $ext) {
@@ -100,7 +112,7 @@ class IslandoraSimpleXmlBatchObject extends IslandoraBatchObject {
       }
     }
     return FALSE;
-  } 
+  }
 
   /**
    * Creates a MODS datastream.
@@ -112,7 +124,7 @@ class IslandoraSimpleXmlBatchObject extends IslandoraBatchObject {
    * @return obj
    */
   private function getMods() {
-    $pathinfo = pathinfo($this->xml_obj_file_path);
+    $pathinfo = pathinfo($this->xmlObjFilePath);
     $dir_name = $pathinfo['dirname'];
     $file_name = $pathinfo['filename'];
     $mods_file_path = $dir_name . DIRECTORY_SEPARATOR . $file_name . '.MODS.xml';
@@ -137,15 +149,15 @@ EOQ;
       $mods->label = 'MODS metadata';
       return $mods;
     }
-  } 
+  }
 
   /**
-   * Creates a RENDER_STYLESHEET datastream from a file matching the base object.
+   * Creates a RENDER_STYLESHEET datastream.
    *
    * @return object|FALSE
    */
   private function getRenderStylesheet() {
-    $pathinfo = pathinfo($this->xml_obj_file_path);
+    $pathinfo = pathinfo($this->xmlObjFilePath);
     $dir_name = $pathinfo['dirname'];
     $file_name = $pathinfo['filename'];
     $rs_file_path = $dir_name . DIRECTORY_SEPARATOR . $file_name . '.xsl';
@@ -159,6 +171,6 @@ EOQ;
     else {
       return FALSE;
     }
-  } 
+  }
 
 }

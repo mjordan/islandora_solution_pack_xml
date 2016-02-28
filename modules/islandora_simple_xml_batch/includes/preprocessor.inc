@@ -5,7 +5,13 @@
  * Implementation of classes from the batch ingest framework.
  */
 
+/**
+ * Batch preprocessor class.
+ */
 class IslandoraSimpleXmlBatchPreprocessor extends IslandoraBatchPreprocessor {
+  /**
+   * Function to get the OBJ XML files from the input directory.
+   */
   public function preprocess() {
 
     $input_path = $this->parameters['target'] . DIRECTORY_SEPARATOR . '*.xml';
@@ -28,4 +34,5 @@ class IslandoraSimpleXmlBatchPreprocessor extends IslandoraBatchPreprocessor {
 
     return $added;
   }
+
 }
