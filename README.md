@@ -16,13 +16,13 @@ Users may upload a thumbnail image for their XML object. Objects managed by this
 The admin settings for this solution pack lets site administrators determine:
 
 1. whether users can upload object-specific thumbnails for objects
-2. the location of a default thumbnail image for use if no object-specific thumbnail exists)
+2. the location of a default thumbnail image for use if no object-specific thumbnail exists (this default thumbnail can also be applied in batch ingests)
 3. whether users can upload object-specific XSLT sytlesheets for objects
 4. what the default Islandora viewer for objects managed by this solution pack are.
 
 ## Rendering the OBJ datastream using XSL Transformations
 
-The module allows the use of XSLT stylesheets in the following ways:
+The module allows the use of XSLT stylesheets to render the XML to users in the following ways:
 
 1. Users may upload a stylesheet when they create an object managed by this solution pack. The stylesheet becomes a datastream on the object with the datastream ID 'RENDER_STYLESHEET' and is applied to the XML OBJ file when users view the object. So in a sense this module creates its derivatives on demand, not on ingest.
 2. Owners of collections may upload an XSL stylesheet as a datastream on a collection object. If this datastream has an ID of 'RENDER_STYLESHEET', it is used for all XML objects that are members of the collection (unless a member object has its own RENDER_STYLESHEET datastream).
