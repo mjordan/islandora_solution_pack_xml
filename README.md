@@ -1,25 +1,29 @@
 # Islandora XML Solution Pack
 
-Simple Islandora Solution Pack that allows for ingesting and viewing XML files.
+Simple Islandora Solution Pack that allows for ingesting and viewing XML files. This solution pack is a successor to the overly complex [Islandora Feeds](https://github.com/mjordan/islandora_feeds) module.
 
-## Introduction and usage
+## Introduction
 
 This module provides basic support for ingesting and viewing XML OBJ files in Islandora. The solution pack is "simple" because:
 
-* It does not offer any way of editing the XML files. If users need to modify an XML file, they must "replace" the object's OBJ datastream.
+* It does not offer any way of editing the XML files. If users need to modify an XML file, they must replace the object's OBJ datastream using the standard tools provided within an object's Datastreams tab.
 * It does not generate any derivatives.
 
-The module allows the use of XSL stylesheets in the following ways:
+Users may upload a thumbnail image for their XML object. Objects managed by this solution pack also have a MODS datastream just like other Islandora objects do.
 
-1. Users may upload a stylesheet when they create an object managed by this solution pack. The stylesheet becomes a datastream on the object with the datastream ID 'RENDER_STYLESHEET' and is applied to the XML OBJ file when users view the object.
-2. Owners of collections may upload an XSL stylesheet as a datastream on a collection object. If this datastream has an ID of 'RENDER_STYLESHEET,' it is used for all XML objects that are memebers of the collection (unless a member object has its own RENDER_STYLESHEET datastream).
-3. If neither of the above is true, the XML file is simply escaped and rendered betweem HTML &lt;pre&gt; tags, or, if a viewer module (like the one included with this solution pack) is enabled and configured, it styles the XML output.
+## Rendering the OBJ datastream using XSL Transformations
 
-Users may also upload a thumbnail image for their XML object.
+The module allows the use of XSLT stylesheets in the following ways:
 
-## Viewers
+1. Users may upload a stylesheet when they create an object managed by this solution pack. The stylesheet becomes a datastream on the object with the datastream ID 'RENDER_STYLESHEET' and is applied to the XML OBJ file when users view the object. So in a sense this module creates its derivatives on demand, not on ingest.
+2. Owners of collections may upload an XSL stylesheet as a datastream on a collection object. If this datastream has an ID of 'RENDER_STYLESHEET', it is used for all XML objects that are members of the collection (unless a member object has its own RENDER_STYLESHEET datastream).
+3. If neither of the above is true, the XML file is simply escaped and rendered betweem HTML &lt;pre&gt; tags, or, if a viewer module (like the one included with this solution pack) is enabled and configured, it renders the XML output.
 
-This solution pack comes with an Islandora viewer that if enabled and configured as the default viewer for XML objects allows easy styling of XML files using the [Google Javascript Prettifier](https://github.com/google/code-prettify). Note that if this viewer is enabled, the XML content is not styled with the RENDER_STYLESHEET XSLTs as described above.
+## Rendering the OBJ datastream using viewers
+
+This solution pack supports Islandora viewer modules, and comes with a simple viewer module that if enabled and configured as the default viewer for XML objects allows easy styling of XML files using the [Google Javascript Prettifier](https://github.com/google/code-prettify).
+
+Note that if this viewer is enabled, the XML OBJ datastream content is not styled with the RENDER_STYLESHEET XSLTs as described above. However, third-party viewers are free to use the RENDER_STYLESHEET or any other stylesheet they wish.
 
 ## Batch loading
 
