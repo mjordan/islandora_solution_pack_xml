@@ -29,14 +29,19 @@ function islandora_solution_pack_xml_admin(array $form, array &$form_state) {
     '#default_value' => variable_get('islandora_solution_pack_xml_allow_thumbnail_upload', TRUE),
   );
   $module_path = drupal_get_path('module', 'islandora_solution_pack_xml');
-  $default_tn_path = $module_path . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'xml.png';
+  $default_tn_path = DRUPAL_ROOT . DIRECTORY_SEPARATOR . $module_path . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'xml.png';
+  if (file_exists(variable_get('islandora_solution_pack_xml_default_thumbnail_path', $default_tn_path))) {
+    $tn_exists_markup = '<br /><img src="http://localhost:8000/misc/watchdog-ok.png" /> File exists.';
+  }
+  else {
+    $tn_exists_markup = '<br /><img src="http://localhost:8000/misc/watchdog-error.png" /> File does not exist.';
+  }
   $form['islandora_solution_pack_xml_default_thumbnail_path'] = array(
     '#title' => t('Path to default thumbnail image'),
     '#type' => 'textfield',
-    '#size' => 60,
+    '#size' => 100,
     '#default_value' => variable_get('islandora_solution_pack_xml_default_thumbnail_path', $default_tn_path),
-    '#description' => t('Filesystem path (relative to your Drupal installation) to the default thumbnail ' .
-      'image for XML objects. Leave empty to not attach a thumbnail.'),
+    '#description' => t('Absolute filesystem path to the default thumbnail image for XML objects. Leave empty to not attach a thumbnail. !tn_exists', array('!tn_exists' => $tn_exists_markup)),
     '#maxlength' => 255,
   );
 

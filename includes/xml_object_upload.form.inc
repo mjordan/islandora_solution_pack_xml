@@ -128,7 +128,7 @@ function islandora_solution_pack_xml_xml_upload_form_submit(array $form, array &
   else {
     // Use default thumbnail.
     $default_thumbnail_path = variable_get('islandora_solution_pack_xml_default_thumbnail_path', '');
-    if (strlen($default_thumbnail_path)) {
+    if (strlen($default_thumbnail_path) && file_exists($default_thumbnail_path)) {
       if (empty($object['TN'])) {
         $ds = $object->constructDatastream('TN', 'M');
         $object->ingestDatastream($ds);
@@ -136,11 +136,10 @@ function islandora_solution_pack_xml_xml_upload_form_submit(array $form, array &
       else {
         $ds = $object['TN'];
       }
-      $thumbnail_path = DRUPAL_ROOT . DIRECTORY_SEPARATOR . $default_thumbnail_path;
       $thumbnail_mime_detector = new MimeDetect();
-      $ds->mimetype = $thumbnail_mime_detector->getMimetype($thumbnail_path);
+      $ds->mimetype = $thumbnail_mime_detector->getMimetype($default_thumbnail_path);
       $ds->label = 'Thumbnail';
-      $ds->setContentFromFile($thumbnail_path, FALSE);
+      $ds->setContentFromFile($default_thumbnail_path, FALSE);
     }
   }
 

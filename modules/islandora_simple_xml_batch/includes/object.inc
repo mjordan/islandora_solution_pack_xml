@@ -112,6 +112,17 @@ class IslandoraSimpleXmlBatchObject extends IslandoraBatchObject {
         $tn->setContentFromFile($tn_file_path, FALSE);
         return $tn;
       }
+      else {
+        $default_tn_path = variable_get('islandora_solution_pack_xml_default_thumbnail_path', '');
+        if (strlen($default_tn_path) && file_exists($default_tn_path)) {
+          $tn_mime_detector = new MimeDetect();
+          $tn = $this->constructDatastream('TN', 'M');
+          $tn->mimetype = $tn_mime_detector->getMimetype($default_tn_path);
+          $tn->label = 'Thumbnail';
+          $tn->setContentFromFile($default_tn_path, FALSE);
+          return $tn;
+        }
+      }
     }
     return FALSE;
   }

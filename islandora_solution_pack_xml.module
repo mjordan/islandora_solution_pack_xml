@@ -63,7 +63,8 @@ function islandora_solution_pack_xml_islandora_required_objects(IslandoraTuque $
   $simple_xml_collection->owner = 'fedoraAdmin';
   $simple_xml_collection->label = 'Simple XML Collection';
   $simple_xml_collection->models = 'islandora:collectionCModel';
-  $simple_xml_collection->relationships->add(FEDORA_RELS_EXT_URI, 'isMemberOfCollection', 'islandora:root');
+  $top_level_collection = variable_get('islandora_repository_pid', 'islandora:root');
+  $simple_xml_collection->relationships->add(FEDORA_RELS_EXT_URI, 'isMemberOfCollection', $top_level_collection);
   // Collection Policy Datastream.
   $datastream = $simple_xml_collection->constructDatastream('COLLECTION_POLICY', 'X');
   $datastream->label = 'Collection policy';
