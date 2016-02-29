@@ -1,0 +1,7 @@
+name = "Islandora Simple XML Solution Pack Example Derivative Creation Module"
+description = "Example module"
+dependencies[] = islandora
+dependencies[] = islandora_solution_pack_xml
+package = Islandora
+core = 7.x
+version = 7.x-dev

@@ -1,0 +1,23 @@
+<?php
+
+/**
+ * @file
+ * Example module file.
+ */
+
+/**
+ * Implements hook_CMODEL_PID_islandora_derivative().
+ */
+function islandora_solution_pack_xml_derivatives_example_islandora_sp_simple_xml_islandora_derivative() {
+  return array(
+    array(
+      'source_dsid' => 'OBJ',
+      'destination_dsid' => 'FOO',
+      'weight' => '0',
+      'function' => array(
+        'islandora_solution_pack_xml_derivatives_example_create_foo',
+      ),
+      'file' => drupal_get_path('module', 'islandora_solution_pack_xml_derivatives_example') . '/includes/derivatives.inc',
+    ),
+  );
+}

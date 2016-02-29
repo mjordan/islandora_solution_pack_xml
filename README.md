@@ -7,7 +7,7 @@ An Islandora Solution Pack that allows for ingesting and viewing content within 
 This solution pack provides well-understood tools for ingesting and viewing XML OBJ files in Islandora. It is simpler than Islandora Feeds because:
 
 * It does not offer any way of editing the XML files. If users need to modify an XML file, they must replace the object's OBJ datastream using the standard tools provided within an object's Datastreams tab, just like with any other solution pack's OBJ datastream.
-* It does not generate any derivatives.
+* It does not generate any derivatives. However, the 'modules' subdirectory contains an example module that illustrates how you would generate derivatives.
 
 Users may upload a thumbnail image and default XSLT stylesheet for each XML object. Objects managed by this solution pack also have a MODS datastream just like other Islandora objects do.
 
