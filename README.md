@@ -42,6 +42,31 @@ Objects managed by this module cannot be loaded using Islandora Batch, but a cus
 
 * [Islandora](https://github.com/Islandora/islandora)
 
+## Altering the viewer using drupal_alter()
+
+Modules can determine which viewer to use via implementations of drupal_alter().
+
+```php
+/**
+ * Implementation of drupal_alter().
+ *
+ * @param string $viewer
+ *   A rendered viewer.
+ * @param IslandoraFedoraObject $islandora_object
+ *   The object that we are viewing.
+ * @param array $context
+ *   An associative array containing the parameters for the
+ *   viewer callback function.
+ */
+function mymodule_islandora_xml_viewer_alter($viewer, $islandora_object, $context) {
+  module_load_include('inc', 'islandora', 'includes/solution_packs');
+  $callback = islandora_get_viewer_callback('islandora_some_cool_viewer_id');
+  if (function_exists($callback)) {
+    return $callback(array(), $islandora_object);
+  }
+}
+```
+
 ## Maintainer
 
 * [Mark Jordan](https://github.com/mjordan)

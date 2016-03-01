@@ -64,6 +64,10 @@ function islandora_solution_pack_xml_preprocess_islandora_solution_pack_xml_defa
 
   module_load_include('inc', 'islandora', 'includes/solution_packs');
   $viewer = islandora_get_viewer(array(), 'islandora_xml_viewers', $islandora_object);
+  // Allow other modules to modify the viewer using
+  // mymodule_islandora_xml_viewer_alter('islandora_xml_viewer',
+  //   $viewer, $islandora_object, $context).
+  drupal_alter('islandora_xml_viewer', $viewer, $islandora_object, $context);
   if ($viewer) {
     $variables['islandora_content'] = $viewer;
   }
