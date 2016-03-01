@@ -2,8 +2,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="Islandora simple XML collection"
     xsi:schemaLocation="http://www.islandora.ca http://syn.lib.umanitoba.ca/collection_policy.xsd">
   <content_models>
-    <content_model dsid="" name="New Simple XML object" namespace="islandora:collection"
-            pid="islandora:sp_simple_xml_collection"/>
+    <content_model dsid="" name="Simple XML object" namespace="islandora" pid="islandora:sp_simple_xml"/>
   </content_models>
   <search_terms/>
   <relationship>isMemberOfCollection</relationship>
