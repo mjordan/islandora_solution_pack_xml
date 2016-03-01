@@ -11,6 +11,10 @@ This solution pack provides well-understood tools for ingesting and viewing XML 
 
 Users may upload a thumbnail image and default XSLT stylesheet for each XML object. Objects managed by this solution pack also have a MODS datastream just like other Islandora objects do.
 
+## Requirements
+
+* [Islandora](https://github.com/Islandora/islandora)
+
 ## Configuration
 
 The admin settings for this solution pack, available at `admin/islandora/solution_pack_config/xml`, let site administrators determine:
@@ -34,17 +38,9 @@ This solution pack supports Islandora viewer modules, and comes with a simple vi
 
 Note that if this viewer is enabled, the XML OBJ datastream content is not styled with the RENDER_STYLESHEET XSLTs as described above. However, third-party viewers are free to use the RENDER_STYLESHEET or any other stylesheet they wish.
 
-## Batch loading
-
-Objects managed by this module cannot be loaded using Islandora Batch, but a custom Drush-based loader is available in the `modules` subdirectory.
-
-## Requirements
-
-* [Islandora](https://github.com/Islandora/islandora)
-
 ## Altering the viewer using drupal_alter()
 
-Modules can determine which viewer to use via implementations of drupal_alter().
+Third-party modules can modify viewers or determine which viewer to use via implementations of drupal_alter(), as illustrated in this example:
 
 ```php
 /**
@@ -66,6 +62,10 @@ function mymodule_islandora_xml_viewer_alter($viewer, $islandora_object, $contex
   }
 }
 ```
+
+## Batch loading
+
+Objects managed by this module cannot be loaded using Islandora Batch, but a custom Drush-based loader is available in the `modules` subdirectory.
 
 ## Maintainer
 
