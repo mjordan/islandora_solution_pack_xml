@@ -34,7 +34,7 @@ function islandora_solution_pack_xml_xml_upload_form(array $form, array &$form_s
     ),
   );
 
-  if (variable_get('islandora_solution_pack_xml_allow_thumbnail_upload', TRUE)) {
+  if (user_access('upload simple XML thumbnails')) {
     $form['islandora_solution_pack_xml_thumbnail_upload'] = array(
       '#type' => 'checkbox',
       '#title' => t("Add a custom thumbnail to this object?"),
@@ -60,7 +60,7 @@ function islandora_solution_pack_xml_xml_upload_form(array $form, array &$form_s
     );
   }
 
-  if (variable_get('islandora_solution_pack_xml_allow_render_stylesheet_upload', TRUE)) {
+  if (user_access('upload RENDER_STYLESHEET datasteams')) {
     $form['islandora_solution_pack_xml_render_stylesheet_upload'] = array(
       '#type' => 'checkbox',
       '#title' => t("Add a render stylesheet file to this object?"),

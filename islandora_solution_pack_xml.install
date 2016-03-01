@@ -18,8 +18,6 @@ function islandora_solution_pack_xml_install() {
  */
 function islandora_solution_pack_xml_uninstall() {
   module_load_include('inc', 'islandora', 'includes/solution_packs');
-  variable_del('islandora_solution_pack_xml_allow_thumbnail_upload');
-  variable_del('islandora_solution_pack_xml_allow_render_stylesheet_upload');
   variable_del('islandora_solution_pack_xml_default_thumbnail_path');
   variable_del('islandora_xml_viewers');
   islandora_install_solution_pack('islandora_solution_pack_xml', 'uninstall');

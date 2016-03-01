@@ -15,10 +15,10 @@ Users may upload a thumbnail image and default XSLT stylesheet for each XML obje
 
 The admin settings for this solution pack, available at `admin/islandora/solution_pack_config/xml`, let site administrators determine:
 
-1. whether users can upload object-specific thumbnails for objects
 2. the location of a default thumbnail image for use if no object-specific thumbnail exists (this default thumbnail can also be applied in batch ingests)
-3. whether users can upload object-specific XSLT sytlesheets for objects
 4. what the default Islandora viewer for objects managed by this solution pack are.
+
+Standard Drupal permissions are available for allowing users to upload object-specific thumbnails and object-specific XSLT sytlesheets.
 
 ## Rendering the OBJ datastream using XSL Transformations
 

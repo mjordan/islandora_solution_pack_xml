@@ -43,6 +43,22 @@ function islandora_solution_pack_xml_theme($existing, $type, $theme, $path) {
 }
 
 /**
+ * Implements hook_permission().
+ */
+function islandora_solution_pack_xml_permission() {
+  return array(
+    'upload RENDER_STYLESHEET datasteams' => array(
+      'title' => t('Upload RENDER_STYLESHEET datasteams'),
+      'description' => t('Upload XSLT stylesheets on simple XML objects'),
+    ),
+    'upload simple XML thumbnails' => array(
+      'title' => t('Upload object-specific thumbnails'),
+      'description' => t('Upload object-specific custom thumbnails'),
+    ),
+  );
+}
+
+/**
  * Implements hook_islandora_required_objects().
  */
 function islandora_solution_pack_xml_islandora_required_objects(IslandoraTuque $connection) {

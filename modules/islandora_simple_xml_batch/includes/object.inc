@@ -96,6 +96,8 @@ class IslandoraSimpleXmlBatchObject extends IslandoraBatchObject {
    * Creates a TN datastream from a file matching the base object.
    *
    * @return object|FALSE
+   *   A datastream object for the thumbnail, or FALSE if no datastream
+   *   was created.
    */
   private function getTn() {
     $tn_extensions = array('png', 'jpg', 'jpeg', 'gif');
@@ -134,7 +136,9 @@ class IslandoraSimpleXmlBatchObject extends IslandoraBatchObject {
    * plus '.MODS.xml' exists, populates the MODS datastream with that file;
    * if no such file exists, generates a minimal, templated MODS datastream.
    *
-   * @return obj
+   * @return obj|FALSE
+   *   A datastream object for the MODS document, or FALSE if no datastream
+   *   was created.
    */
   private function getMods() {
     $pathinfo = pathinfo($this->xmlObjFilePath);
@@ -162,12 +166,15 @@ EOQ;
       $mods->label = 'MODS metadata';
       return $mods;
     }
+    return FALSE;
   }
 
   /**
    * Creates a RENDER_STYLESHEET datastream.
    *
    * @return object|FALSE
+   *   A datastream object for the render stylesheet, or FALSE if no datastream
+   *   was created.
    */
   private function getRenderStylesheet() {
     $pathinfo = pathinfo($this->xmlObjFilePath);

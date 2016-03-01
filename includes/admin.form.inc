@@ -17,17 +17,6 @@
  *   The Drupal form definition.
  */
 function islandora_solution_pack_xml_admin(array $form, array &$form_state) {
-  $form['islandora_solution_pack_xml_allow_render_stylesheet_upload'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Allow users to upload object-specific XSLT stylesheet for rendering OBJ files?'),
-    '#description' => t('If present, this stylesheet will override collection-level stylesheets'),
-    '#default_value' => variable_get('islandora_solution_pack_xml_allow_render_stylesheet_upload', TRUE),
-  );
-  $form['islandora_solution_pack_xml_allow_thumbnail_upload'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Allow users to upload object-specific thumbnails?'),
-    '#default_value' => variable_get('islandora_solution_pack_xml_allow_thumbnail_upload', TRUE),
-  );
   $module_path = drupal_get_path('module', 'islandora_solution_pack_xml');
   $default_tn_path = DRUPAL_ROOT . DIRECTORY_SEPARATOR . $module_path . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'xml.png';
   if (file_exists(variable_get('islandora_solution_pack_xml_default_thumbnail_path', $default_tn_path))) {
