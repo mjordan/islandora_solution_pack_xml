@@ -65,7 +65,7 @@ function mymodule_islandora_xml_viewer_alter($viewer, $islandora_object, $contex
 
 ## Batch loading
 
-Objects managed by this module cannot be loaded using Islandora Batch, but a custom Drush-based loader is available in the `modules` subdirectory.
+Objects managed by this module cannot be loaded using the [Islandora Batch](https://github.com/Islandora/islandora_batch), but a custom Drush-based loader is available in the `modules` subdirectory. Its README provides details on preparing content and ingesting it.
 
 ## Maintainer
 

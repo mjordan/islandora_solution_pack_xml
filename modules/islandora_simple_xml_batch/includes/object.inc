@@ -29,7 +29,7 @@ class IslandoraSimpleXmlBatchObject extends IslandoraBatchObject {
     // OBJ datastream.
     $obj = $this->constructDatastream('OBJ', 'M');
     $obj->label = 'OBJ Datastream';
-    $obj->mimetype = 'text/xml';
+    $obj->mimetype = 'application/xml';
     $obj->setContentFromFile($this->xmlObjFilePath, FALSE);
     $this->ingestDatastream($obj);
 
@@ -42,7 +42,7 @@ class IslandoraSimpleXmlBatchObject extends IslandoraBatchObject {
       $mods_to_dc_xsl = file_get_contents($path_to_mods_to_dc_xsl);
       $dc_content = islandora_solution_pack_xml_apply_xslt($mods_to_dc_xsl, $mods->content);
       $dc = $this->constructDatastream('DC', 'M');
-      $dc->mimetype = 'text/xml';
+      $dc->mimetype = 'application/xml';
       $dc->label = 'DC Record';
       $dc->setContentFromString($dc_content);
       $this->ingestDatastream($dc);
@@ -147,7 +147,7 @@ class IslandoraSimpleXmlBatchObject extends IslandoraBatchObject {
     $mods_file_path = $dir_name . DIRECTORY_SEPARATOR . $file_name . '.MODS.xml';
     if (file_exists($mods_file_path)) {
       $mods = $this->constructDatastream('MODS', 'M');
-      $mods->mimetype = 'text/xml';
+      $mods->mimetype = 'application/xml';
       $mods->label = 'MODS metadata';
       $mods->setContentFromFile($mods_file_path, FALSE);
       return $mods;
@@ -162,7 +162,7 @@ class IslandoraSimpleXmlBatchObject extends IslandoraBatchObject {
   </titleInfo>
 </mods>
 EOQ;
-      $mods->mimetype = 'text/xml';
+      $mods->mimetype = 'application/xml';
       $mods->label = 'MODS metadata';
       return $mods;
     }
@@ -183,7 +183,7 @@ EOQ;
     $rs_file_path = $dir_name . DIRECTORY_SEPARATOR . $file_name . '.xsl';
     if (file_exists($rs_file_path)) {
       $rs = $this->constructDatastream('RENDER_STYLESHEET', 'M');
-      $rs->mimetype = 'text/xml';
+      $rs->mimetype = 'application/xml';
       $rs->label = 'Render stylesheet';
       $rs->setContentFromFile($rs_file_path, FALSE);
       return $rs;

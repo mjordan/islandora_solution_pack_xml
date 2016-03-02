@@ -26,7 +26,7 @@ function islandora_solution_pack_xml_derivatives_example_create_foo(AbstractObje
     else {
       $ds = $object->constructDatastream($dsid, 'M');
       $ds->label = $dsid;
-      $ds->mimeType = 'text/xml';
+      $ds->mimeType = 'application/xml';
       $ds->setContentFromString($object['OBJ']->content);
     }
     if (!$has_ds) {
