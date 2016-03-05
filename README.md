@@ -80,7 +80,6 @@ Objects managed by this module cannot be loaded using Islandora Batch, but a cus
 * Write some additional viewers that present the XML content in interesting ways
   * Like [this](https://www.sencha.com/forum/showthread.php?163680-Implementing-treeview-using-xml-data) or [this](http://blog.ashwani.co.in/blog/2013-07-18/stylize-your-xml-with-jquery-xml-tree-plugin/).
 * Provide sample XSLT stylesheets for common types of XML objects, like TEI, EAD, etc.
-* Define use cases for more granular permissions controlling upload of thumbnail images and XSLT stylesheets.
 
 ## Development and feedback
 
