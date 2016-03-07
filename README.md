@@ -42,6 +42,14 @@ Note that if this viewer is enabled, the XML OBJ datastream content is not style
 
 Objects managed by this module cannot be loaded using the [Islandora Batch](https://github.com/Islandora/islandora_batch), but a custom Drush-based loader is available in the `modules` subdirectory. Its README provides details on preparing content and ingesting it.
 
+## Indexing XML content
+
+By default, all content is slurped into on field for simple search, but it is possible to configure FedoraGsearch to index specific fields so they can be used in advanced search forms and in metadata displays. To do this:
+
+1. Create an XSLT stylesheet to create the Solr fields. An annotate example is provided in this module's extras/indexing directory. Place your transform in your tomcat's `webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/islandora_transforms` directory with the other stylesheets.
+2. Include the stylesheet from within your foxmlToSolr.xslt stylesheet, following the pattern of other stylesheets in the `islandora_transforms` directory.
+3. On reindexing, or on ingest of new simple XML objects, each of the fields created in your stylesheet will be added to the object's Solr document.
+
 ## Maintainer
 
 * [Mark Jordan](https://github.com/mjordan)
@@ -49,7 +57,6 @@ Objects managed by this module cannot be loaded using the [Islandora Batch](http
 ## To do
 
 * Add checks for well formedness on XML and XSLT files as they are uploaded.
-* Provide Fgsearch/Solr configs for allowing the indexing of XML element content for advanced searches within using elements in XML OBJ datasteams.
 * Add checks for validity against a specific schema or DTD
   * Possible solution is to attach a schema file to the collection object as a datastream.
 * Write some additional viewers that present the XML content in interesting ways
