@@ -44,9 +44,9 @@ Objects managed by this module cannot be loaded using the [Islandora Batch](http
 
 ## Indexing XML content
 
-By default, all content is slurped into on field for simple search, but it is possible to configure FedoraGsearch to index specific fields so they can be used in advanced search forms and in metadata displays. To do this:
+By default, all content is slurped into one field for simple search as it is with any other XML datastream, but it is possible to configure FedoraGSearch to index specific fields so they can be used in advanced search forms and in metadata displays. To do this:
 
-1. Create an XSLT stylesheet to create the Solr fields. An annotate example is provided in this module's extras/indexing directory. Place your transform in your tomcat's `webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/islandora_transforms` directory with the other stylesheets.
+1. Create an XSLT stylesheet to create the Solr fields. An annotate example is provided in this module's `extras/indexing_stylesheets` directory. Place your transform in your tomcat's `webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/islandora_transforms` (or where ever your FedoraGSearch configs are located) directory with the other stylesheets.
 2. Include the stylesheet from within your foxmlToSolr.xslt stylesheet, following the pattern of other stylesheets in the `islandora_transforms` directory.
 3. On reindexing, or on ingest of new simple XML objects, each of the fields created in your stylesheet will be added to the object's Solr document.
 

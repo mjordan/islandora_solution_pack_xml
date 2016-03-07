@@ -4,16 +4,14 @@
   xmlns:xlink="http://www.w3.org/1999/xlink"
   xmlns:foxml="info:fedora/fedora-system:def/foxml#">
 
-  <!-- @todo: Figure out how allow specific indexing for collections, etc.
-       so that not all the simple XML objects are indexed using this same stylesheet.
-        Maybe require a namespace in the XML?i -->
-  <xsl:template match="foxml:datastream[@ID='OBJ']/foxml:datastreamVersion[last() and @MIMETYPE='application/xml']" name="index_ceww">
+  <xsl:template match="foxml:datastream[@ID='OBJ']/foxml:datastreamVersion[last() and @MIMETYPE='application/xml']" name="index_simple_xml_sp">
     <xsl:param name="content"/>
-    <xsl:param name="prefix">ceww_</xsl:param>
+    <xsl:param name="prefix">islandora_simple_xml_sp_</xsl:param>
     <xsl:param name="suffix">_ms</xsl:param>
 
-    <!-- 'writer' is the document element of the simple XML objects. -->
-    <xsl:for-each select="$content/writer/*">
+    <!-- This select expression gets all the granchildren of the $content context,
+         i.e., all children of the document element. -->
+    <xsl:for-each select="$content/*/*">
       <field>
         <xsl:attribute name="name">
           <xsl:value-of select="concat($prefix, local-name(), $suffix)"/>
