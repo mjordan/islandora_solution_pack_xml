@@ -1,6 +1,6 @@
 # Example module
 
-Illustrates generating derivatives on objects manageed by the Islandora Simple XML Solution Pack.
+Illustrates generating derivatives on objects managed by the Islandora Simple XML Solution Pack.
 
 ## Requirements
 

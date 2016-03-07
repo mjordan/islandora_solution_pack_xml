@@ -27,6 +27,8 @@ function islandora_solution_pack_xml_derivatives_example_create_foo(AbstractObje
       $ds = $object->constructDatastream($dsid, 'M');
       $ds->label = $dsid;
       $ds->mimeType = 'application/xml';
+      // In this example, the content of the FOO datastream is just copy of
+      // the content of the OBJ's content. Nothing fancy.
       $ds->setContentFromString($object['OBJ']->content);
     }
     if (!$has_ds) {
