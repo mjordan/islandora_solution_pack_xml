@@ -38,31 +38,6 @@ This solution pack supports Islandora viewer modules, and comes with a simple vi
 
 Note that if this viewer is enabled, the XML OBJ datastream content is not styled with the RENDER_STYLESHEET XSLTs as described above. However, third-party viewers are free to use the RENDER_STYLESHEET or any other stylesheet they wish.
 
-## Altering the viewer using drupal_alter()
-
-Third-party modules can modify viewers or determine which viewer to use via implementations of drupal_alter(), as illustrated in this example:
-
-```php
-/**
- * Implementation of drupal_alter().
- *
- * @param string $viewer
- *   A rendered viewer.
- * @param IslandoraFedoraObject $islandora_object
- *   The object that we are viewing.
- * @param array $context
- *   An associative array containing the parameters for the
- *   viewer callback function.
- */
-function mymodule_islandora_xml_viewer_alter($viewer, $islandora_object, $context) {
-  module_load_include('inc', 'islandora', 'includes/solution_packs');
-  $callback = islandora_get_viewer_callback('islandora_some_cool_viewer_id');
-  if (function_exists($callback)) {
-    return $callback(array(), $islandora_object);
-  }
-}
-```
-
 ## Batch loading
 
 Objects managed by this module cannot be loaded using the [Islandora Batch](https://github.com/Islandora/islandora_batch), but a custom Drush-based loader is available in the `modules` subdirectory. Its README provides details on preparing content and ingesting it.
