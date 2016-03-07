@@ -3,23 +3,25 @@
 <!--
 Simple XSLT stylesheet to transform "flat" XML into simple HTML table markup.
 Can be used as the RENDER_STYLESHEET datastream for collections or individual
-objects managed by the Islandora Simple XML Solution Pack. Elements must have
-an 'displayLabel' attribute in order for the field to get a human-readable label.
+objects managed by the Islandora Simple XML Solution Pack.
 -->
 
 <!-- Select the root element. -->
-  <xsl:template match="/*">
-    <div>
-      <table>
-        <xsl:apply-templates/>
-      </table>
-    </div>
-  </xsl:template>
+<xsl:template match="/*">
+  <div>
+    <table>
+      <xsl:apply-templates/>
+    </table>
+  </div>
+</xsl:template>
 
-  <!-- Select all children of the root node. Human-readable field names come from the @displayLabel attribute. -->
-  <xsl:template match="*">
-    <tr><th><xsl:value-of select="@displayLabel"/></th><td><xsl:value-of select="."/></td></tr>
-  </xsl:template>
+<!-- Select all children of the root node. Human-readable field names
+     come from the @displayLabel attribute. -->
+<xsl:template match="*">
+	<!-- We don't want to display empty rows. -->
+	<xsl:if test="string-length(.) != 0">
+      <tr><th><xsl:value-of select="@displayLabel"/></th><td><xsl:value-of select="."/></td></tr>
+  </xsl:if>
+</xsl:template>
 
 </xsl:stylesheet>
-
