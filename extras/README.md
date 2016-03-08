@@ -8,7 +8,7 @@ Both XSLT stylesheets are designed to work with simple, flat XML OBJ datastreams
  <name displayLabel="Name">Osler, Marian Frances</name>
  <birth_place displayLabel="Birth place">Fredericton, New Brunswick</birth_place>
  <date_of_birth displayLabel="Birth date">25 September 1842</date_of_birth>
- <occupation displayLabel="Birth date">Writer</occupation>
+ <occupation displayLabel="Occupation">Writer</occupation>
 </person>
 ```
 
