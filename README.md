@@ -50,10 +50,6 @@ By default, all content is slurped into one field for simple search as it is wit
 2. Include the stylesheet from within your foxmlToSolr.xslt stylesheet, following the pattern of other stylesheets in the `islandora_transforms` directory.
 3. On reindexing, or on ingest of new simple XML objects, each of the fields created in your stylesheet will be added to the object's Solr document.
 
-## Maintainer
-
-* [Mark Jordan](https://github.com/mjordan)
-
 ## To do
 
 * Add checks for well formedness on XML and XSLT files as they are uploaded.
@@ -62,6 +58,10 @@ By default, all content is slurped into one field for simple search as it is wit
 * Write some additional viewers that present the XML content in interesting ways
   * Like [this](https://www.sencha.com/forum/showthread.php?163680-Implementing-treeview-using-xml-data) or [this](http://blog.ashwani.co.in/blog/2013-07-18/stylize-your-xml-with-jquery-xml-tree-plugin/).
 * Provide sample render XSLT stylesheets for common types of XML objects, like TEI, EAD, etc.
+
+## Maintainer
+
+* [Mark Jordan](https://github.com/mjordan)
 
 ## Development and feedback
 
