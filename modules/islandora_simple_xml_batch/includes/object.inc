@@ -100,7 +100,7 @@ class IslandoraSimpleXmlBatchObject extends IslandoraBatchObject {
    *   was created.
    */
   private function getTn() {
-    $tn_extensions = array('png','jpg', 'jpeg', 'gif');
+    $tn_extensions = array('png', 'jpg', 'jpeg', 'gif');
     $pathinfo = pathinfo($this->xmlObjFilePath);
     $dir_name = $pathinfo['dirname'];
     $file_name = $pathinfo['filename'];
