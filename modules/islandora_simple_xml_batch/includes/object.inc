@@ -100,30 +100,35 @@ class IslandoraSimpleXmlBatchObject extends IslandoraBatchObject {
    *   was created.
    */
   private function getTn() {
-    $tn_extensions = array('png', 'jpg', 'jpeg', 'gif');
+    $tn_extensions = array('png','jpg', 'jpeg', 'gif');
     $pathinfo = pathinfo($this->xmlObjFilePath);
     $dir_name = $pathinfo['dirname'];
     $file_name = $pathinfo['filename'];
+    $tn_file_path = '';
     foreach ($tn_extensions as $ext) {
       $tn_file_path = $dir_name . DIRECTORY_SEPARATOR . $file_name . '.TN.' . $ext;
       if (file_exists($tn_file_path)) {
+        break;
+      }
+    }
+
+    if (file_exists($tn_file_path)) {
+      $tn_mime_detector = new MimeDetect();
+      $tn = $this->constructDatastream('TN', 'M');
+      $tn->mimetype = $tn_mime_detector->getMimetype($tn_file_path);
+      $tn->label = 'Thumbnail';
+      $tn->setContentFromFile($tn_file_path, FALSE);
+      return $tn;
+    }
+    else {
+      $default_tn_path = variable_get('islandora_solution_pack_xml_default_thumbnail_path', '');
+      if (strlen($default_tn_path) && file_exists($default_tn_path)) {
         $tn_mime_detector = new MimeDetect();
         $tn = $this->constructDatastream('TN', 'M');
-        $tn->mimetype = $tn_mime_detector->getMimetype($tn_file_path);
+        $tn->mimetype = $tn_mime_detector->getMimetype($default_tn_path);
         $tn->label = 'Thumbnail';
-        $tn->setContentFromFile($tn_file_path, FALSE);
+        $tn->setContentFromFile($default_tn_path, FALSE);
         return $tn;
-      }
-      else {
-        $default_tn_path = variable_get('islandora_solution_pack_xml_default_thumbnail_path', '');
-        if (strlen($default_tn_path) && file_exists($default_tn_path)) {
-          $tn_mime_detector = new MimeDetect();
-          $tn = $this->constructDatastream('TN', 'M');
-          $tn->mimetype = $tn_mime_detector->getMimetype($default_tn_path);
-          $tn->label = 'Thumbnail';
-          $tn->setContentFromFile($default_tn_path, FALSE);
-          return $tn;
-        }
       }
     }
     return FALSE;
