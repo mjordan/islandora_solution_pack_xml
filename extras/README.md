@@ -1,4 +1,4 @@
-This directory contains stylesheets that are not used by the Islandora XML Solution Pack directly but that might be of interests to some users.
+This directory contains files that are not used by the Islandora XML Solution Pack directly but that might be of interests to some users.
 
 Both XSLT stylesheets are designed to work with simple, flat XML OBJ datastreams like this:
 

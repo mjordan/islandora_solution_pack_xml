@@ -5,7 +5,7 @@
     <xsl:param name="prefix">islandora_simple_xml_sp_</xsl:param>
     <xsl:param name="suffix">_ms</xsl:param>
 
-    <!-- Do stuff like check to see if the object has the namespace we want. -->
+    <!-- We can do stuff like check to see if the object has the namespace we want. -->
     <!-- <xsl:if test="substring-before(../../@PID,':') = 'foo'"> -->
 
     <!-- This select expression gets all the granchildren of the $content context,
@@ -19,7 +19,7 @@
       </field>
     </xsl:for-each>
 
-    <!-- End if from the PID test. -->
+    <!-- End if from the commented-out namespace check. -->
     <!-- </xsl:if> -->
 
   </xsl:template>
