@@ -39,7 +39,8 @@ function islandora_solution_pack_xml_preprocess_islandora_solution_pack_xml_defa
   $variables['islandora_object_label'] = $islandora_object->label;
   $variables['theme_hook_suggestions'][] = 'islandora_simple_xml__' . str_replace(':', '_', $islandora_object->id);
   $variables['parent_collections'] = islandora_get_parents_from_rels_ext($islandora_object);
-  if ($islandora_object['MODS']) {
+  $metadata_dsid = variable_get('islandora_solution_pack_xml_metadata_dsid', 'MODS');
+  if ($islandora_object[$metadata_dsid]) {
     $variables['metadata'] = islandora_retrieve_metadata_markup($islandora_object);
     $variables['description'] = islandora_retrieve_description_markup($islandora_object);
   }

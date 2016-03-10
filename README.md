@@ -19,8 +19,9 @@ Users may upload a thumbnail image and default XSLT stylesheet for each XML obje
 
 The admin settings for this solution pack, available at `admin/islandora/solution_pack_config/xml`, let site administrators determine:
 
-2. the location of a default thumbnail image for use if no object-specific thumbnail exists (this default thumbnail can also be applied in batch ingests)
-4. the default Islandora viewer for objects managed by this solution pack.
+1. the location of a default thumbnail image for use if no object-specific thumbnail exists (this default thumbnail can also be applied in batch ingests)
+2. the Islandora viewer for objects managed by this solution pack
+3. the ID of the datastream that needs to be present to render metadata and description at the bottom of the object display.
 
 Standard Drupal permissions are available for allowing users to upload object-specific thumbnails and object-specific XSLT sytlesheets.
 
@@ -44,7 +45,7 @@ Objects managed by this module cannot be loaded using the [Islandora Batch](http
 
 ## Metadata and description display
 
-If an XML object has a MODS datastream, its content and the "Description" content will appear at the bottom of the object display (including custom metadata display configurations), just as in other Islandora solution packs. If an object has no MODS datastream, no metadata or description will appear.
+If an XML object has a MODS datastream, its content and the "Description" content will appear at the bottom of the object display (including custom metadata display configurations), just as in other Islandora solution packs. If an object has no MODS datastream, no metadata or description will appear. A datastream ID other than 'MODS' can be configured in the module's admin settings.
 
 ## Indexing XML content
 
