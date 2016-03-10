@@ -39,8 +39,14 @@ function islandora_solution_pack_xml_preprocess_islandora_solution_pack_xml_defa
   $variables['islandora_object_label'] = $islandora_object->label;
   $variables['theme_hook_suggestions'][] = 'islandora_simple_xml__' . str_replace(':', '_', $islandora_object->id);
   $variables['parent_collections'] = islandora_get_parents_from_rels_ext($islandora_object);
-  $variables['metadata'] = islandora_retrieve_metadata_markup($islandora_object);
-  $variables['description'] = islandora_retrieve_description_markup($islandora_object);
+  if ($islandora_object['MODS']) {
+    $variables['metadata'] = islandora_retrieve_metadata_markup($islandora_object);
+    $variables['description'] = islandora_retrieve_description_markup($islandora_object);
+  }
+  else {
+    $variables['metadata'] = '';
+    $variables['description'] = '';
+  }
 
   $obj_xml_content = $islandora_object['OBJ']->content;
 
