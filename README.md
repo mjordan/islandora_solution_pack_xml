@@ -39,30 +39,33 @@ This solution pack supports Islandora viewer modules, and comes with a simple vi
 
 Note that if a viewer is enabled, the XML OBJ datastream content is not styled with the RENDER_STYLESHEET XSLTs as described above. However, third-party viewers are free to use the RENDER_STYLESHEET or any other stylesheet they wish.
 
-## Batch loading
-
-Objects managed by this module cannot be loaded using the [Islandora Batch](https://github.com/Islandora/islandora_batch), but a custom Drush-based loader is available in the `modules` subdirectory. Its README provides details on preparing content and ingesting it.
-
 ## Metadata and description display
 
 If an XML object has a MODS datastream, its content and the "Description" content will appear at the bottom of the object display (including custom metadata display configurations), just as in other Islandora solution packs. If an object has no MODS datastream, no metadata or description will appear. A datastream ID other than 'MODS' can be configured in the module's admin settings.
+
+## Batch loading
+
+Objects managed by this module cannot be loaded using the [Islandora Batch](https://github.com/Islandora/islandora_batch), but a custom Drush-based loader is available in the `modules` subdirectory. Its README provides details on preparing content and ingesting it.
 
 ## Indexing XML content
 
 By default, all content is slurped into one field for simple search as it is with any other XML datastream, but it is possible to configure FedoraGSearch to index specific fields so they can be used in advanced search forms and in Solr-based metadata displays. To have FedoraGSearch do this:
 
 1. Create an XSLT stylesheet to create the Solr fields. An annotate example is provided in this module's `extras/indexing_stylesheets` directory. Place your transform in your `tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/islandora_transforms` directory (or wherever your FedoraGSearch configs are located) with the other stylesheets.
-2. Include the stylesheet from within your foxmlToSolr.xslt stylesheet, following the pattern of other stylesheets in the `islandora_transforms` directory.
+2. Include the stylesheet from within your `foxmlToSolr.xslti` stylesheet, following the pattern of other stylesheets in the `islandora_transforms` directory.
 3. On reindexing, or on ingest of new simple XML objects, each of the fields created in your stylesheet will be added to the object's Solr document. You will not need to modify your Solr schema or configuration for this to work.
 
 ## To do
 
-* Add checks for well formedness on XML and XSLT files as they are uploaded.
-* Add checks for validity against a specific schema or DTD
+This solution pack is a work in progress. Some features that would be useful include:
+
+* checks for well formedness on XML and XSLT files as they are uploaded.
+* checks for validity against a specific schema or DTD
   * Possible solution is to attach a schema file to the collection object as a datastream.
-* Write some additional viewers that present the XML content in interesting ways
-  * Like [this](http://blog.ashwani.co.in/blog/2013-07-18/stylize-your-xml-with-jquery-xml-tree-plugin/) or [this](https://github.com/ariutta/svg-pan-zoom).
-* Provide sample render XSLT stylesheets for common types of XML objects, like TEI, EAD, etc.
+* additional viewers that present the XML content in interesting ways
+  * Like [as browsable trees](http://blog.ashwani.co.in/blog/2013-07-18/stylize-your-xml-with-jquery-xml-tree-plugin/) or [SVG graphics](https://github.com/ariutta/svg-pan-zoom).
+* sample render XSLT stylesheets for common types of XML objects, like TEI, EAD, DocBook, etc.
+* caching of the rendered versions of large or expensive-to-render XML files.
 
 ## Maintainer
 
