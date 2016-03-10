@@ -9,7 +9,7 @@ This solution pack provides well-understood tools for ingesting and viewing XML 
 * It does not offer any way of editing the XML files. If users need to modify an XML file, they must replace the object's OBJ datastream using the standard tools provided within an object's Datastreams tab, just like with any other solution pack's OBJ datastream.
 * It does not generate any derivatives. However, the 'modules' subdirectory contains an example module that illustrates how you would generate derivatives.
 
-Users may upload a thumbnail image and default XSLT stylesheet for each XML object. Objects managed by this solution pack also have a MODS datastream just like other Islandora objects do.
+Users may upload a thumbnail image and default XSLT stylesheet for each XML object. Objects managed by this solution pack can also have a MODS datastream just like other Islandora objects do.
 
 ## Requirements
 
@@ -59,12 +59,13 @@ By default, all content is slurped into one field for simple search as it is wit
 
 This solution pack is a work in progress. Some features that would be useful include:
 
-* checks for well formedness on XML and XSLT files as they are uploaded.
+* checks for well formedness on XML and XSLT files as they are uploaded
 * checks for validity against a specific schema or DTD
-  * Possible solution is to attach a schema file to the collection object as a datastream.
+  * Possible solution is to attach a schema file to the collection object as a datastream
 * additional viewers that present the XML content in interesting ways
-  * for example as [browsable trees](http://blog.ashwani.co.in/blog/2013-07-18/stylize-your-xml-with-jquery-xml-tree-plugin/) or [SVG graphics](https://github.com/ariutta/svg-pan-zoom).
+  * for example as [browsable trees](http://blog.ashwani.co.in/blog/2013-07-18/stylize-your-xml-with-jquery-xml-tree-plugin/) or [SVG graphics](https://github.com/ariutta/svg-pan-zoom)
 * sample render XSLT stylesheets for common types of XML objects, like TEI, EAD, DocBook, etc.
+* render the XML based on conditions defined by [Islandora Context](https://github.com/mjordan/islandora_context)
 * caching of the rendered versions of large or expensive-to-render XML files.
 
 ## Maintainer
