@@ -34,7 +34,7 @@ The module allows the use of XSLT stylesheets to render the XML to users in the 
 
 ## Rendering the OBJ datastream using viewers
 
-This solution pack supports Islandora viewer modules, and comes with a simple viewer module that if enabled and configured as the default viewer for XML objects allows easy styling of XML files using the [Google Javascript Prettifier](https://github.com/google/code-prettify).
+This solution pack supports Islandora viewer modules, and comes with a simple viewer module that if enabled and configured as the default viewer for XML objects allows easy styling of XML files using the [Google Javascript Code Prettifier](https://github.com/google/code-prettify).
 
 Note that if this viewer is enabled, the XML OBJ datastream content is not styled with the RENDER_STYLESHEET XSLTs as described above. However, third-party viewers are free to use the RENDER_STYLESHEET or any other stylesheet they wish.
 
