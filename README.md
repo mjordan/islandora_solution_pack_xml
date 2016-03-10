@@ -1,10 +1,10 @@
 # Islandora XML Solution Pack
 
-An Islandora Solution Pack that allows for ingesting and viewing content within arbitrarily structured XML files. This solution pack offers a simpler solution to the goals of the overly complex [Islandora Feeds](https://github.com/mjordan/islandora_feeds) module, the original motivation for which can be found in [this Islandora Google group discussion](https://groups.google.com/forum/#!searchin/islandora/jordan$20database/islandora/vqJZH7bxBDc/SzSygjj1RQsJ).
+An Islandora Solution Pack that allows for ingesting and viewing arbitrary types of XML files. This solution pack offers a simpler solution to the goals of the overly complex [Islandora Feeds](https://github.com/mjordan/islandora_feeds) module, the original motivation for which can be found in [this Islandora Google group discussion](https://groups.google.com/forum/#!searchin/islandora/jordan$20database/islandora/vqJZH7bxBDc/SzSygjj1RQsJ).
 
 ## Introduction
 
-This solution pack provides well-understood tools for ingesting and viewing XML OBJ files in Islandora. It is simpler than Islandora Feeds because:
+This solution pack provides well-understood tools for ingesting and viewing XML OBJ files in Islandora. These files could be TEI, EAD, DocBook, SVG, or locally defined XML. It is simpler than Islandora Feeds because:
 
 * It does not offer any way of editing the XML files. If users need to modify an XML file, they must replace the object's OBJ datastream using the standard tools provided within an object's Datastreams tab, just like with any other solution pack's OBJ datastream.
 * It does not generate any derivatives. However, the 'modules' subdirectory contains an example module that illustrates how you would generate derivatives.
@@ -20,8 +20,8 @@ Users may upload a thumbnail image and default XSLT stylesheet for each XML obje
 The admin settings for this solution pack, available at `admin/islandora/solution_pack_config/xml`, let site administrators determine:
 
 1. the location of a default thumbnail image for use if no object-specific thumbnail exists (this default thumbnail can also be applied in batch ingests)
-2. the Islandora viewer for objects managed by this solution pack
-3. the ID of the datastream that needs to be present to render metadata and description at the bottom of the object display.
+2. the ID of the datastream that needs to be present to render metadata and description at the bottom of the object display.
+3. the Islandora viewer for objects managed by this solution pack
 
 Standard Drupal permissions are available for allowing users to upload object-specific thumbnails and object-specific XSLT sytlesheets.
 
@@ -61,7 +61,7 @@ By default, all content is slurped into one field for simple search as it is wit
 * Add checks for validity against a specific schema or DTD
   * Possible solution is to attach a schema file to the collection object as a datastream.
 * Write some additional viewers that present the XML content in interesting ways
-  * Like [this](https://www.sencha.com/forum/showthread.php?163680-Implementing-treeview-using-xml-data) or [this](http://blog.ashwani.co.in/blog/2013-07-18/stylize-your-xml-with-jquery-xml-tree-plugin/).
+  * Like [this](http://blog.ashwani.co.in/blog/2013-07-18/stylize-your-xml-with-jquery-xml-tree-plugin/) or [this](https://github.com/ariutta/svg-pan-zoom).
 * Provide sample render XSLT stylesheets for common types of XML objects, like TEI, EAD, etc.
 
 ## Maintainer
