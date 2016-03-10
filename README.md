@@ -42,6 +42,10 @@ Note that if this viewer is enabled, the XML OBJ datastream content is not style
 
 Objects managed by this module cannot be loaded using the [Islandora Batch](https://github.com/Islandora/islandora_batch), but a custom Drush-based loader is available in the `modules` subdirectory. Its README provides details on preparing content and ingesting it.
 
+## Metadata and description display
+
+If an XML object has a MODS datastream, its content and the "Description" content will appear at the bottom of the object display (including custom metadata display configurations), just as in other Islandora solution packs. If an object has no MODS datastream, no metadata or description will appear.
+
 ## Indexing XML content
 
 By default, all content is slurped into one field for simple search as it is with any other XML datastream, but it is possible to configure FedoraGSearch to index specific fields so they can be used in advanced search forms and in Solr-based metadata displays. To have FedoraGSearch do this:
