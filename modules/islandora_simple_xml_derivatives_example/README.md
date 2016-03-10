@@ -1,11 +1,11 @@
-# Example module
+# Example derivative-creation module
 
-Illustrates generating derivatives on objects managed by the Islandora Simple XML Solution Pack.
+Illustrates generating derivatives on objects managed by the Islandora XML Solution Pack.
 
 ## Requirements
 
 * [Islandora](https://github.com/Islandora/islandora)
-* Islandora Simple XML Solution Pack
+* [Islandora XML Solution Pack](https://github.com/mjordan/islandora_solution_pack_xml)
 
 ## Usage
 
