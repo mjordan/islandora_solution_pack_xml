@@ -19,7 +19,10 @@ objects managed by the Islandora Simple XML Solution Pack.
   <xsl:template match="*">
     <!-- We don't want to display empty rows. -->
     <xsl:if test="string-length(.) != 0">
-      <tr><th><xsl:value-of select="@displayLabel"/></th><td><xsl:value-of select="."/></td></tr>
+      <!-- And we don't want to display rows for elements with no @dislayLabel attribute. -->
+      <xsl:if test="@displayLabel">
+        <tr><th><xsl:value-of select="@displayLabel"/></th><td><xsl:value-of select="."/></td></tr>
+      </xsl:if>
     </xsl:if>
   </xsl:template>
 
