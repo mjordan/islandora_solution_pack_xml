@@ -20,10 +20,10 @@ function islandora_solution_pack_xml_admin(array $form, array &$form_state) {
   $module_path = drupal_get_path('module', 'islandora_solution_pack_xml');
   $default_tn_path = DRUPAL_ROOT . DIRECTORY_SEPARATOR . $module_path . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'xml.png';
   if (file_exists(variable_get('islandora_solution_pack_xml_default_thumbnail_path', $default_tn_path))) {
-    $tn_exists_markup = '<br /><img src="http://localhost:8000/misc/watchdog-ok.png" /> File exists.';
+    $tn_exists_markup = '<br /><img src="/misc/watchdog-ok.png" /> File exists.';
   }
   else {
-    $tn_exists_markup = '<br /><img src="http://localhost:8000/misc/watchdog-error.png" /> File does not exist.';
+    $tn_exists_markup = '<br /><img src="/misc/watchdog-error.png" /> File does not exist.';
   }
   $form['islandora_solution_pack_xml_default_thumbnail_path'] = array(
     '#title' => t('Path to default thumbnail image'),
