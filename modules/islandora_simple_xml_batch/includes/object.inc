@@ -71,6 +71,14 @@ class IslandoraSimpleXmlBatchObject extends IslandoraBatchObject {
       $this->ingestDatastream($rs);
     }
 
+    // Additional datastreams.
+    $additional_datastreams = $this->getAdditionalDatastreams();
+    if (count($additional_datastreams)) {
+      foreach ($additional_datastreams as $additional) {
+        $this->ingestDatastream($additional);
+      }
+    }
+
     $this->addRelationships();
 
     // Indicate that this object is ready to actually go into Fedora.
@@ -196,6 +204,46 @@ EOQ;
     else {
       return FALSE;
     }
+  }
+
+  /**
+   * Creates any additional datastreams for the object based on filename.
+   *
+   * For a base XML file with the name somefile.xml, a datastream with the
+   * DSID 'FOO' will be created from a file with the name somfile.FOO.ext.
+   * The datastream's mimetype will be derived from .ext. Its label will
+   * be 'FOO datastream'.
+   *
+   * @return array
+   *   A list of additional datastreams to ingest with the current object.
+   */
+  private function getAdditionalDatastreams() {
+    $datastreams = array();
+    $pathinfo = pathinfo($this->xmlObjFilePath);
+    $dir_name = $pathinfo['dirname'];
+    $file_name = $pathinfo['filename'];
+    $base_path = $dir_name . DIRECTORY_SEPARATOR . $file_name;
+
+    $ds_filepaths = glob($base_path . '*');
+    foreach ($ds_filepaths as $ds_filepath) {
+      // We don't want the base .xml file.
+      if ($ds_filepath != $base_path . '.xml') {
+        // Or the MODS, TN, or RENDER_STYLESHEET files.
+        if (!preg_match('/\.(TN|MODS|RENDER_STYLESHEET)/', $ds_filepath)) {
+          $ds_filepath_filename = pathinfo($ds_filepath, PATHINFO_FILENAME);
+          // The DSID is not an extension, but it will be the part after
+          // the final . in $ds_filepath_filename.
+          $dsid = pathinfo($ds_filepath_filename, PATHINFO_EXTENSION);
+          $ds = $this->constructDatastream($dsid, 'M');
+          $mime_detector = new MimeDetect();
+          $ds->mimetype = $mime_detector->getMimetype($ds_filepath);
+          $ds->label = $dsid . ' datastream';
+          $ds->setContentFromFile($ds_filepath, FALSE);
+          $datastreams[] = $ds;
+        }
+      }
+    }
+    return $datastreams;
   }
 
 }

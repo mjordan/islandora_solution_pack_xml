@@ -40,6 +40,12 @@ OBJ file base name with the double extension `.MODS.xml`.
 
 OBJ file base name plus the extension `.xsl`.
 
+### Additional, arbitrary datastreams 
+
+You may want your objects to have additional datastreams, for example, an image you want to render with the XML. To do so, add files you want to create the datastreams from using the following file naming convention: for a base XML file with the name somefile.xml, a datastream with the datastream ID 'JPEG' will be created from a file with the name somefile.JPEG.jpg.
+
+The datastream's mimetype will be derived from its extension, in the example above, '.jpg'. Its label will be 'JPEG datastream'. The DSID and extension have no relationship, they just happend to be consistent in this example.
+
 ### Example input directories
 
 Two XML files, which will create two objects. The thumbnail and MODS datastreams for the objects will be set to defaults:
@@ -68,6 +74,19 @@ Three XML files, which will create three objects. The object created from `foo.x
 .
 ├── foo.xml
 ├── foo.MODS.xml
+├── bar.xml
+├── bar.TN.png
+├── baz.xml
+└── baz.xsl
+```
+
+Same as the previous example, but for the object created from foo.xml, an additional datastream with the DSID 'SOMETHING' will be ingested from the file `foo.SOMETHING.png`.
+
+```
+.
+├── foo.xml
+├── foo.MODS.xml
+├── foo.SOMETHING.png
 ├── bar.xml
 ├── bar.TN.png
 ├── baz.xml
