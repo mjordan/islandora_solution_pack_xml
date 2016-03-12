@@ -42,9 +42,9 @@ OBJ file base name plus the extension `.xsl`.
 
 ### Additional, arbitrary datastreams 
 
-You may want your objects to have additional datastreams, for example, an image you want to render with the XML. To do so, add files you want to create the datastreams from using the following file naming convention: for a base XML file with the name somefile.xml, a datastream with the datastream ID 'JPEG' will be created from a file with the name somefile.JPEG.jpg.
+You may want your objects to have additional datastreams, for example, an image you want to render with the XML. To do so, add files you want to create the datastreams from using the following file naming convention: for a base XML file with the name somefile.xml, a datastream with the datastream ID 'JPEG' will be created from a file with the name `somefile.JPEG.jpg`.
 
-The datastream's mimetype will be derived from its extension, in the example above, '.jpg'. Its label will be 'JPEG datastream'. The DSID and extension have no relationship, they just happend to be consistent in this example.
+The datastream's mimetype will be derived from its extension, in the example above, `.jpg`. Its label will be 'JPEG datastream'. The DSID and extension have no relationship, they just happend to be consistent in this example.
 
 ### Example input directories
 
