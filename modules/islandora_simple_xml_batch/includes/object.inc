@@ -234,12 +234,14 @@ EOQ;
           // The DSID is not an extension, but it will be the part after
           // the final . in $ds_filepath_filename.
           $dsid = pathinfo($ds_filepath_filename, PATHINFO_EXTENSION);
-          $ds = $this->constructDatastream($dsid, 'M');
-          $mime_detector = new MimeDetect();
-          $ds->mimetype = $mime_detector->getMimetype($ds_filepath);
-          $ds->label = $dsid . ' datastream';
-          $ds->setContentFromFile($ds_filepath, FALSE);
-          $datastreams[] = $ds;
+          if (strlen($dsid)) {
+            $ds = $this->constructDatastream($dsid, 'M');
+            $mime_detector = new MimeDetect();
+            $ds->mimetype = $mime_detector->getMimetype($ds_filepath);
+            $ds->label = $dsid . ' datastream';
+            $ds->setContentFromFile($ds_filepath, FALSE);
+            $datastreams[] = $ds;
+          }
         }
       }
     }
