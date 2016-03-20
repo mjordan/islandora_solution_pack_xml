@@ -81,7 +81,7 @@ class IslandoraSimpleXmlBatchObject extends IslandoraBatchObject {
 
     $this->addRelationships();
 
-    // Indicate that this object is ready to actually go into Fedora.
+    // Indicate that this object is ready to be ingested.
     return ISLANDORA_BATCH_STATE__DONE;
   }
 
