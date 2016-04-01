@@ -1,0 +1,40 @@
+<?php
+
+/**
+ * @file
+ * Tests for the Islandora XML Solution Pack.
+ */
+
+class IslandoraXmlSolutionPackTestCase extends IslandoraCollectionWebTestCase {
+
+  /**
+   * Get test information.
+   *
+   * @see IslandoraWebTestCase::getInfo()
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Islandora XML Solution Pack tests',
+      'description' => 'Tests basic functionality of the Islandora XML Solution Pack',
+      'group' => 'Islandora XML Solution Pack',
+    );
+  }
+
+  /**
+   * Set up the test environment.
+   *
+   * @see IslandoraWebTestCase::setUp()
+   */
+  public function setUp() {
+    parent::setUp(array(
+      'islandora',
+      'islandora_batch',
+      'islandora_basic_collection',
+      'islandora_solution_pack_xml',
+      'islandora_simple_xml_batch',
+    ));
+
+    $user = $this->drupalCreateUser(array_keys(module_invoke_all('permission')));
+    $this->drupalLogin($user);
+
+}
