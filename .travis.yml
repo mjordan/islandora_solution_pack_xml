@@ -4,7 +4,7 @@ php:
   - 5.5
 branches:
   only:
-    - /^travis/
+    - /^7.x/
 env:
   - FEDORA_VERSION="3.8.1"
 before_install:
