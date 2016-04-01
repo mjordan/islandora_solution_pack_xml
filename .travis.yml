@@ -18,8 +18,11 @@ before_install:
   - ln -s $TRAVIS_BUILD_DIR sites/all/modules/islandora_solution_pack_xml
   - drush en --yes --user=1 islandora_basic_collection
   - drush en --yes --user=1 islandora_solution_pack_xml
+  - drush en --yes --user=1 islandora_simple_xml_batch
 script:
   - $ISLANDORA_DIR/tests/scripts/line_endings.sh sites/all/modules/islandora_solution_pack_xml
   - drush coder-review islandora_solution_pack_xml
   - phpcpd --names *.module,*.inc sites/all/modules/islandora_solution_pack_xml
   - drush test-run --uri=http://localhost:8081 "Islandora XML Solution Pack"
+  - drush --user=1 islandora_simple_xml_batch_preprocess --target=$TRAVIS_BUILD_DIR/tests/fixtures --namespace=foo --parent=islandora:sp_simple_xml_collection
+  - drush --user=1 islandora_batch_ingest
