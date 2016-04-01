@@ -20,6 +20,6 @@ before_install:
   - drush en --yes --user=1 islandora_solution_pack_xml
 script:
   - $ISLANDORA_DIR/tests/scripts/line_endings.sh sites/all/modules/islandora_solution_pack_xml
-  - drush coder-review --reviews=production,security,style,i18n,potx,sniffer islandora_solution_pack_xml
+  - drush coder-review islandora_solution_pack_xml
   - phpcpd --names *.module,*.inc sites/all/modules/islandora_solution_pack_xml
   - drush test-run --uri=http://localhost:8081 "Islandora XML Solution Pack"
