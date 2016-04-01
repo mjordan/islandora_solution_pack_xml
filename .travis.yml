@@ -23,7 +23,7 @@ before_install:
   - drush en --yes --user=1 islandora_solution_pack_xml
   - drush en --yes --user=1 islandora_simple_xml_batch
 script:
-  - ant -buildfile sites/all/modules/islandora_cdm_api/build.xml lint
+  - ant -buildfile sites/all/modules/islandora_solution_pack_xml/build.xml lint
   - $ISLANDORA_DIR/tests/scripts/line_endings.sh sites/all/modules/islandora_solution_pack_xml
   - drush coder-review islandora_solution_pack_xml
   - phpcpd --names *.module,*.inc sites/all/modules/islandora_solution_pack_xml
