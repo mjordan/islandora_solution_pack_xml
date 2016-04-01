@@ -36,5 +36,6 @@ class IslandoraXmlSolutionPackTestCase extends IslandoraCollectionWebTestCase {
 
     $user = $this->drupalCreateUser(array_keys(module_invoke_all('permission')));
     $this->drupalLogin($user);
+  }
 
 }
