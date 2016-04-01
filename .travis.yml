@@ -1,0 +1,25 @@
+sudo: true
+language: php
+php:
+  - 5.5
+branches:
+  only:
+    - /^travis/
+env:
+  - FEDORA_VERSION="3.8.1"
+before_install:
+  - cd $HOME
+  - git clone -b 7.x git://github.com/Islandora/islandora.git
+  - git clone -b 7.x git://github.com/Islandora/islandora_solution_pack_collection.git
+  - export ISLANDORA_DIR=$HOME/islandora
+  - $HOME/islandora/tests/scripts/travis_setup.sh
+  - cd $HOME/drupal-*
+  - ln -s $HOME/islandora_solution_pack_collection sites/all/modules/islandora_solution_pack_collection
+  - ln -s $TRAVIS_BUILD_DIR sites/all/modules/islandora_solution_pack_xml
+  - drush en --yes --user=1 islandora_basic_collection
+  - drush en --yes --user=1 islandora_solution_pack_xml
+script:
+  - $ISLANDORA_DIR/tests/scripts/line_endings.sh sites/all/modules/islandora_solution_pack_xml
+  - drush coder-review --reviews=production,security,style,i18n,potx,sniffer islandora_solution_pack_xml
+  - phpcpd --names *.module,*.inc sites/all/modules/islandora_solution_pack_xml
+  - drush test-run --uri=http://localhost:8081 "Islandora XML Solution Pack"
