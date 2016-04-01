@@ -38,4 +38,13 @@ class IslandoraXmlSolutionPackTestCase extends IslandoraCollectionWebTestCase {
     $this->drupalLogin($user);
   }
 
+  /**
+   * Test the CONTENTdm API emulation methods.
+   */
+  public function testGet() {
+    $this->drupalGet('islandora/object/foo:1');
+    $match = preg_match('|some|', $this->content);
+    $this->assertTrue($match, 'Test XML object was found');
+  }
+
 }
