@@ -5,6 +5,9 @@
  * Tests for the Islandora XML Solution Pack.
  */
 
+/**
+ * A test case for the Islandora Simple XML Solution Pack.
+ */
 class IslandoraXmlSolutionPackTestCase extends IslandoraCollectionWebTestCase {
 
   /**

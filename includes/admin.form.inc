@@ -42,7 +42,6 @@ function islandora_solution_pack_xml_admin(array $form, array &$form_state) {
     '#maxlength' => 255,
   );
 
-
   module_load_include('inc', 'islandora', 'includes/solution_packs');
   $form += islandora_viewers_form('islandora_xml_viewers', 'application/xml');
   return system_settings_form($form);

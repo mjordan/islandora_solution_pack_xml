@@ -71,6 +71,14 @@ function islandora_solution_pack_xml_preprocess_islandora_solution_pack_xml_defa
 
   module_load_include('inc', 'islandora', 'includes/solution_packs');
   $viewer = islandora_get_viewer(array(), 'islandora_xml_viewers', $islandora_object);
+  // Viewers defined by islandora_simple_xml_context override the
+  // system default.
+  if (module_exists('islandora_simple_xml_context')) {
+    if ($plugin = context_get_plugin('reaction', 'islandora_simple_xml_context_reaction_use_viewer')) {
+      $viewer = $plugin->execute($islandora_object);
+    }
+  }
+
   if ($viewer) {
     $variables['islandora_content'] = $viewer;
   }

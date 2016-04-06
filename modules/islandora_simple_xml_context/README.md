@@ -8,23 +8,21 @@ Integrates the Islandora Simple XML Solution Pack with the Context module.
 * [Islandora XML Solution Pack](https://github.com/mjordan/islandora_solution_pack_xml)
 * [Context](https://drupal.org/project/context)
 
+No additional software or libraries need to be installed. [Islandora Context](https://github.com/mjordan/islandora_context) is not required but offers some additional conditions and reactions that may be useful in combination with those provided by this module.
+
 ## Introduction
 
 This module provides the following Context condition:
 
 * Root element of an OBJ XML datastream: Define a set of root element names; if the current object's OBJ datastream has a root element in this list, the condition is triggered.
 
-There are currently no Context reactions, but some that are planned include:
+And the following Context reaction:
 
-* Display/hide the object's "Details" metadata
 * Use a specific Islandora Simple XML viewer
-* Use a specific XSLT stylesheet and/or CSS file
 
 ## Usage
 
-Install and configure. To create a context, go to Structure > Context and click on Add. The 'Islandora Simple XML root element' condition will be available in the context form.
-
-No additional software or libraries need to be installed.
+Install as any other module. To create a context, go to Structure > Context and click on Add. The condition and reaction listed above will appear in their respective sections of the context form.
 
 ## Maintainer
 

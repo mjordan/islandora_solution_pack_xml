@@ -17,6 +17,13 @@ function islandora_simple_xml_context_context_registry() {
         'plugin' => 'islandora_simple_xml_context_condition_root_element',
       ),
     ),
+    'reactions' => array(
+      'islandora_simple_xml_context_reaction_use_viewer' => array(
+        'title' => t('Use an Islandora Simple XML viewer'),
+        'description' => t("Use an Islandora Simple XML viewer"),
+        'plugin' => 'islandora_simple_xml_context_reaction_use_viewer',
+      ),
+    ),
   );
 }
 
@@ -40,6 +47,14 @@ function islandora_simple_xml_context_context_plugins() {
       'file' => 'islandora_simple_xml_context_condition_root_element.inc',
       'class' => 'IslandoraSimpleXmlContextConditionRootElement',
       'parent' => 'context_condition',
+    ),
+  );
+  $plugins['islandora_simple_xml_context_reaction_use_viewer'] = array(
+    'handler' => array(
+      'path' => drupal_get_path('module', 'islandora_simple_xml_context') . '/plugins',
+      'file' => 'islandora_simple_xml_context_reaction_use_viewer.inc',
+      'class' => 'IslandoraSimpleXmlContextReactionUseViewer',
+      'parent' => 'context_reaction',
     ),
   );
   return $plugins;
