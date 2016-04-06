@@ -10,7 +10,7 @@ Integrates the Islandora Simple XML Solution Pack with the Context module.
 
 ## Introduction
 
-This module provides the following Context conditions:
+This module provides the following Context condition:
 
 * Root element of an OBJ XML datastream: Define a set of root element names; if the current object's OBJ datastream has a root element in this list, the condition is triggered.
 
@@ -22,7 +22,7 @@ There are currently no Context reactions, but some that are planned include:
 
 ## Usage
 
-Install and configure. To create a context, go to Structure > Context and click on Add. The conditions and reactions listed above will appear in their respective sections of the context form.
+Install and configure. To create a context, go to Structure > Context and click on Add. The 'Islandora Simple XML root element' condition will be available in the context form.
 
 No additional software or libraries need to be installed.
 
