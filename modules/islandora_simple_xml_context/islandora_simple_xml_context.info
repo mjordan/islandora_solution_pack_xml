@@ -1,0 +1,8 @@
+name = "Islandora Simple XML Context"
+description = "Integrates the Context module with the Islandora Simple XML Solution Pack."
+package = Islandora Tools
+dependencies[] = islandora
+dependencies[] = islandora_solution_pack_xml
+dependencies[] = context
+version = 7.x-dev
+core = 7.x

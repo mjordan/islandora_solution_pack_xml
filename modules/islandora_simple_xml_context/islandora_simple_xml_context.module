@@ -1,0 +1,56 @@
+<?php
+
+/**
+ * @file
+ * Defines all the hooks this module implements.
+ */
+
+/**
+ * Implements hook_context_registry().
+ */
+function islandora_simple_xml_context_context_registry() {
+  return array(
+    'conditions' => array(
+      'islandora_simple_xml_context_condition_root_element' => array(
+        'title' => t('Islandora Simple XML root element'),
+        'description' => t("Choose this condition if you want to inspect an XML OBJ datastream's root element"),
+        'plugin' => 'islandora_simple_xml_context_condition_root_element',
+      ),
+    ),
+  );
+}
+
+/**
+ * Implements hook_ctools_plugin_api().
+ */
+function islandora_simple_xml_context_ctools_plugin_api($module, $api) {
+  if ($module == 'context' && $api == 'plugins') {
+    return array('version' => 3);
+  }
+}
+
+/**
+ * Implements hook_context_plugins().
+ */
+function islandora_simple_xml_context_context_plugins() {
+  $plugins = array();
+  $plugins['islandora_simple_xml_context_condition_root_element'] = array(
+    'handler' => array(
+      'path' => drupal_get_path('module', 'islandora_simple_xml_context') . '/plugins',
+      'file' => 'islandora_simple_xml_context_condition_root_element.inc',
+      'class' => 'IslandoraSimpleXmlContextConditionRootElement',
+      'parent' => 'context_condition',
+    ),
+  );
+  return $plugins;
+}
+
+/**
+ * Implements hook_CMODEL_PID_islandora_view_object().
+ */
+function islandora_simple_xml_context_islandora_sp_simple_xml_islandora_view_object(AbstractObject $object, $page_number, $page_size) {
+  if ($plugin = context_get_plugin('condition', 'islandora_simple_xml_context_condition_root_element')) {
+    $plugin->execute($object);
+  }
+  return array();
+}
