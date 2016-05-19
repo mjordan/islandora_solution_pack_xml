@@ -51,26 +51,32 @@ function islandora_solution_pack_xml_preprocess_islandora_solution_pack_xml_defa
 
   $obj_xml_content = $islandora_object['OBJ']->content;
 
-  if ($islandora_object['RENDER_STYLESHEET']) {
-    module_load_include('inc', 'islandora_solution_pack_xml', 'includes/utilities');
-    $object_render_stylesheet = $islandora_object['RENDER_STYLESHEET']->content;
-    $variables['islandora_content'] = islandora_solution_pack_xml_apply_xslt($object_render_stylesheet, $obj_xml_content);
-  }
-  // If the object is a member of a collection that has a RENDER_STYLESHEET ds,
-  // use that stylesheet. But only do that if the object is a member of one
-  // collection.
-  elseif (count($variables['parent_collections']) == 1 &&
-    $variables['parent_collections'][0]['RENDER_STYLESHEET']) {
-    module_load_include('inc', 'islandora_solution_pack_xml', 'includes/utilities');
-    $object_render_stylesheet = $variables['parent_collections'][0]['RENDER_STYLESHEET']->content;
-    $variables['islandora_content'] = islandora_solution_pack_xml_apply_xslt($object_render_stylesheet, $obj_xml_content);
-  }
-  else {
-    $variables['islandora_content'] = '<pre>' . htmlspecialchars($obj_xml_content) . '</pre>';
-  }
-
   module_load_include('inc', 'islandora', 'includes/solution_packs');
   $viewer = islandora_get_viewer(array(), 'islandora_xml_viewers', $islandora_object);
+
+  if ($viewer) {
+    $variables['islandora_content'] = $viewer;
+  } 
+  else {
+    if ($islandora_object['RENDER_STYLESHEET']) {
+      module_load_include('inc', 'islandora_solution_pack_xml', 'includes/utilities');
+      $object_render_stylesheet = $islandora_object['RENDER_STYLESHEET']->content;
+      $variables['islandora_content'] = islandora_solution_pack_xml_apply_xslt($object_render_stylesheet, $obj_xml_content);
+    }
+    // If the object is a member of a collection that has a RENDER_STYLESHEET ds,
+    // use that stylesheet. But only do that if the object is a member of one
+    // collection.
+    elseif (count($variables['parent_collections']) == 1 &&
+      $variables['parent_collections'][0]['RENDER_STYLESHEET']) {
+      module_load_include('inc', 'islandora_solution_pack_xml', 'includes/utilities');
+      $object_render_stylesheet = $variables['parent_collections'][0]['RENDER_STYLESHEET']->content;
+      $variables['islandora_content'] = islandora_solution_pack_xml_apply_xslt($object_render_stylesheet, $obj_xml_content);
+    }
+    else {
+      $variables['islandora_content'] = '<pre>' . htmlspecialchars($obj_xml_content) . '</pre>';
+    }
+  }
+
   // Viewers defined by islandora_simple_xml_context override the
   // system default.
   if (module_exists('islandora_simple_xml_context')) {
@@ -79,7 +85,4 @@ function islandora_solution_pack_xml_preprocess_islandora_solution_pack_xml_defa
     }
   }
 
-  if ($viewer) {
-    $variables['islandora_content'] = $viewer;
-  }
 }
