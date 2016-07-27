@@ -49,7 +49,7 @@ class IslandoraSimpleXmlContextConditionRootElement extends context_condition {
       'islandora_simple_xml_root_elements' => array(
         '#type' => 'textarea',
         '#title' => t('XML root elements to activate this condition'),
-        '#description' => t('Set this condition when one or more of the root elements in this list is present in the XML OBJ datastream. Enter a list of root element names (no attributes or markup), separated by spaces. Matching is case sensitive.'),
+        '#description' => t('Set this condition when one of the elements in this list is the root element in the XML OBJ datastream. Enter a list of root element names (without attributes or markup), separated by spaces. Namespaced root elements are allowed, e.g. "METS:mets". Matches are case sensitive.'),
         '#default_value' => isset($defaults['islandora_simple_xml_root_elements']) ?
           $defaults['islandora_simple_xml_root_elements'] : '',
       ),

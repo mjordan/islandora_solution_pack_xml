@@ -27,6 +27,8 @@ function islandora_simple_xml_viewer_menu() {
  */
 function islandora_simple_xml_viewer_theme() {
   return array(
+    // This item should match the corresponding item in
+    // hook_islandora_viewer_info().
     'islandora_simple_xml_viewer' => array(
       'file' => 'theme/theme.inc',
       'template' => 'theme/islandora-simple-xml-viewer',
@@ -42,6 +44,7 @@ function islandora_simple_xml_viewer_theme() {
  */
 function islandora_simple_xml_viewer_islandora_viewer_info() {
   return array(
+    // This item should match the corresponding item in hook_theme().
     'islandora_simple_xml_viewer' => array(
       'label' => t('Islandora Simple XML Viewer'),
       'description' => t('A simple XML viewer for Islandora.'),

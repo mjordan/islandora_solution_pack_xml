@@ -47,6 +47,11 @@ If an XML object has a MODS datastream, its content and the "Description" conten
 
 Objects managed by this module cannot be loaded using the [Islandora Batch](https://github.com/Islandora/islandora_batch), but a custom Drush-based loader is available in the `modules` subdirectory. Its README provides details on preparing content and ingesting it.
 
+## Using Contexts
+
+The [Islandora Simple XML Context](https://github.com/mjordan/islandora_solution_pack_xml/tree/7.x/modules/islandora_simple_xml_context), included in the `modules` subdirectory, provides integration with the [Context](https://www.drupal.org/project/context) contrib module. More information is provided in its README file.
+
+
 ## Indexing XML content
 
 By default, all content is slurped into one field for simple search as it is with any other XML datastream, but it is possible to configure FedoraGSearch to index specific fields so they can be used in advanced search forms and in Solr-based metadata displays. To have FedoraGSearch do this:
@@ -65,7 +70,6 @@ This solution pack is a work in progress. Some features that would be useful inc
 * additional viewers that present the XML content in interesting ways
   * for example as [browsable trees](http://blog.ashwani.co.in/blog/2013-07-18/stylize-your-xml-with-jquery-xml-tree-plugin/) or [SVG graphics](https://github.com/ariutta/svg-pan-zoom)
 * sample render XSLT stylesheets for common types of XML objects, like TEI, EAD, DocBook, etc.
-* render the XML based on conditions defined by [Islandora Context](https://github.com/mjordan/islandora_context)
 * caching of the rendered versions of large or expensive-to-render XML files.
 
 ## Maintainer

@@ -63,7 +63,7 @@ function islandora_simple_xml_context_context_plugins() {
 /**
  * Implements hook_CMODEL_PID_islandora_view_object().
  */
-function _islandora_simple_xml_context_islandora_sp_simple_xml_islandora_view_object(AbstractObject $object, $page_number, $page_size) {
+function islandora_simple_xml_context_islandora_sp_simple_xml_islandora_view_object(AbstractObject $object, $page_number, $page_size) {
   if ($plugin = context_get_plugin('condition', 'islandora_simple_xml_context_condition_root_element')) {
     $plugin->execute($object);
   }
@@ -72,7 +72,7 @@ function _islandora_simple_xml_context_islandora_sp_simple_xml_islandora_view_ob
 
 
 /**
- * Preprocessor for theme('page').
+ * Preprocessor for theme('islandora_solution_pack_xml_default').
  */
 function islandora_simple_xml_context_preprocess_islandora_solution_pack_xml_default(&$vars) {
   $islandora_object = $vars['islandora_object'];
