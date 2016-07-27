@@ -1,0 +1,19 @@
+<?php
+
+/**
+ * @file
+ * Install hooks.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function islandora_simple_xml_context_install() {
+  // Set this module's weight to 1 so theme preprocessor runs late.
+  db_update('system')
+    ->fields(array('weight' => 1))
+    ->condition('type', 'module')
+    ->condition('name', 'islandora_simple_xml_context')
+    ->execute();
+}
+
