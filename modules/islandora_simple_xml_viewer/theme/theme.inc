@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Any hooks/functions used by this module'ss themes.
+ * Any hooks/functions used by this module's themes.
  */
 
 /**

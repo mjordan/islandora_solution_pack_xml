@@ -42,7 +42,7 @@ function islandora_simple_xml_viewer_theme() {
  */
 function islandora_simple_xml_viewer_islandora_viewer_info() {
   return array(
-    'islandora_simple_xml' => array(
+    'islandora_simple_xml_viewer' => array(
       'label' => t('Islandora Simple XML Viewer'),
       'description' => t('A simple XML viewer for Islandora.'),
       'configuration' => 'admin/islandora/islandora_viewers/simple_xml',
@@ -63,7 +63,7 @@ function islandora_simple_xml_viewer_islandora_viewer_info() {
  *   The object that we are viewing.
  *
  * @return string
- *   HTML repersentation of the Simple XML Viewer.
+ *   HTML representation of the Simple XML Viewer.
  */
 function islandora_simple_xml_viewer_callback(array $params, IslandoraFedoraObject $islandora_object = NULL) {
   if (isset($islandora_object['OBJ']) && $islandora_object['OBJ']->mimetype == 'application/xml') {

@@ -49,7 +49,7 @@ class IslandoraSimpleXmlContextReactionUseViewer extends context_reaction {
    */
   public function execute($object) {
     foreach ($this->get_contexts() as $context) {
-      if (isset($context->reactions['islandora_simple_xml_context_reaction_use_viewer']['islandora_simple_xml_viewers'])) {
+      if ($context->reactions['islandora_simple_xml_context_reaction_use_viewer']['islandora_simple_xml_viewers']) {
         module_load_include('inc', 'islandora', 'includes/solution_packs');
         $viewer_id = $context->reactions['islandora_simple_xml_context_reaction_use_viewer']['islandora_simple_xml_viewers'];
         $callback = islandora_get_viewer_callback($viewer_id);
