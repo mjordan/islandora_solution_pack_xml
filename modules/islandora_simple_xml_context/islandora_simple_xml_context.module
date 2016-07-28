@@ -76,9 +76,11 @@ function islandora_simple_xml_context_islandora_sp_simple_xml_islandora_view_obj
  */
 function islandora_simple_xml_context_preprocess_islandora_solution_pack_xml_default(&$vars) {
   $islandora_object = $vars['islandora_object'];
-  if ($plugin = context_get_plugin('reaction', 'islandora_simple_xml_context_reaction_use_viewer')) {
-    if ($viewer = $plugin->execute($islandora_object)) {
-      $vars['islandora_content'] = $viewer;
+  if (in_array('islandora:sp_simple_xml', $islandora_object->models)) {
+    if ($plugin = context_get_plugin('reaction', 'islandora_simple_xml_context_reaction_use_viewer')) {
+      if ($viewer = $plugin->execute($islandora_object)) {
+        $vars['islandora_content'] = $viewer;
+      }
     }
   }
 }

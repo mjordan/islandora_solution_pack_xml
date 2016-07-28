@@ -16,4 +16,3 @@ function islandora_simple_xml_context_install() {
     ->condition('name', 'islandora_simple_xml_context')
     ->execute();
 }
-

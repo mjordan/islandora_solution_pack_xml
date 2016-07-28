@@ -42,10 +42,7 @@ class IslandoraSimpleXmlContextReactionUseViewer extends context_reaction {
   // @codingStandardsIgnoreEnd
 
   /**
-   * Pass the rendered viewer to the theming function.
-   *
-   * The theming function is
-   * islandora_solution_pack_xml_preprocess_islandora_solution_pack_xml_default.
+   * Pass the rendered viewer output to the theme preprocess function.
    */
   public function execute($object) {
     foreach ($this->get_contexts() as $context) {
