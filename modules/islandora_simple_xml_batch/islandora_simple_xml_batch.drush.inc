@@ -5,9 +5,6 @@
  * Implementation of Drush hooks.
  */
 
-module_load_include('inc', 'islandora_simple_xml_batch', 'includes/preprocessor');
-module_load_include('inc', 'islandora_simple_xml_batch', 'includes/object');
-
 /**
  * Implements hook_drush_command().
  */
