@@ -35,6 +35,7 @@ function islandora_solution_pack_xml_xml_upload_form(array $form, array &$form_s
   );
 
   if (user_access('upload simple XML thumbnails')) {
+    $tn_extensions = array('gif png jpg jpeg');
     $form['islandora_solution_pack_xml_thumbnail_upload'] = array(
       '#type' => 'checkbox',
       '#title' => t("Add a custom thumbnail to this object?"),
@@ -44,11 +45,11 @@ function islandora_solution_pack_xml_xml_upload_form(array $form, array &$form_s
       '#title' => t('Thumbnail image'),
       '#type' => 'managed_file',
       '#required' => FALSE,
-      '#description' => t('Select thumbnail file to upload.<br/>Files must be less than <strong>@size MB.</strong><br/>Allowed file types: <strong>@ext.</strong><br />This file is optional.', array('@size' => $upload_size, '@ext' => 'jpg, png, gif')),
+      '#description' => t('Select thumbnail file to upload.<br/>Files must be less than <strong>@size MB.</strong><br/>Allowed file types: <strong>@ext.</strong><br />This file is optional.', array('@size' => $upload_size, '@ext' => $tn_extensions[0])),
       '#default_value' => isset($form_state['values']['files']) ? $form_state['values']['files'] : NULL,
       '#upload_location' => 'temporary://',
       '#upload_validators' => array(
-        'file_validate_extensions' => array('jpg', 'png', 'gif'),
+        'file_validate_extensions' => $tn_extensions,
         // Assume it's specified in MB.
         'file_validate_size' => array($upload_size * 1024 * 1024),
       ),
