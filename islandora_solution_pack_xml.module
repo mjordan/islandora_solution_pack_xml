@@ -19,7 +19,31 @@ function islandora_solution_pack_xml_menu() {
     'file' => 'includes/admin.form.inc',
     'type' => MENU_NORMAL_ITEM,
   );
+  $items['islandora/object/%islandora_object/datastreams/OBJ/edit'] = array(
+    'title' => 'Edit XML file',
+    'file' => 'includes/xml_object_edit.form.inc',
+    'page callback' => 'islandora_solution_pack_xml_edit_xml',
+    'page arguments' => array(2),
+    'access callback' => 'islandora_object_manage_access_callback',
+    'access arguments' => array(2),
+    'type' => MENU_CALLBACK,
+  );
   return $items;
+}
+
+/**
+ * Implements hook_islandora_edit_datastream_registry().
+ */
+function islandora_solution_pack_xml_islandora_edit_datastream_registry($object, $dsid) {
+  if (in_array('islandora:sp_simple_xml', $object->models) &&
+    $dsid->id == 'OBJ') {
+    return array(
+      array(
+        'name' => t('XML Edit form'),
+        'url' => "islandora/object/{$object->id}/datastreams/OBJ/edit",
+      ),
+    );
+  }
 }
 
 /**

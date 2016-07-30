@@ -6,7 +6,7 @@ An Islandora Solution Pack that allows for ingesting and viewing arbitrary types
 
 This solution pack provides well-understood tools for ingesting and viewing XML OBJ files in Islandora. These files could be TEI, EAD, DocBook, SVG, or locally defined XML. It is simpler than Islandora Feeds because:
 
-* It does not offer any way of editing the XML files. If users need to modify an XML file, they must replace the object's OBJ datastream using the standard tools provided within an object's Datastreams tab, just like with any other solution pack's OBJ datastream.
+* It offers only a very rudimentary way of editing an XML file - just a plain text area. If users need to modify an XML file using more sophisticated tools, they must edit the object's OBJ XML datastream outside of Islandora and replace the datastream using the "Replace" provided within the object's Datastreams tab.
 * It does not generate any derivatives. However, the 'modules' subdirectory contains an example module that illustrates how you would generate derivatives.
 
 Users may upload a thumbnail image and default XSLT stylesheet for each XML object. Objects managed by this solution pack can also have a MODS datastream just like other Islandora objects do.
