@@ -6,7 +6,7 @@ An Islandora Solution Pack that allows for ingesting and viewing arbitrary types
 
 This solution pack provides well-understood tools for ingesting and viewing XML OBJ files in Islandora. These files could be TEI, EAD, DocBook, SVG, or locally defined XML. It is simpler than Islandora Feeds because:
 
-* It offers only a very rudimentary way of editing an XML file - just a plain text area. If users need to modify an XML file using more sophisticated tools, they must edit the object's OBJ XML datastream outside of Islandora and replace the datastream using the "Replace" provided within the object's Datastreams tab.
+* It offers only a very rudimentary way of editing an XML file - just a plain text area. Users who need to modify an XML file using more sophisticated tools must download the object's OBJ XML datastream, edit it outside of Islandora, and upload it using the "Replace" link provided within the object's Datastreams tab. The editing feature in this module is intended for fixing typos, etc. and performs no well-formedness checking or validation on the edited XML content.
 * It does not generate any derivatives. However, the 'modules' subdirectory contains an example module that illustrates how you would generate derivatives.
 
 Users may upload a thumbnail image and default XSLT stylesheet for each XML object. Objects managed by this solution pack can also have a MODS datastream just like other Islandora objects do.
@@ -62,15 +62,15 @@ By default, all content is slurped into one field for simple search as it is wit
 
 ## To do
 
-This solution pack is a work in progress. Some features that would be useful include:
+Some features that would be useful include:
 
+* sample render XSLT stylesheets for common types of XML objects, like TEI, EAD, DocBook, etc.
 * checks for well formedness on XML and XSLT files as they are uploaded
 * checks for validity against a specific schema or DTD
   * Possible solution is to attach a schema file to the collection object as a datastream
 * additional viewers that present the XML content in interesting ways
   * for example as [browsable trees](http://blog.ashwani.co.in/blog/2013-07-18/stylize-your-xml-with-jquery-xml-tree-plugin/) or [SVG graphics](https://github.com/ariutta/svg-pan-zoom)
-* sample render XSLT stylesheets for common types of XML objects, like TEI, EAD, DocBook, etc.
-* caching of the rendered versions of large or expensive-to-render XML files.
+* caching of the rendered versions of large or expensive-to-render XML files (which may be done best in viewers).
 
 ## Maintainer
 
