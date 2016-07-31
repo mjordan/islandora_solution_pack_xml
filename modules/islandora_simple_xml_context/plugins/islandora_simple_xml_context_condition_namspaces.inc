@@ -61,7 +61,6 @@ class IslandoraSimpleXmlContextConditionNamespaces extends context_condition {
    * Override of execute().
    */
   public function execute($islandora_object) {
-    dd('I have been executed');
     if ($this->condition_used()) {
       foreach ($this->get_contexts() as $context) {
         $config = $this->fetch_from_context($context, 'options');
@@ -73,7 +72,6 @@ class IslandoraSimpleXmlContextConditionNamespaces extends context_condition {
             // Get all the namespaces in the document, including any in
             // child elements.
             $registered_namespaces = $simple->getNamespaces(TRUE);
-            dd($registered_namespaces, 'Registered namespaces');
             $uris = array_values($registered_namespaces);
             if (count(array_intersect($uris, $configured_uris))) {
               $this->condition_met($context);
