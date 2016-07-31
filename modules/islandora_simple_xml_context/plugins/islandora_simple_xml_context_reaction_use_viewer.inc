@@ -22,10 +22,14 @@ class IslandoraSimpleXmlContextReactionUseViewer extends context_reaction {
   function options_form($context) {
     $settings = $this->fetch_from_context($context);
     module_load_include('inc', 'islandora', 'includes/solution_packs');
-    $viewers = islandora_get_viewers(array('application/xml'), 'islandora:sp_simple_xml');
     $options = array();
-    foreach ($viewers as $key => $properties) {
-      $options[$key] = $properties['label'];
+    if ($viewers = islandora_get_viewers(array('application/xml'), 'islandora:sp_simple_xml')) {
+      foreach ($viewers as $key => $properties) {
+        $options[$key] = $properties['label'];
+      }
+    }
+    else {
+      $options = array('' => t("No viewers are available for the Simple XML Content Model"));
     }
     $form = array(
       '#title' => t('Islandora Simple XML Viewers'),
