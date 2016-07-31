@@ -16,6 +16,11 @@ function islandora_simple_xml_context_context_registry() {
         'description' => t("Choose this condition if you want to inspect an XML OBJ datastream's root element"),
         'plugin' => 'islandora_simple_xml_context_condition_root_element',
       ),
+      'islandora_simple_xml_context_condition_namspaces' => array(
+        'title' => t('Islandora Simple XML namespaces'),
+        'description' => t("Choose this condition if you want to inspect an XML OBJ datastream's namespaces. The namespaces can be registered anywhere in the document."),
+        'plugin' => 'islandora_simple_xml_context_condition_namspaces',
+      ),
     ),
     'reactions' => array(
       'islandora_simple_xml_context_reaction_use_viewer' => array(
@@ -49,6 +54,14 @@ function islandora_simple_xml_context_context_plugins() {
       'parent' => 'context_condition',
     ),
   );
+  $plugins['islandora_simple_xml_context_condition_namspaces'] = array(
+    'handler' => array(
+      'path' => drupal_get_path('module', 'islandora_simple_xml_context') . '/plugins',
+      'file' => 'islandora_simple_xml_context_condition_namspaces.inc',
+      'class' => 'IslandoraSimpleXmlContextConditionNamespaces',
+      'parent' => 'context_condition',
+    ),
+  );
   $plugins['islandora_simple_xml_context_reaction_use_viewer'] = array(
     'handler' => array(
       'path' => drupal_get_path('module', 'islandora_simple_xml_context') . '/plugins',
@@ -65,6 +78,10 @@ function islandora_simple_xml_context_context_plugins() {
  */
 function islandora_simple_xml_context_islandora_sp_simple_xml_islandora_view_object(AbstractObject $object, $page_number, $page_size) {
   if ($plugin = context_get_plugin('condition', 'islandora_simple_xml_context_condition_root_element')) {
+    $plugin->execute($object);
+  }
+  if ($plugin = context_get_plugin('condition', 'islandora_simple_xml_context_condition_namespaces')) {
+    dd('Hi from hook');
     $plugin->execute($object);
   }
   return array();
