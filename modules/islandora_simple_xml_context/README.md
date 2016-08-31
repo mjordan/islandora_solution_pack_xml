@@ -12,9 +12,10 @@ No additional software or libraries need to be installed. [Islandora Context](ht
 
 ## Introduction
 
-This module provides the following Context condition:
+This module provides the following Context conditions:
 
 * Root element of an OBJ XML datastream: Define a set of root element names; if the current object's OBJ datastream has a root element in this list, the condition is triggered.
+* Namespaces used in an OBJ XML datastream: Define a set of namespace URIs; if the current object's OBJ datastream uses a namespace in this list, the condition is triggered.
 
 And the following Context reaction:
 
