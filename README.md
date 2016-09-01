@@ -33,11 +33,11 @@ The module allows the use of XSLT stylesheets to render the XML to users in the 
 2. Owners of collections may upload an XSL stylesheet as a datastream on a collection object. If this datastream has an ID of 'RENDER_STYLESHEET', it is used for all XML objects that are members of the collection (unless a member object has its own RENDER_STYLESHEET datastream).
 3. If neither of the above is true, the XML file is simply escaped and rendered betweem HTML &lt;pre&gt; tags, or, if a viewer module (like the one included with this solution pack) is enabled and configured, it renders the XML output.
 
-In cases 1 and 2, parameters can be passed to the XSLT stylesheet via URL query parameters, e.g. `http://host/islandora/object/islandora:29?foo=true&bar=section1`. The values of `foo` and `bar` would then be accessible in the render stylesheet as follows:
+In cases 1 and 2, parameters can be passed to the XSLT stylesheet via URL query parameters, e.g. `http://host/islandora/object/islandora:29?foo=true&bar=Mark`. The values of `foo` and `bar` would then be accessible in the render stylesheet as follows:
 
 ```xml
-<xsl:param name="foo"></xsl:param>
-<xsl:param name="bar"></xsl:param>
+  <xsl:param name="foo"></xsl:param>
+  <xsl:param name="bar"></xsl:param>
 
   <xsl:if test="$foo='true' and $bar">
     <div>Hello <span><xsl:value-of select="$bar"/></span></div>
