@@ -59,6 +59,7 @@ function islandora_solution_pack_xml_preprocess_islandora_solution_pack_xml_defa
   }
   else {
     $url_params = drupal_get_query_parameters();
+    $url_params['pid'] = $islandora_object->id;
     if ($islandora_object['RENDER_STYLESHEET']) {
       module_load_include('inc', 'islandora_solution_pack_xml', 'includes/utilities');
       $object_render_stylesheet = $islandora_object['RENDER_STYLESHEET']->content;

@@ -11,5 +11,10 @@ As explained in this module's main README, if a collection object has a datastre
   </xsl:if>
 ```
 
-This tutorial illustrates how URL parameters passed to a RENDER_STYLESHEET can be used to transform a single XML object, namely an excerpt of Cory Doctorow's Down and Out in the Magic Kingdom marked up in DocBook, in a variety of ways.
+This tutorial illustrates how URL parameters passed to a RENDER_STYLESHEET can be used to transform a single XML object, namely an excerpt of Cory Doctorow's **Down and Out in the Magic Kingdom** marked up in DocBook, in a variety of ways.
 
+## Rendering the table of contents
+
+## Rendering a specific chapter
+
+## Rendering the entire document
