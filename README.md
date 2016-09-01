@@ -44,6 +44,14 @@ In cases 1 and 2, parameters can be passed to the XSLT stylesheet via URL query 
   </xsl:if>
 ```
 
+The parameter 'pid' is always passed to the stylesheet, and is accessible as follows:
+
+```xml
+  <xsl:param name="bar"></xsl:param>
+```
+
+More detail on using parameters to render specific parts of an XML object is [available](https://github.com/mjordan/islandora_solution_pack_xml/tree/7.x/extras/parameters_tutorial).
+
 ## Rendering the OBJ datastream using viewers
 
 This solution pack supports Islandora viewer modules, and comes with a simple viewer module that if enabled and configured as the default viewer for XML objects allows easy styling of XML files using the [Google Javascript Code Prettifier](https://github.com/google/code-prettify). Viewers may also be defined by the Islandora Simple XML Context module, which is included with this one. Michael Joyce has written a viewer for [a specific set of TEI documents](https://github.com/ubermichael/ballads_viewer).
@@ -67,7 +75,7 @@ The [Islandora Simple XML Context](https://github.com/mjordan/islandora_solution
 
 By default, all content is slurped into one field for simple search as it is with any other XML datastream, but it is possible to configure FedoraGSearch to index specific fields so they can be used in advanced search forms and in Solr-based metadata displays. To have FedoraGSearch do this:
 
-1. Create an XSLT stylesheet to create the Solr fields. An annotate example is provided in this module's `extras/indexing_stylesheets` directory. Place your transform in your `tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/islandora_transforms` directory (or wherever your FedoraGSearch configs are located) with the other stylesheets.
+1. Create an XSLT stylesheet to create the Solr fields. An annotate example is provided in this module's `extras/sample_stylesheets` directory. Place your transform in your `tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/islandora_transforms` directory (or wherever your FedoraGSearch configs are located) with the other stylesheets.
 2. Include the stylesheet from within your `foxmlToSolr.xslt` stylesheet, following the pattern of other stylesheets in the `islandora_transforms` directory.
 3. On reindexing, or on ingest of new simple XML objects, each of the fields created in your stylesheet will be added to the object's Solr document. You will not need to modify your Solr schema or configuration for this to work.
 
