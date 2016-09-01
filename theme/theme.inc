@@ -58,10 +58,11 @@ function islandora_solution_pack_xml_preprocess_islandora_solution_pack_xml_defa
     $variables['islandora_content'] = $viewer;
   }
   else {
+    $url_params = drupal_get_query_parameters();
     if ($islandora_object['RENDER_STYLESHEET']) {
       module_load_include('inc', 'islandora_solution_pack_xml', 'includes/utilities');
       $object_render_stylesheet = $islandora_object['RENDER_STYLESHEET']->content;
-      $variables['islandora_content'] = islandora_solution_pack_xml_apply_xslt($object_render_stylesheet, $obj_xml_content);
+      $variables['islandora_content'] = islandora_solution_pack_xml_apply_xslt($object_render_stylesheet, $obj_xml_content, $url_params);
     }
     // If the object is a member of a collection that has a RENDER_STYLESHEET
     // ds, use that stylesheet. But only do that if the object is a member of
@@ -70,7 +71,7 @@ function islandora_solution_pack_xml_preprocess_islandora_solution_pack_xml_defa
       $variables['parent_collections'][0]['RENDER_STYLESHEET']) {
       module_load_include('inc', 'islandora_solution_pack_xml', 'includes/utilities');
       $object_render_stylesheet = $variables['parent_collections'][0]['RENDER_STYLESHEET']->content;
-      $variables['islandora_content'] = islandora_solution_pack_xml_apply_xslt($object_render_stylesheet, $obj_xml_content);
+      $variables['islandora_content'] = islandora_solution_pack_xml_apply_xslt($object_render_stylesheet, $obj_xml_content, $url_params);
     }
     else {
       $variables['islandora_content'] = '<pre>' . htmlspecialchars($obj_xml_content) . '</pre>';
