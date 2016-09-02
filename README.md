@@ -2,12 +2,19 @@
 
 An Islandora Solution Pack that allows for ingesting and viewing arbitrary types of XML files. This solution pack is not intended to replace others that offer more comprehensive and specialized tools for XML formats like [EAD](https://github.com/DrexelUniversityLibraries/islandora_solution_pack_ead) and [TEI](https://github.com/discoverygarden/islandora_solution_pack_manuscript). Instead, its focus is on being a general-purpose solution for making a variety of types of XML content accessible. It offers a simpler solution to the goals of the overly complex [Islandora Feeds](https://github.com/mjordan/islandora_feeds) module, the original motivation for which can be found in [this Islandora Google group discussion](https://groups.google.com/forum/#!searchin/islandora/jordan$20database/islandora/vqJZH7bxBDc/SzSygjj1RQsJ).
 
+Examples of this solution pack in action include:
+* [Canada's Early Women Writers](http://digital.lib.sfu.ca/ceww-collection/canadas-early-women-writers) (using the one-XLST-stylesheet-per-collection approach)
+  * [sample raw proprietary XML](http://digital.lib.sfu.ca/islandora/object/ceww%3A794/datastream/OBJ/view)
+* [A collection of Wordsworth's and Coleridge's Lyrical Ballads marked up in TEI](http://digital.lib.sfu.ca/islandora/object/lyrical-ballads:collection) (using Michael Joyce's [custom viewer](https://github.com/ubermichael/ballads_viewer)).
+  * [sample raw TEI XML](http://digital.lib.sfu.ca/islandora/object/lyrical-ballads%3A35/datastream/OBJ/view)
+
 ## Introduction
 
-This solution pack provides well-understood tools for ingesting and viewing XML OBJ files in Islandora. These files could be TEI, EAD, DocBook, SVG, or locally defined XML. It is simpler than Islandora Feeds because:
+This solution pack provides tools for ingesting and viewing XML OBJ files in Islandora much like those offered by other solutions packs. These files could be TEI, EAD, DocBook, SVG, or locally defined XML. Some differences between this solution pack and most others include:
 
-* It offers only a very rudimentary way of editing an XML file - just a plain text area. Users who need to modify an XML file using more sophisticated tools must download the object's OBJ XML datastream, edit it outside of Islandora, and upload it using the "Replace" link provided within the object's Datastreams tab. The editing feature in this module is intended for fixing typos, etc. and performs no well-formedness checking or validation on the edited XML content.
 * It does not generate any derivatives. However, the 'modules' subdirectory contains an example module that illustrates how you would generate derivatives.
+* It is designed specifically to delegate presentation of XML OBJ content to Islandora viewer modules. That being the case, it does present raw XML content to end users if no viewer is configured and also supports fairly sophisticated processing of OBJ datastreams using XSLT stylesheets.
+* Even though the solution pack manages XML data, it does not use the Islandora XML Forms interface to allow editing of the OBJ datastream. MODS datastreams attached to the object can be edited as in other solution packs. The XML Solution Pack offers only a  rudimentary way of editing an XML file - just a plain text area. Users who need to modify an XML file using more sophisticated tools must download the object's OBJ XML datastream, edit it outside of Islandora, and upload it using the "Replace" link provided within the object's Datastreams tab. The editing feature in this module is intended for fixing typos, etc. and performs no well-formedness checking or validation on the edited XML content.
 
 Users may upload a thumbnail image and default XSLT stylesheet for each XML object. Objects managed by this solution pack can also have a MODS datastream just like other Islandora objects do.
 
@@ -27,7 +34,7 @@ Standard Drupal permissions are available for allowing users to upload object-sp
 
 ## Rendering the OBJ datastream using XSL Transformations
 
-The module allows the use of XSLT stylesheets to render the XML to users in the following ways:
+The module allows the use of XSLT 1.0 stylesheets to render the XML to users in the following ways:
 
 1. Users may upload a stylesheet when they create an object managed by this solution pack. The stylesheet becomes a datastream on the object with the datastream ID 'RENDER_STYLESHEET' and is applied to the XML OBJ file when users view the object.
 2. Owners of collections may upload an XSL stylesheet as a datastream on a collection object. If this datastream has an ID of 'RENDER_STYLESHEET', it is used for all XML objects that are members of the collection (unless a member object has its own RENDER_STYLESHEET datastream).
@@ -46,7 +53,7 @@ In cases 1 and 2, parameters can be passed to the XSLT stylesheet via URL query 
 
 The stylesheet parameter 'pid' is always passed to the stylesheet, and is accessible within stylesheets as `$pid`. It does not need to be declared as a pararameter.
 
-More detail on using parameters in RENDER_STYLESHEETs is [available](https://github.com/mjordan/islandora_solution_pack_xml/tree/7.x/extras/parameters_tutorial).
+[More information](https://github.com/mjordan/islandora_solution_pack_xml/tree/7.x/extras/parameters_tutorial) on using parameters in RENDER_STYLESHEETs is available.
 
 ## Rendering the OBJ datastream using viewers
 
