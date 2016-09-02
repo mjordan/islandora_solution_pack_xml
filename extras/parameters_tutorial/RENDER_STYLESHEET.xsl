@@ -4,12 +4,15 @@
   version="1.0">
 
 <!--
-This XSLT stylesheet illustrates how to render the same Islandora XML object
-based on URL parameters passed into the stylesheet.
+XSLT stylesheet illustrating how to render different parts of an
+Islandora XML object based on URL parameters passed into the stylesheet.
 -->
 
   <xsl:output method="html" indent="yes"/>
+
   <xsl:param name="chapter"></xsl:param>
+  <!-- 'pid' is passed into all RENDER_STYLESHEETs with the value
+        of the current Islandora object's PID. -->
   <xsl:param name="pid"></xsl:param>
 
   <xsl:template match="docbook:book">
@@ -26,7 +29,7 @@ based on URL parameters passed into the stylesheet.
        <p><a href="/islandora/object/{$pid}?chapter={./@xml:id}"><xsl:value-of select="docbook:title"/></a></p>
      </xsl:if>
 
-     <!-- If the 'chapter' URL parameter contains a chapter ID, render the chapter. -->
+     <!-- If the 'chapter' URL parameter contains a chapter ID, render the chapter with that xml:id value. -->
      <xsl:if test="$chapter">
        <xsl:if test="./@xml:id=$chapter">
          <h2><xsl:value-of select="docbook:title"/></h2>

@@ -50,7 +50,7 @@ If the 'chapter' parameter is passed to the stylesheet, its value is used to det
   </xsl:if>
 ```
 
-The chapter's `<title>` element, plus each of its `<para>` elements, are transformed into simple HTML markup. This XSLT also adds a link back to the table of contents (in other words, a link back to the object's standard URL). The rendered versionn of the Prologue, for example, looks like this:
+The chapter's `<title>` element, plus each of its `<para>` elements, are transformed into simple HTML markup. This XSLT also adds a link back to the table of contents (in other words, a link back to the object's standard URL). The rendered version of the Prologue, for example, looks like this:
 
 ![Down and Out in the Magic Kingdom Prologue](https://dl.dropboxusercontent.com/u/1015702/linked_to/islandora_solution_pack_xml/parameters_chapter.png)
 
