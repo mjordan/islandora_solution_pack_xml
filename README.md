@@ -47,10 +47,10 @@ In cases 1 and 2, parameters can be passed to the XSLT stylesheet via URL query 
 The parameter 'pid' is always passed to the stylesheet, and is accessible as follows:
 
 ```xml
-  <xsl:param name="bar"></xsl:param>
+  <xsl:param name="pid"></xsl:param>
 ```
 
-More detail on using parameters to render specific parts of an XML object is [available](https://github.com/mjordan/islandora_solution_pack_xml/tree/7.x/extras/parameters_tutorial).
+More detail on using parameters in RENDER_STYLESHEETs is [available](https://github.com/mjordan/islandora_solution_pack_xml/tree/7.x/extras/parameters_tutorial).
 
 ## Rendering the OBJ datastream using viewers
 
@@ -83,7 +83,7 @@ By default, all content is slurped into one field for simple search as it is wit
 
 Some features that would be useful include:
 
-* sample render XSLT stylesheets for common types of XML objects, like TEI, EAD, DocBook, etc.
+* sample render XSLT stylesheets for common types of XML objects, like TEI, EAD, DocBook (partially addressed [here](https://github.com/mjordan/islandora_solution_pack_xml/blob/7.x/extras/parameters_tutorial/RENDER_STYLESHEET.xsl)), etc.
 * checks for well formedness on XML and XSLT files as they are uploaded
 * checks for validity against a specific schema or DTD
   * Possible solution is to attach a schema file to the collection object as a datastream
