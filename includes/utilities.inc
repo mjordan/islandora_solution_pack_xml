@@ -28,7 +28,7 @@ function islandora_solution_pack_xml_apply_xslt($xslt, $input_xml, $params = arr
     $xslt_proc->importStylesheet($xsl_doc);
     if (count($params)) {
       foreach ($params as $param_name => $param_value) {
-        $xslt_proc->setParameter(NULL, $param_name, $param_value);
+        $xslt_proc->setParameter(NULL, $param_name, check_plain($param_value));
       }
     }
     $output_xml = $xslt_proc->transformToXML($xml_doc);
