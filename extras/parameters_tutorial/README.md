@@ -1,17 +1,28 @@
 # Using XSLT parameters in RENDER_STYLESHEETs
 
-As explained in this module's main README, if a collection object has a datastream with an ID of 'RENDER_STYLESHEET', the XSLT transform in that datastream is applied to all XML objects that are members of the collection, unless a member object has its own RENDER_STYLESHEET datastream. In addition, parameters can be passed to the RENDER_STYLESHEET via URL query parameters, as long as the parameters are declared in the stylesheet; for example, `http://host/islandora/object/islandora:29?foo=true&bar=Mark` would make the values of `foo` and `bar` accessible in the stylesheet as follows:
+## Overview
+
+As explained in this module's main README, if a collection object has a datastream with an ID of 'RENDER_STYLESHEET', the XSLT transform in that datastream is applied to all XML objects that are members of the collection. If a member object has its own RENDER_STYLESHEET datastream, it is used instead of the collection-level stylesheet. XSLT Parameters can be passed to either RENDER_STYLESHEET via URL query parameters, as long as the parameters are declared in the stylesheet. For example, declaring these to parameters in your stylesheet:
 
 ```xml
   <xsl:param name="foo"></xsl:param>
   <xsl:param name="bar"></xsl:param>
+```
+
+will allow you to pass them into the stylesheet via URL query paramters, like this:
+
+```http://host/islandora/object/islandora:29?foo=true&bar=Mark```
+
+and use them like this:
 
   <xsl:if test="$foo='true' and $bar">
     <div>Hello <span><xsl:value-of select="$bar"/></span></div>
   </xsl:if>
 ```
 
-The parameter 'pid' is always passed to the RENDER_STYLESHEET, providing stylesheet writers with access to the current object's PID, which is useful in generating URLs within the document.
+URL query parameters that are not declared using `<xsl:param>` are ignored. If you call a parameter in your stylesheet that has not been declared, PHP will throw a warning.
+
+The parameter 'pid' is always passed to the RENDER_STYLESHEET, giving stylesheet writers access to the current object's PID in `$pid`. It does not need to be declared using `<xsl:param>`.
 
 This tutorial illustrates how URL parameters passed to a RENDER_STYLESHEET can be used to transform a single XML object, namely a three-chapter excerpt of Cory Doctorow's *[Down and Out in the Magic Kingdom](http://craphound.com/category/down/)* marked up in DocBook, so that specific chapters can be linked to from an auto-generated table of contents. The XML document is not large, but it allows us to demonstrate how to render only specific parts of the document. Doctorow's text is used here under a Creative Commons [Attribution-NonCommercial-ShareAlike 1.0 Generic](https://creativecommons.org/licenses/by-nc-sa/1.0/) license.
 

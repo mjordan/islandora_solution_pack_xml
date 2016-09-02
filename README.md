@@ -44,11 +44,7 @@ In cases 1 and 2, parameters can be passed to the XSLT stylesheet via URL query 
   </xsl:if>
 ```
 
-The parameter 'pid' is always passed to the stylesheet, and is accessible as follows:
-
-```xml
-  <xsl:param name="pid"></xsl:param>
-```
+The stylesheet parameter 'pid' is always passed to the stylesheet, and is accessible within stylesheets as `$pid`. It does not need to be declared as a pararameter.
 
 More detail on using parameters in RENDER_STYLESHEETs is [available](https://github.com/mjordan/islandora_solution_pack_xml/tree/7.x/extras/parameters_tutorial).
 
