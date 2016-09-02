@@ -6,14 +6,14 @@ As explained in this module's main README, if a collection object has a datastre
 
 ```xml
   <!-- If you declare these at the top of your XSLT file, outside of any templates,
-    they care 'global' in scope and can be used within all templates. -->
+    they are 'global' in scope and can be used within all templates. -->
   <xsl:param name="foo"></xsl:param>
   <xsl:param name="bar"></xsl:param>
 ```
 
 will allow you to pass them into the stylesheet via URL query paramters, like this:
 
-```http://host/islandora/object/islandora:29?foo=true&bar=Mark```
+`http://host/islandora/object/islandora:29?foo=true&bar=Mark`
 
 and use them within your templates like this:
 
