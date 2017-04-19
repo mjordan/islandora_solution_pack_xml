@@ -5,6 +5,9 @@
  * Implementation of Drush hooks.
  */
 
+require_once 'includes/preprocessor.inc';
+require_once 'includes/object.inc';
+
 /**
  * Implements hook_drush_command().
  */
