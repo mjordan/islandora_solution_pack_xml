@@ -33,6 +33,11 @@ function islandora_solution_pack_xml_admin(array $form, array &$form_state) {
     '#description' => t('Absolute filesystem path to the default thumbnail image for XML objects. Leave empty to not attach a thumbnail. !tn_exists', array('!tn_exists' => $tn_exists_markup)),
     '#maxlength' => 255,
   );
+  $form['islandora_solution_pack_xml_require_obj'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Make uploading an OBJ datastream at ingest required?'),
+    '#default_value' => variable_get('islandora_solution_pack_xml_require_obj', TRUE),
+  );
   $form['islandora_solution_pack_xml_metadata_dsid'] = array(
     '#title' => t('Metadata datastream ID'),
     '#type' => 'textfield',

@@ -32,6 +32,9 @@ function islandora_solution_pack_xml_xml_upload_form(array $form, array &$form_s
       'file_validate_size' => array($upload_size * 1024 * 1024),
     ),
   );
+  if (variable_get('islandora_solution_pack_xml_require_obj', TRUE)) {
+    $form['file']["#required"] = TRUE;
+  }
 
   if (user_access('upload simple XML thumbnails')) {
     $tn_extensions = array('gif png jpg jpeg');
