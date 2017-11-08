@@ -23,7 +23,6 @@ function islandora_solution_pack_xml_xml_upload_form(array $form, array &$form_s
   $form['file'] = array(
     '#title' => t('XML object file'),
     '#type' => 'managed_file',
-    '#required' => TRUE,
     '#description' => t('Select file to upload.<br/>Files must be less than <strong>@size MB.</strong><br/>Allowed file types: <strong>@ext.</strong>', array('@size' => $upload_size, '@ext' => $extensions[0])),
     '#default_value' => isset($form_state['values']['files']) ? $form_state['values']['files'] : NULL,
     '#upload_location' => 'temporary://',
@@ -99,18 +98,20 @@ function islandora_solution_pack_xml_xml_upload_form(array $form, array &$form_s
  */
 function islandora_solution_pack_xml_xml_upload_form_submit(array $form, array &$form_state) {
   $object = islandora_ingest_form_get_object($form_state);
-  if (empty($object['OBJ'])) {
-    $ds = $object->constructDatastream('OBJ', 'M');
-    $object->ingestDatastream($ds);
+  if ($form_state['values']['file']) {
+    if (empty($object['OBJ'])) {
+      $ds = $object->constructDatastream('OBJ', 'M');
+      $object->ingestDatastream($ds);
+    }
+    else {
+      $ds = $object['OBJ'];
+    }
+    $xml_file = file_load($form_state['values']['file']);
+    $xml_path = drupal_realpath($xml_file->uri);
+    $ds->setContentFromFile($xml_path, FALSE);
+    $ds->label = $xml_file->filename;
+    $ds->mimetype = $xml_file->filemime;
   }
-  else {
-    $ds = $object['OBJ'];
-  }
-  $xml_file = file_load($form_state['values']['file']);
-  $xml_path = drupal_realpath($xml_file->uri);
-  $ds->setContentFromFile($xml_path, FALSE);
-  $ds->label = $xml_file->filename;
-  $ds->mimetype = $xml_file->filemime;
 
   if (isset($form_state['values']['thumbnail']) && ($form_state['values']['thumbnail'] > 0)) {
     if (empty($object['TN'])) {

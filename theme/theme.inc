@@ -49,7 +49,12 @@ function islandora_solution_pack_xml_preprocess_islandora_solution_pack_xml_defa
     $variables['description'] = '';
   }
 
-  $obj_xml_content = $islandora_object['OBJ']->content;
+  if ($islandora_object['OBJ']) {
+    $obj_xml_content = $islandora_object['OBJ']->content;
+  }
+  else {
+    $obj_xml_content = '';
+  }
 
   module_load_include('inc', 'islandora', 'includes/solution_packs');
   $viewer = islandora_get_viewer(array(), 'islandora_xml_viewers', $islandora_object);
