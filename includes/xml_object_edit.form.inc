@@ -51,12 +51,13 @@ function islandora_solution_pack_xml_edit_xml_form_submit($form, &$form_state) {
     $xml = $object->constructDatastream('OBJ', 'M');
     $xml->mimetype = 'application/xml';
     $xml->label = 'XML content';
+    $xml->setContentFromString($form_state['values']['xml']);
+    $object->ingestDatastream($xml);
   }
   else {
     $xml = $object['OBJ'];
+    $xml->setContentFromString($form_state['values']['xml']);
   }
-  $xml->setContentFromString($form_state['values']['xml']);
-  $object->ingestDatastream($xml);
   drupal_set_message(t("XML updated for !object.", array('!object' => $object->id)));
   drupal_goto("islandora/object/{$object->id}/manage/datastreams");
 }
