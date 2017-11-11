@@ -1,0 +1,6 @@
+name = "Islandora Simple XML HTML Viewer"
+description = "A very simple XML (HTML) viewer for Islandora."
+package = Islandora Viewers
+version = 7.x-dev
+core = 7.x
+dependencies[] = islandora_solution_pack_xml

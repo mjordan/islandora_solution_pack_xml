@@ -15,8 +15,9 @@
   <dsTypeModel ID="TECHMD" optional="true">
     <form MIME="application/xml"/>
   </dsTypeModel>
-  <dsTypeModel ID="OBJ">
+  <dsTypeModel ID="OBJ" optional="true">
     <form MIME="application/xml"/>
+    <form MIME="text/html"/>
   </dsTypeModel>
   <dsTypeModel ID="TN" ORDERED="false" optional="true">
     <form MIME="image/jpeg"/>

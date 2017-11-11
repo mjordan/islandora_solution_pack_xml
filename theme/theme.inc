@@ -15,6 +15,7 @@
  *   - islandora_object: An AbstractObject from Islandora.
  */
 function islandora_solution_pack_xml_preprocess_islandora_solution_pack_xml_default(array &$variables) {
+  $filter = variable_get('islandora_solution_pack_xml_output_filter', 'full_html');
   drupal_add_js('misc/form.js');
   drupal_add_js('misc/collapse.js');
   module_load_include('inc', 'islandora', 'includes/datastream');
@@ -77,7 +78,9 @@ function islandora_solution_pack_xml_preprocess_islandora_solution_pack_xml_defa
       $variables['parent_collections'][0]['RENDER_STYLESHEET']) {
       module_load_include('inc', 'islandora_solution_pack_xml', 'includes/utilities');
       $object_render_stylesheet = $variables['parent_collections'][0]['RENDER_STYLESHEET']->content;
-      $variables['islandora_content'] = islandora_solution_pack_xml_apply_xslt($object_render_stylesheet, $obj_xml_content, $url_params);
+      $output = islandora_solution_pack_xml_apply_xslt($object_render_stylesheet, $obj_xml_content, $url_params);
+      $variables['islandora_content'] = check_html($output, $filter);
+      
     }
     else {
       $variables['islandora_content'] = '<pre>' . htmlspecialchars($obj_xml_content) . '</pre>';

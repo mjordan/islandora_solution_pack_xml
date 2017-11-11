@@ -1,0 +1,58 @@
+<?php
+
+/**
+ * @file
+ * Defines all the hooks this module implements.
+ */
+
+/**
+ * Implements hook_theme().
+ */
+function islandora_simple_xml_html_viewer_theme() {
+  return array(
+    // This item should match the corresponding item in
+    // hook_islandora_viewer_info().
+    'islandora_simple_xml_html_viewer' => array(
+      'file' => 'theme/theme.inc',
+      'template' => 'theme/islandora-simple-xml-html-viewer',
+      'variables' => array(
+        'islandora_object' => NULL,
+      ),
+    ),
+  );
+}
+
+/**
+ * Implements hook_islandora_viewer_info().
+ */
+function islandora_simple_xml_html_viewer_islandora_viewer_info() {
+  return array(
+    // This item should match the corresponding item in hook_theme().
+    'islandora_simple_xml_html_viewer' => array(
+      'label' => t('Islandora Simple XML (HTML) Viewer'),
+      'description' => t('A simple XML (HTML) viewer for Islandora.'),
+      'callback' => 'islandora_simple_xml_html_viewer_callback',
+      'model' => array('islandora:sp_simple_xml'),
+      'mimetype' => array('text/html'),
+    ),
+  );
+}
+
+/**
+ * Callback function for the viewer.
+ *
+ * @param array $params
+ *   The params for the theme function 'islandora_simple_xml_html_viewer'.
+ * @param IslandoraFedoraObject $islandora_object
+ *   The object that we are viewing.
+ *
+ * @return string
+ *   HTML representation of the Simple XML HTML Viewer.
+ */
+function islandora_simple_xml_html_viewer_callback(array $params, IslandoraFedoraObject $islandora_object = NULL) {
+  if (isset($islandora_object['OBJ']) && $islandora_object['OBJ']->mimetype == 'text/html') {
+    if (islandora_datastream_access(ISLANDORA_VIEW_OBJECTS, $islandora_object['OBJ'])) {
+      return theme('islandora_simple_xml_html_viewer', array('islandora_object' => $islandora_object));
+    }
+  }
+}

@@ -55,6 +55,10 @@ The stylesheet parameter 'pid' is always passed to the stylesheet, and is access
 
 [More information](https://github.com/mjordan/islandora_solution_pack_xml/tree/7.x/extras/parameters_tutorial) on using parameters in RENDER_STYLESHEETs is available.
 
+## Rendering HTML datastreams
+
+This solution pack provides support for OBJ datastreams that contain simple HTML. HTML files should contain only a `<body>` and its children, i.e., no `<html>` or `<head>` markup. There is a viewer for these datastreams, named the Islandora Simple XML HTML Viewer.
+
 ## Rendering the OBJ datastream using viewers
 
 This solution pack supports Islandora viewer modules, and comes with a simple viewer module that if enabled and configured as the default viewer for XML objects allows easy styling of XML files using the [Google Javascript Code Prettifier](https://github.com/google/code-prettify). Viewers may also be defined by the Islandora Simple XML Context module, which is included with this one. Michael Joyce has written a viewer for [a specific set of TEI documents](https://github.com/ubermichael/ballads_viewer).

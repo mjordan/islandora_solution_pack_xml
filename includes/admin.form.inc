@@ -47,7 +47,20 @@ function islandora_solution_pack_xml_admin(array $form, array &$form_state) {
     '#maxlength' => 255,
   );
 
+  $filters = filter_formats();
+  $filter_options = array();
+  foreach ($filters as $filter) {
+    $filter_options[$filter->format] = $filter->name;
+  }
+  $form['islandora_solution_pack_xml_output_filter'] = array(
+    '#type' => 'select',
+    '#tilte' => t('Output format'),
+    '#options' => $filter_options,
+    '#default_value' => variable_get('islandora_solution_pack_xml_output_filter', 'full_html'),
+    '#description' => t('The Drupal output filter to apply to HTML rendered by this solution pack.'),
+  );
+
   module_load_include('inc', 'islandora', 'includes/solution_packs');
-  $form += islandora_viewers_form('islandora_xml_viewers', 'application/xml');
+  $form += islandora_viewers_form('islandora_xml_viewers', NULL, 'islandora:sp_simple_xml');
   return system_settings_form($form);
 }
