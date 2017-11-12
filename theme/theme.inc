@@ -15,7 +15,6 @@
  *   - islandora_object: An AbstractObject from Islandora.
  */
 function islandora_solution_pack_xml_preprocess_islandora_solution_pack_xml_default(array &$variables) {
-  $filter = variable_get('islandora_solution_pack_xml_output_filter', 'full_html');
   drupal_add_js('misc/form.js');
   drupal_add_js('misc/collapse.js');
   module_load_include('inc', 'islandora', 'includes/datastream');
@@ -50,22 +49,58 @@ function islandora_solution_pack_xml_preprocess_islandora_solution_pack_xml_defa
     $variables['description'] = '';
   }
 
-  if ($islandora_object['OBJ']) {
-    $obj_xml_content = $islandora_object['OBJ']->content;
+  if (module_exists('islandora_simple_xml_context')) {
+    if ($plugin = context_get_plugin('reaction', 'islandora_simple_xml_context_reaction_use_format')) {
+      $format = $plugin->execute();
+    }
+    else {
+      $format = variable_get('islandora_solution_pack_xml_output_format', 'full_html');
+    }
   }
   else {
-    $obj_xml_content = '';
+    $format = variable_get('islandora_solution_pack_xml_output_format', 'full_html');
   }
+  $variables['format'] = $format;
 
   module_load_include('inc', 'islandora', 'includes/solution_packs');
-  $viewer = islandora_get_viewer(array(), 'islandora_xml_viewers', $islandora_object);
+
+  if (module_exists('islandora_simple_xml_context')) {
+    if ($plugin = context_get_plugin('reaction', 'islandora_simple_xml_context_reaction_use_viewer')) {
+      if ($callback = $plugin->execute($islandora_object) && isset($callback) && function_exists($callback)) {
+        $viewer = $callback(array(), $object);
+        dd($viewer, 'Viewer if context module exists and plugin executed');
+      }
+      else {
+        $viewer = islandora_get_viewer(array(), 'islandora_xml_viewers', $islandora_object);
+      }
+    }
+    else {
+      $viewer = islandora_get_viewer(array(), 'islandora_xml_viewers', $islandora_object);
+    }
+  dd($viewer, 'Viewer if context module exists');
+  }
+  else {
+    $viewer = islandora_get_viewer(array(), 'islandora_xml_viewers', $islandora_object);
+  dd($viewer, 'Viewer after else');
+  }
+  dd($viewer, 'Viewer after logic');
 
   if ($viewer) {
     $variables['islandora_content'] = $viewer;
+    dd($viewer, 'There is a viewer, and here is its output');
   }
   else {
+    dd("I am viewerless output");
     $url_params = drupal_get_query_parameters();
     $url_params['pid'] = $islandora_object->id;
+
+    if ($islandora_object['OBJ']) {
+       $obj_xml_content = $islandora_object['OBJ']->content;
+    }
+    else {
+      $obj_xml_content = '';
+    }
+
     if ($islandora_object['RENDER_STYLESHEET']) {
       module_load_include('inc', 'islandora_solution_pack_xml', 'includes/utilities');
       $object_render_stylesheet = $islandora_object['RENDER_STYLESHEET']->content;
@@ -79,11 +114,11 @@ function islandora_solution_pack_xml_preprocess_islandora_solution_pack_xml_defa
       module_load_include('inc', 'islandora_solution_pack_xml', 'includes/utilities');
       $object_render_stylesheet = $variables['parent_collections'][0]['RENDER_STYLESHEET']->content;
       $output = islandora_solution_pack_xml_apply_xslt($object_render_stylesheet, $obj_xml_content, $url_params);
-      $variables['islandora_content'] = check_html($output, $filter);
+      $variables['islandora_content'] = $output;
       
     }
     else {
-      $variables['islandora_content'] = '<pre>' . htmlspecialchars($obj_xml_content) . '</pre>';
+      $variables['islandora_content'] = '<pre>' . $obj_xml_content . '</pre>';
     }
   }
 }

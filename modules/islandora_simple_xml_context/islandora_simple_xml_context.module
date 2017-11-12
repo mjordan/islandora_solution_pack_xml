@@ -24,9 +24,14 @@ function islandora_simple_xml_context_context_registry() {
     ),
     'reactions' => array(
       'islandora_simple_xml_context_reaction_use_viewer' => array(
-        'title' => t('Use an Islandora Simple XML viewer'),
+        'title' => t('Islandora Simple XML viewer'),
         'description' => t("Use an Islandora Simple XML viewer"),
         'plugin' => 'islandora_simple_xml_context_reaction_use_viewer',
+      ),
+      'islandora_simple_xml_context_reaction_use_format' => array(
+       'title' => t('Text format to use with an Islandora Simple XML Viewer'),
+        'description' => t("Use a text format with an Islandora Simple XML viewer"),
+        'plugin' => 'islandora_simple_xml_context_reaction_use_format',
       ),
     ),
   );
@@ -70,6 +75,14 @@ function islandora_simple_xml_context_context_plugins() {
       'parent' => 'context_reaction',
     ),
   );
+  $plugins['islandora_simple_xml_context_reaction_use_format'] = array(
+    'handler' => array(
+      'path' => drupal_get_path('module', 'islandora_simple_xml_context') . '/plugins',
+      'file' => 'islandora_simple_xml_context_reaction_use_format.inc',
+      'class' => 'IslandoraSimpleXmlContextReactionUseFormat',
+      'parent' => 'context_reaction',
+    ),
+  );
   return $plugins;
 }
 
@@ -84,19 +97,4 @@ function islandora_simple_xml_context_islandora_sp_simple_xml_islandora_object_a
     $plugin->execute($object);
   }
   return NULL;
-}
-
-
-/**
- * Preprocessor for theme('islandora_solution_pack_xml_default').
- */
-function islandora_simple_xml_context_preprocess_islandora_solution_pack_xml_default(&$vars) {
-  $islandora_object = $vars['islandora_object'];
-  if (in_array('islandora:sp_simple_xml', $islandora_object->models)) {
-    if ($plugin = context_get_plugin('reaction', 'islandora_simple_xml_context_reaction_use_viewer')) {
-      if ($viewer = $plugin->execute($islandora_object)) {
-        $vars['islandora_content'] = $viewer;
-      }
-    }
-  }
 }

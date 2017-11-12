@@ -53,12 +53,14 @@ class IslandoraSimpleXmlContextReactionUseViewer extends context_reaction {
       if ($context->reactions['islandora_simple_xml_context_reaction_use_viewer']['islandora_simple_xml_viewers']) {
         module_load_include('inc', 'islandora', 'includes/solution_packs');
         $viewer_id = $context->reactions['islandora_simple_xml_context_reaction_use_viewer']['islandora_simple_xml_viewers'];
-        $callback = islandora_get_viewer_callback($viewer_id);
-        if (function_exists($callback)) {
-          // @todo: How do we pass viewer params into the 'execute()' function?
-          $params = array();
-          return $callback($params, $object);
+        if ($callback = islandora_get_viewer_callback($viewer_id)) {
+          return $callback;
         }
+
+        if (function_exists($callback)) {
+          return $callback(array(), $object);
+        }
+
       }
     }
   }

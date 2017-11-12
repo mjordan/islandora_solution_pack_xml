@@ -3,14 +3,19 @@
 /**
  * @file
  * This is the template file for the Islandora Simple XML object.
+ *
+ * Variables:
+ *  - $islandora_content
+ *  - $format
  */
 ?>
+
 
 <div class="islandora-simple-xml-object islandora">
   <div class="islandora-simple-xml-content-wrapper clearfix">
     <?php if (isset($islandora_content)): ?>
       <div class="islandora-simple-xml-content">
-        <?php print $islandora_content; ?>
+        <?php print check_markup($islandora_content, $format); ?>
       </div>
       <?php if (isset($islandora_download_link)): ?>
         <?php print $islandora_download_link; ?>
