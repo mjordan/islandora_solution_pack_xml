@@ -24,7 +24,7 @@ function islandora_simple_xml_context_context_registry() {
     ),
     'reactions' => array(
       'islandora_simple_xml_context_reaction_use_viewer' => array(
-        'title' => t('Islandora Simple XML viewer'),
+        'title' => t('Use an Islandora Simple XML viewer'),
         'description' => t("Use an Islandora Simple XML viewer"),
         'plugin' => 'islandora_simple_xml_context_reaction_use_viewer',
       ),
