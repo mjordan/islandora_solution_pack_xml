@@ -56,15 +56,15 @@ The stylesheet parameter 'pid' is always passed to the stylesheet, and is access
 
 [More information](https://github.com/mjordan/islandora_solution_pack_xml/tree/7.x/extras/parameters_tutorial) on using parameters in RENDER_STYLESHEETs is available.
 
-## Rendering HTML datastreams
-
-This solution pack provides support for OBJ datastreams that contain simple HTML. HTML files should contain only a `<body>` and its children, i.e., no `<html>` or `<head>` markup. There is a viewer for these datastreams, named the Islandora Simple XML HTML Viewer.
-
 ## Rendering the OBJ datastream using viewers
 
 This solution pack supports Islandora viewer modules, and comes with two simple viewer modules. The first allows easy styling of XML files using the [Google Javascript Code Prettifier](https://github.com/google/code-prettify), and the second provides a simple viewer for HTML markup. Viewers may also be defined by the Islandora Simple XML Context module, which is included with this one. Michael Joyce has written a viewer for [a specific set of TEI documents](https://github.com/ubermichael/ballads_viewer). Viewer templates should run their output through `check_markup()` (e.g., `<?php print check_markup($islandora_content, $format) ?>` to take advantage of Drupal's output filtering security features.
 
 Note that if a viewer is enabled, the XML OBJ datastream content is not styled with the RENDER_STYLESHEET XSLTs as described above. However, third-party viewers are free to use the RENDER_STYLESHEET or any other stylesheet they wish.
+
+## Using HTML datastreams
+
+This solution pack provides support for OBJ datastreams that contain simple HTML. "Simple" here means the type of markup that a user would enter into a standard Drupal node body, i.e., markup that would occur within an HTML `<body>` tag. There is a viewer for these datastreams, named the Islandora Simple XML HTML Viewer.
 
 ## Metadata and description display
 
