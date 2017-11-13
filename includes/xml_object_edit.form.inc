@@ -23,12 +23,18 @@ function islandora_solution_pack_xml_edit_xml(AbstractObject $object) {
  */
 function islandora_solution_pack_xml_edit_xml_form($form, &$form_state, AbstractObject $object) {
   $xml = $object['OBJ']->content;
+  if ($object['OBJ']->mimetype == 'text/html') {
+    $description = t('Edit your HTML here.');
+  }
+  else {
+    $description = t('Edit your XML here. Note that no validation or well-formedness checking is performed on this content.');
+  }
   return array(
     'xml' => array(
       '#title' => t('XML OBJ datastream content'),
       '#type' => 'textarea',
       '#rows' => 20,
-      '#description' => t('Edit your XML here. Note that no validation or well-formedness checking is performed on this content.'),
+      '#description' => $description,
       '#default_value' => $xml,
     ),
     'object' => array(
