@@ -26,11 +26,12 @@ class IslandoraSimpleXmlContextReactionUseFormat extends context_reaction {
     foreach ($formats as $format) {
       $format_options[$format->format] = $format->name;
     }
+    $format_options['none'] = t('None');
     $form = array(
       '#title' => t('Text formats'),
       'islandora_simple_xml_format' => array(
         '#title' => t('Text formats'),
-        '#description' => t('Choose a tex format to use when reaction is active.'),
+        '#description' => t('Choose a tex format to use when reaction is active. "None" bypasses the filter system completely; use with caution.'),
         '#type' => 'select',
         '#options' => $format_options,
         '#default_value' => isset($settings['islandora_simple_xml_format']) ? $settings['islandora_simple_xml_format'] : '',

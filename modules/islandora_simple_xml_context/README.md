@@ -20,6 +20,7 @@ This module provides the following Context conditions:
 And the following Context reaction:
 
 * Use a specific Islandora Simple XML viewer
+* Use a specific Drupal text format (Full HTML, Filtered HTML, Plain text, etc.)
 
 ## Usage
 

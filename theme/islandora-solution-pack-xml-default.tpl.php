@@ -15,7 +15,11 @@
   <div class="islandora-simple-xml-content-wrapper clearfix">
     <?php if (isset($islandora_content)): ?>
       <div class="islandora-simple-xml-content">
-        <?php print check_markup($islandora_content, $format); ?>
+        <?php if ($format == 'none'): ?>
+          <?php print $islandora_content; ?>
+        <?php else: ?>
+          <?php print check_markup($islandora_content, $format); ?>
+        <?php endif; ?>
       </div>
       <?php if (isset($islandora_download_link)): ?>
         <?php print $islandora_download_link; ?>

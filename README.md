@@ -27,8 +27,9 @@ Users may upload a thumbnail image and default XSLT stylesheet for each XML obje
 The admin settings for this solution pack, available at `admin/islandora/solution_pack_config/xml`, let site administrators determine:
 
 1. the location of a default thumbnail image for use if no object-specific thumbnail exists (this default thumbnail can also be applied in batch ingests)
-2. the ID of the datastream that needs to be present to render metadata and description at the bottom of the object display.
-3. the Islandora viewer for objects managed by this solution pack
+1. the ID of the datastream that needs to be present to render metadata and description at the bottom of the object display.
+1. the Drupal text format to use (Full HTML, Filtered HTML, Plain text, etc.) for HTML rendered by this solution pack
+1. the Islandora viewer for objects managed by this solution pack
 
 Standard Drupal permissions are available for allowing users to upload object-specific thumbnails and object-specific XSLT sytlesheets.
 

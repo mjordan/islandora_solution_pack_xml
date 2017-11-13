@@ -52,16 +52,24 @@ function islandora_solution_pack_xml_preprocess_islandora_solution_pack_xml_defa
   // Get output format as determined by Context, if applicable.
   if (module_exists('islandora_simple_xml_context')) {
     if ($plugin = context_get_plugin('reaction', 'islandora_simple_xml_context_reaction_use_format')) {
-      $format = $plugin->execute();
+      if ($format = $plugin->execute()) {
+        $variables['format'] = $format;
+      }
+      else {
+        // In case the plugin is disabled.
+        $format = variable_get('islandora_solution_pack_xml_output_format', 'full_html');
+        $variables['format'] = $format;
+      }
     }
     else {
       $format = variable_get('islandora_solution_pack_xml_output_format', 'full_html');
+      $variables['format'] = $format;
     }
   }
   else {
     $format = variable_get('islandora_solution_pack_xml_output_format', 'full_html');
+    $variables['format'] = $format;
   }
-  $variables['format'] = $format;
 
   module_load_include('inc', 'islandora', 'includes/solution_packs');
   // Get viewer as determined by Context, if applicable.

@@ -52,12 +52,13 @@ function islandora_solution_pack_xml_admin(array $form, array &$form_state) {
   foreach ($formats as $format) {
     $format_options[$format->format] = $format->name;
   }
+  $format_options['none'] = t('None');
   $form['islandora_solution_pack_xml_output_format'] = array(
     '#type' => 'select',
     '#tilte' => t('Output format'),
     '#options' => $format_options,
     '#default_value' => variable_get('islandora_solution_pack_xml_output_format', 'full_html'),
-    '#description' => t('The Drupal text format to apply to HTML rendered by this solution pack.'),
+    '#description' => t('The Drupal text format to apply to HTML rendered by this solution pack. "None" bypasses the filter system completely; use with caution.'),
   );
 
   module_load_include('inc', 'islandora', 'includes/solution_packs');
