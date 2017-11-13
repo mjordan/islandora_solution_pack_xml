@@ -8,4 +8,3 @@
 <div id="islandora-simple-xml">
   <?php print check_markup($islandora_content, $format) ?>
 </div>
-<div>I am the HTML viewer</div>
