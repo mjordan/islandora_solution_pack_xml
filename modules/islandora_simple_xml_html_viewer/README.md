@@ -13,7 +13,7 @@ Note that "HTML" here refers to markup within a standard HTML file's `<body>` ta
 
 Enable this module, then select it as a viewer in the XML Solution Pack's admin settings. No additional software or libraries need to be installed.
 
-The XML Solution Pack has an admin option to select which output filter to use in its viewers. If your HTML is not rendering as intended, make sure that the filter being applied is not configured correctly.
+The XML Solution Pack has an admin option to select which output format to use in its viewers. In addition, the Islandora Simple XML Context module provides a reaction to use a specific Drupal output format. If your HTML is not rendering as intended, make sure that the filter being applied is not configured correctly.
 
 ## Maintainer
 

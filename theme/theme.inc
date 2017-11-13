@@ -49,6 +49,7 @@ function islandora_solution_pack_xml_preprocess_islandora_solution_pack_xml_defa
     $variables['description'] = '';
   }
 
+  // Get output format as determined by Context, if applicable.
   if (module_exists('islandora_simple_xml_context')) {
     if ($plugin = context_get_plugin('reaction', 'islandora_simple_xml_context_reaction_use_format')) {
       $format = $plugin->execute();
@@ -63,12 +64,11 @@ function islandora_solution_pack_xml_preprocess_islandora_solution_pack_xml_defa
   $variables['format'] = $format;
 
   module_load_include('inc', 'islandora', 'includes/solution_packs');
-
+  // Get viewer as determined by Context, if applicable.
   if (module_exists('islandora_simple_xml_context')) {
     if ($plugin = context_get_plugin('reaction', 'islandora_simple_xml_context_reaction_use_viewer')) {
       if ($callback = $plugin->execute($islandora_object) && isset($callback) && function_exists($callback)) {
         $viewer = $callback(array(), $object);
-        dd($viewer, 'Viewer if context module exists and plugin executed');
       }
       else {
         $viewer = islandora_get_viewer(array(), 'islandora_xml_viewers', $islandora_object);
@@ -77,20 +77,15 @@ function islandora_solution_pack_xml_preprocess_islandora_solution_pack_xml_defa
     else {
       $viewer = islandora_get_viewer(array(), 'islandora_xml_viewers', $islandora_object);
     }
-  dd($viewer, 'Viewer if context module exists');
   }
   else {
     $viewer = islandora_get_viewer(array(), 'islandora_xml_viewers', $islandora_object);
-  dd($viewer, 'Viewer after else');
   }
-  dd($viewer, 'Viewer after logic');
 
   if ($viewer) {
     $variables['islandora_content'] = $viewer;
-    dd($viewer, 'There is a viewer, and here is its output');
   }
   else {
-    dd("I am viewerless output");
     $url_params = drupal_get_query_parameters();
     $url_params['pid'] = $islandora_object->id;
 

@@ -61,7 +61,7 @@ This solution pack provides support for OBJ datastreams that contain simple HTML
 
 ## Rendering the OBJ datastream using viewers
 
-This solution pack supports Islandora viewer modules, and comes with a simple viewer module that if enabled and configured as the default viewer for XML objects allows easy styling of XML files using the [Google Javascript Code Prettifier](https://github.com/google/code-prettify). Viewers may also be defined by the Islandora Simple XML Context module, which is included with this one. Michael Joyce has written a viewer for [a specific set of TEI documents](https://github.com/ubermichael/ballads_viewer).
+This solution pack supports Islandora viewer modules, and comes with two simple viewer modules. The first allows easy styling of XML files using the [Google Javascript Code Prettifier](https://github.com/google/code-prettify), and the second provides a simple viewer for HTML markup. Viewers may also be defined by the Islandora Simple XML Context module, which is included with this one. Michael Joyce has written a viewer for [a specific set of TEI documents](https://github.com/ubermichael/ballads_viewer). Viewer templates should run their output through `check_markup()` (e.g., `<?php print check_markup($islandora_content, $format) ?>` to take advantage of Drupal's output filtering security features.
 
 Note that if a viewer is enabled, the XML OBJ datastream content is not styled with the RENDER_STYLESHEET XSLTs as described above. However, third-party viewers are free to use the RENDER_STYLESHEET or any other stylesheet they wish.
 
