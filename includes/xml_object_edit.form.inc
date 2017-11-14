@@ -45,6 +45,9 @@ function islandora_solution_pack_xml_edit_xml_form($form, &$form_state, Abstract
       '#type' => 'submit',
       '#value' => t('Save'),
     ),
+    'cancel' => array(
+      '#markup' => l('Cancel', url('islandora/object/' . $object->id)),
+    ),
   );
 }
 

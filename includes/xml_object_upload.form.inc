@@ -18,7 +18,7 @@
  */
 function islandora_solution_pack_xml_xml_upload_form(array $form, array &$form_state) {
   $upload_size = min((int) ini_get('post_max_size'), (int) ini_get('upload_max_filesize'));
-  $extensions = array('htm', 'xml');
+  $extensions = array('xml htm');
   $form = array();
   $form['file'] = array(
     '#title' => t('XML object file'),
