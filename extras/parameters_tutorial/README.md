@@ -47,7 +47,7 @@ The included RENDER_STYLESHEET's default behavior when viewing the object is to 
 
 The result is HTML output that contains a link for each chapter title, each one containing the chapter's `xml:id` attribute value as a URL parameter. The rendered version of the table of contents looks like this:
 
-![Down and Out in the Magic Kingdom table of contents](https://dl.dropboxusercontent.com/u/1015702/linked_to/islandora_solution_pack_xml/parameters_toc.png)
+![Down and Out in the Magic Kingdom table of contents](parameters_toc.png)
 
 
 ## Rendering a specific chapter
@@ -68,7 +68,7 @@ If the 'chapter' parameter is passed to the stylesheet, its value is used to det
 
 The chapter's `<title>` element, plus each of its `<para>` elements, are transformed into simple HTML markup. This XSLT also adds a link back to the table of contents (in other words, a link back to the object's standard URL). The rendered version of the Prologue, for example, looks like this:
 
-![Down and Out in the Magic Kingdom Prologue](https://dl.dropboxusercontent.com/u/1015702/linked_to/islandora_solution_pack_xml/parameters_chapter.png)
+![Down and Out in the Magic Kingdom Prologue](parameters_chapter.png)
 
 ## Rendering the entire document
 
